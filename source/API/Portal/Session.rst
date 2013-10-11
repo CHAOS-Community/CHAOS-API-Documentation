@@ -34,7 +34,7 @@ Session
          Creates a session, which can be authenticated via the
          :act:`EmailPassword/Login` method.
 
-         :param protocolVersion: must have a value of :code:`4`
+         :param: None
          :returns: The created session
 
          .. code-editor:: xml
