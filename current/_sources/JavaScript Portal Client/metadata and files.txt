@@ -21,6 +21,7 @@ are identified by their GUID, and can be retrieved with
         , includeFiles: true
         , includeObjectRelations: true
         , includeAccessPoints: false
+        , pageSize: 1
         }
       );
     });
@@ -193,6 +194,7 @@ retrieve data from the XML.
         , includeFiles: true
         , includeObjectRelations: true
         , includeAccessPoints: false
+        , pageSize: 1
         }
       );
     });
