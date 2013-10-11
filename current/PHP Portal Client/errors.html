@@ -3,11 +3,11 @@
 
 <html lang="">
 
-<head><title>Error handling &mdash; CHAOS API v5</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+<head><title>Error handling &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
   <!-- <meta name="robots" content="index" /> -->
   <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/PHP Portal Client/errors.txt"/> -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="release" content="v5"/>
+  <meta name="release" content="v4"/>
 
   
 
@@ -21,12 +21,14 @@
    <script type="text/javascript">
      var DOCUMENTATION_OPTIONS = {
          URL_ROOT: '../',
-         VERSION: 'v5',
+         VERSION: 'v4',
          COLLAPSE_INDEX: false,
          FILE_SUFFIX: '.html',
          HAS_SOURCE: true,
      };
    </script>
+   
+   
    
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
@@ -39,6 +41,7 @@
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
        <script type="text/javascript" src="../_static/scrollspy.js"></script>
+       <script type="text/javascript" src="../_static/base.js"></script>
           <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
 <link rel="top" title="CHAOS API" href="../index.html" />
 <link rel="up" title="CHAOS.Portal PHP Client" href="index.html" />
@@ -63,7 +66,7 @@
          <div class="sphinxsidebarwrapper">
 <h3>
   <!-- <a href="../index.html">CHAOS API</a> -->
-  CHAOS API <span id="vn">v5</span>
+  CHAOS API <span id="vn">v4</span>
 </h3>
 
 <div class="site-contents"><a href="../index.html">Table of contents</a></div>
@@ -112,7 +115,7 @@ pagename: "PHP Portal Client/errors" <br>
 <pre><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetSearchSchemas(
   "*",       // search string
-  ["5906a41b-feae-48db-bfb7-714b3e105396"], // fields/schemas to search
+  array("5906a41b-feae-48db-bfb7-714b3e105396"), // fields/schemas to search
   "da",         // language code
   $accessPointGUID,
   0,            // pageIndex
@@ -146,7 +149,7 @@ Not much help there.</p>
 <pre><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetSearchSchemas(
   "*",       // search string
-  ["5906a41b-feae-48db-bfb7-714b3e105396"], // fields/schemas to search
+  array("5906a41b-feae-48db-bfb7-714b3e105396"), // fields/schemas to search
   "da",         // language code
   $accessPointGUID,
   0,            // pageIndex
@@ -256,8 +259,9 @@ In other words, the CHAOS.Portal error handling is not complete yet.</p>
 
   --><script type="text/javascript">
 var versions = {
- "v5": { "branch_name": "master", "directory_name": "current", "current": true },
- "v4": { "branch_name": "v4", "directory_name": "v4" }
+ "v6": { "branch_name": "v6", "directory_name": "v6" },
+ "v5": { "branch_name": "v5", "directory_name": "v5" },
+ "v4": { "branch_name": "master", "directory_name": "current", "current": true }
 };
 var pagename = 'PHP Portal Client/errors';
 var stable = 'v';
@@ -274,7 +278,7 @@ function vfnav() {
     // Get selected version in the version <select>
     var new_version = $(this).children("option:selected").attr('value');
     var new_dir = versions[new_version].directory_name;
-    var current_dir = versions['v5'].directory_name;
+    var current_dir = versions['v4'].directory_name;
 
     var current_url = window.location.href;
 
@@ -303,7 +307,7 @@ $(document).ready(function() {
 
     // Setup URL change on version <select>
     $("#vn select").bind('change', vfnav);
-    $('#vn select').val('v5');
+    $('#vn select').val('v4');
 });
 </script>
 </body>

@@ -3,11 +3,11 @@
 
 <html lang="">
 
-<head><title>Authentication &mdash; CHAOS API v5</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+<head><title>Authentication &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
   <!-- <meta name="robots" content="index" /> -->
   <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/authentication.txt"/> -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="release" content="v5"/>
+  <meta name="release" content="v4"/>
 
   
 
@@ -21,12 +21,14 @@
    <script type="text/javascript">
      var DOCUMENTATION_OPTIONS = {
          URL_ROOT: './',
-         VERSION: 'v5',
+         VERSION: 'v4',
          COLLAPSE_INDEX: false,
          FILE_SUFFIX: '.html',
          HAS_SOURCE: true,
      };
    </script>
+   
+   
    
        <script type="text/javascript" src="_static/jquery.js"></script>
        <script type="text/javascript" src="_static/underscore.js"></script>
@@ -39,6 +41,7 @@
        <script type="text/javascript" src="_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="_static/code-editor.js"></script>
        <script type="text/javascript" src="_static/scrollspy.js"></script>
+       <script type="text/javascript" src="_static/base.js"></script>
           <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
 <link rel="top" title="CHAOS API" href="index.html" />
 <link rel="next" title="CHAOS.Portal JavaScript Client" href="JavaScript Portal Client/index.html" />
@@ -62,7 +65,7 @@
          <div class="sphinxsidebarwrapper">
 <h3>
   <!-- <a href="index.html">CHAOS API</a> -->
-  CHAOS API <span id="vn">v5</span>
+  CHAOS API <span id="vn">v4</span>
 </h3>
 
 <div class="site-contents"><a href="index.html">Table of contents</a></div>
@@ -140,7 +143,7 @@ folders and by logging the user will have access to all objects in those folders
 <p>This call gives you a sessionGUID which you must supply as a parameter to all
 following API calls, e.g. <tt class="code docutils literal"><span class="pre">sessionGUID=...</span></tt></p>
 <p>You can then authenticate the session by logging in:
-<a class="reference internal" href="API.html#api-emailpassword-login"><em>EmailPassword/Login</em></a></p>
+<a class="reference internal" href="API.html#EmailPassword.Login" title="EmailPassword.Login"><tt class="xref py py-func docutils literal"><span class="pre">EmailPassword.Login()</span></tt></a></p>
 <p><a class="reference external" href="http://api.danskkulturarv.dk/EmailPassword/Login?email=test&#64;example.org&amp;password=mysecret&amp;sessionGUID=...">http://api.danskkulturarv.dk/EmailPassword/Login?email=test&#64;example.org&amp;password=mysecret&amp;sessionGUID=...</a></p>
 </div>
 </div>
@@ -200,8 +203,9 @@ following API calls, e.g. <tt class="code docutils literal"><span class="pre">se
 
   --><script type="text/javascript">
 var versions = {
- "v5": { "branch_name": "master", "directory_name": "current", "current": true },
- "v4": { "branch_name": "v4", "directory_name": "v4" }
+ "v6": { "branch_name": "v6", "directory_name": "v6" },
+ "v5": { "branch_name": "v5", "directory_name": "v5" },
+ "v4": { "branch_name": "master", "directory_name": "current", "current": true }
 };
 var pagename = 'authentication';
 var stable = 'v';
@@ -218,7 +222,7 @@ function vfnav() {
     // Get selected version in the version <select>
     var new_version = $(this).children("option:selected").attr('value');
     var new_dir = versions[new_version].directory_name;
-    var current_dir = versions['v5'].directory_name;
+    var current_dir = versions['v4'].directory_name;
 
     var current_url = window.location.href;
 
@@ -247,7 +251,7 @@ $(document).ready(function() {
 
     // Setup URL change on version <select>
     $("#vn select").bind('change', vfnav);
-    $('#vn select').val('v5');
+    $('#vn select').val('v4');
 });
 </script>
 </body>
