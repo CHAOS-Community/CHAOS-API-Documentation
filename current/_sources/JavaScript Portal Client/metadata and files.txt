@@ -44,7 +44,7 @@ attribute of the objects in :code:`serviceResult.MCM().Results()`:
     client.SessionAcquired().Add(function(sender, sessionGUID) {
       client.Object_GetByObjectGUID(showObject, // callback
         {
-        , objectGUID: "00000000-0000-0000-0000-00004e040016"
+          objectGUID: "00000000-0000-0000-0000-00004e040016"
         , accessPointGUID: ChaosSettings.accessPointGUID
         , includeMetadata: true
         , includeFiles: true
