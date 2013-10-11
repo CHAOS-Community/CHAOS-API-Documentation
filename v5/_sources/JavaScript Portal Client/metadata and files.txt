@@ -204,14 +204,22 @@ retrieve data from the XML.
     function showObject(serviceResult) {
       var obj = serviceResult.MCM().Results()[0];
       var metadata = obj.Metadatas;
-      var xml = metadata[1].MetadataXML;
+
+      var DKA2_MetadataSchemaGUID = '5906a41b-feae-48db-bfb7-714b3e105396';
+
+      var i = 0;
+      for ( ; i < metadata.length; i++) {
+        if (metadata[i].MetadataSchemaGUID === DKA2_MetadataSchemaGUID) {
+          break;
+        }
+      }
+      var xml = metadata[i].MetadataXML;
 
       var xmlDoc = $.parseXML( xml ); // XML document
       var $xmlDoc = $( xmlDoc ); // jQuery XML document
 
-
       var obj_title = $xmlDoc.find("Title").text();
-      var obj_desc = $xmlDoc.find("Abstract").text();
+      var obj_desc = $xmlDoc.find("Description").text();
 
       alert(obj_title + "\n" + obj_desc);
     }
