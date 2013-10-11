@@ -48,13 +48,8 @@ URL.
    Creates a session, which can be authenticated via the
    :func:`EmailPassword.Login` method.
 
-   :param: None
+   :param protocolVersion: must have a value of :code:`4`
    :rtype: A :code:`ModuleResult` with a single :code:`Result` with a :code:`SessionGUID`
-
-   .. note::
-     As of 3rd October 2013 :code:`Session/Create` still needs the
-     :code:`protocolVersion` and the value must be :code:`4`.
-     `Reference <https://github.com/CHAOS-Community/Portal/commit/e8e080dd4c75e43b93cc4d2edbf62249f1241e8a#diff-96760c83be16cde55832ddd77975b1b0L65>`_
 
    .. code-editor:: xml
    
