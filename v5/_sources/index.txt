@@ -23,6 +23,7 @@ CHAOS API documentation
    overview
    concepts
    authentication
+   the index
    JavaScript Portal Client/index
    PHP Portal Client/index
    API
