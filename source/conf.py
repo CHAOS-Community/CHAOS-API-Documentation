@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'CHAOS API'
-copyright = u'2013, Malthe Jørgensen, Andreas Røll Larsen'
+copyright = u'2013, Malthe Jørgensen'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -106,7 +106,7 @@ pygments_style = 'sphinx'
 html_theme = 'CHAOS'
 
 html_theme_options = {
-    'github_username': 'malthejorgensen',
+    'github_username': 'CHAOS-Community',
     'repo_name': 'CHAOS-API-Documentation',
     'branch': 'master',
     # 'versions': '["' + '", "'.join(versions) + '"]',
@@ -202,7 +202,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'CHAOSAPIDocumentation.tex', u'CHAOS API',
-   u'Malthe Jørgensen, Andreas Røll Larsen', 'manual'),
+   u'Malthe Jørgensen', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -232,7 +232,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'chaosapidocumentation', u'CHAOS API Documentation',
-     [u'Malthe Jørgensen, Andreas Røll Larsen'], 1)
+     [u'Malthe Jørgensen'], 1)
 ]
 
 # If true, show URL addresses after external links.
