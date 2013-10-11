@@ -50,6 +50,7 @@ attribute of the objects in :code:`serviceResult.MCM().Results()`:
         , includeFiles: true
         , includeObjectRelations: true
         , includeAccessPoints: false
+        , pageSize: 1
         }
       );
     });
@@ -131,6 +132,7 @@ serviceResult.MCM().Results():
        , includeFiles: true
        , includeObjectRelations: true
        , includeAccessPoints: false
+       , pageSize: 1
        }
      );
    });
