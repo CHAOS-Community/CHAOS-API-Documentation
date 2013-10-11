@@ -120,14 +120,15 @@ are identified by their GUID, and can be retrieved with
 <tt class="code docutils literal"><span class="pre">PortalClient.Object_GetByObjectGUID()</span></tt></p>
 <pre><code class="language-javascript eval">// Retrieve object
 client.SessionAcquired().Add(function(sender, sessionGUID) {
-  client.Object_GetByObjectGUID(
-    showObject                      // callback
-    , "00000000-0000-0000-0000-00004e040016" // objectGUID
-    , ChaosSettings.accessPointGUID // accessPointGuid
-    , true                          // includeMetadata
-    , true                          // includeFiles
-    , true                          // includeObjectRelations
-    , false                         // includeAccessPoints
+  client.Object_GetByObjectGUID(showObject, // callback
+    {
+      objectGUID: "00000000-0000-0000-0000-00004e040016"
+    , accessPointGUID: ChaosSettings.accessPointGUID
+    , includeMetadata: true
+    , includeFiles: true
+    , includeObjectRelations: true
+    , includeAccessPoints: false
+    }
   );
 });
 
@@ -143,14 +144,15 @@ and basically any other kind of file. The files can be found in the Files
 attribute of the objects in <tt class="code docutils literal"><span class="pre">serviceResult.MCM().Results()</span></tt>:</p>
 <pre><code class="language-javascript eval">// Retrieve object
 client.SessionAcquired().Add(function(sender, sessionGUID) {
-  client.Object_GetByObjectGUID(
-    showObject                      // callback
-    , "00000000-0000-0000-0000-00004e040016" // objectGUID
-    , ChaosSettings.accessPointGUID // accessPointGuid
-    , true                          // includeMetadata
-    , true                          // includeFiles
-    , true                          // includeObjectRelations
-    , false                         // includeAccessPoints
+  client.Object_GetByObjectGUID(showObject, // callback
+    {
+    , objectGUID: "00000000-0000-0000-0000-00004e040016"
+    , accessPointGUID: ChaosSettings.accessPointGUID
+    , includeMetadata: true
+    , includeFiles: true
+    , includeObjectRelations: true
+    , includeAccessPoints: false
+    }
   );
 });
 
@@ -263,7 +265,7 @@ retrieve data from the XML.</p>
    client.Object_GetByObjectGUID(showObject, // callback
      {
        objectGUID: "00000000-0000-0000-0000-00004e040016"
-     , accessPointGuid: ChaosSettings.accessPointGUID
+     , accessPointGUID: ChaosSettings.accessPointGUID
      , includeMetadata: true
      , includeFiles: true
      , includeObjectRelations: true

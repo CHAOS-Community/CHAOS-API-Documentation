@@ -13,14 +13,15 @@ are identified by their GUID, and can be retrieved with
 
     // Retrieve object
     client.SessionAcquired().Add(function(sender, sessionGUID) {
-      client.Object_GetByObjectGUID(
-        showObject                      // callback
-        , "00000000-0000-0000-0000-00004e040016" // objectGUID
-        , ChaosSettings.accessPointGUID // accessPointGuid
-        , true                          // includeMetadata
-        , true                          // includeFiles
-        , true                          // includeObjectRelations
-        , false                         // includeAccessPoints
+      client.Object_GetByObjectGUID(showObject, // callback
+        {
+          objectGUID: "00000000-0000-0000-0000-00004e040016"
+        , accessPointGUID: ChaosSettings.accessPointGUID
+        , includeMetadata: true
+        , includeFiles: true
+        , includeObjectRelations: true
+        , includeAccessPoints: false
+        }
       );
     });
 
@@ -40,14 +41,15 @@ attribute of the objects in :code:`serviceResult.MCM().Results()`:
 
     // Retrieve object
     client.SessionAcquired().Add(function(sender, sessionGUID) {
-      client.Object_GetByObjectGUID(
-        showObject                      // callback
-        , "00000000-0000-0000-0000-00004e040016" // objectGUID
-        , ChaosSettings.accessPointGUID // accessPointGuid
-        , true                          // includeMetadata
-        , true                          // includeFiles
-        , true                          // includeObjectRelations
-        , false                         // includeAccessPoints
+      client.Object_GetByObjectGUID(showObject, // callback
+        {
+        , objectGUID: "00000000-0000-0000-0000-00004e040016"
+        , accessPointGUID: ChaosSettings.accessPointGUID
+        , includeMetadata: true
+        , includeFiles: true
+        , includeObjectRelations: true
+        , includeAccessPoints: false
+        }
       );
     });
 
@@ -186,7 +188,7 @@ retrieve data from the XML.
       client.Object_GetByObjectGUID(showObject, // callback
         {
           objectGUID: "00000000-0000-0000-0000-00004e040016"
-        , accessPointGuid: ChaosSettings.accessPointGUID
+        , accessPointGUID: ChaosSettings.accessPointGUID
         , includeMetadata: true
         , includeFiles: true
         , includeObjectRelations: true
