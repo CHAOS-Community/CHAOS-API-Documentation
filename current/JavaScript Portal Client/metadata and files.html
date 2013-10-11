@@ -213,14 +213,15 @@ metadata can be found in the Metadatas attribute of the objects in
 serviceResult.MCM().Results():</p>
 <pre><code class="language-javascript eval">// Retrieve object
 client.SessionAcquired().Add(function(sender, sessionGUID) {
-  client.Object_GetByObjectGUID(
-    showObject                      // callback
-    , "00000000-0000-0000-0000-00004e040016" // objectGUID
-    , ChaosSettings.accessPointGUID // accessPointGuid
-    , true                          // includeMetadata
-    , true                          // includeFiles
-    , true                          // includeObjectRelations
-    , false                         // includeAccessPoints
+  client.Object_GetByObjectGUID(showObject, // callback
+    {
+      objectGUID: "00000000-0000-0000-0000-00004e040016"
+    , accessPointGUID: ChaosSettings.accessPointGUID
+    , includeMetadata: true
+    , includeFiles: true
+    , includeObjectRelations: true
+    , includeAccessPoints: false
+    }
   );
 });
 
@@ -259,14 +260,15 @@ function showObject(serviceResult) {
 such as jQuery. In the following example we are using <a class="reference external" href="http://jquery.com/">jQuery</a> 1.7.1 to parse and
 retrieve data from the XML.</p>
 <pre><code class="language-javascript eval"> client.SessionAcquired().Add(function(sender, sessionGUID) {
-   client.Object_GetByObjectGUID(
-     showObject                      // callback
-     , "00000000-0000-0000-0000-00004e040016" // objectGUID
-     , ChaosSettings.accessPointGUID // accessPointGuid
-     , true                          // includeMetadata
-     , true                          // includeFiles
-     , true                          // includeObjectRelations
-     , false                         // includeAccessPoints
+   client.Object_GetByObjectGUID(showObject, // callback
+     {
+       objectGUID: "00000000-0000-0000-0000-00004e040016"
+     , accessPointGuid: ChaosSettings.accessPointGUID
+     , includeMetadata: true
+     , includeFiles: true
+     , includeObjectRelations: true
+     , includeAccessPoints: false
+     }
    );
  });
 
