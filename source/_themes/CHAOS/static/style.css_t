@@ -252,25 +252,45 @@ dl {
   margin-right: 1em;
 }
 
-dl.class {
-  background-color: rgba(166, 102, 102, 0.2);
+dl.module > dt {
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 1;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+dl.module > dt > tt {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-dl.function {
-  /* background-color: rgba(102, 102, 166, 0.2); */
+dl.extension > dt {
+  font-size: 21px;
+  font-weight: 300;
+  /* font-weight: bold; */
+  line-height: 1;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: rgb(90, 90, 90);
+  font-style: italic;
+}
+dl.extension > dt > tt {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+dl.extension > dt > big {
+  display: none;
 }
 
-dl.function dt {
+dl.action > dt {
   font-size: 40px;
   font-weight: 100;
   line-height: 1;
   margin-top: 1em;
   margin-bottom: 0.5em;
 }
-dl.function dt tt {
+dl.action > dt > tt {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-dl.function dt big {
+dl.action > dt > big {
   display: none;
 }
 

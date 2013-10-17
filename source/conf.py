@@ -30,7 +30,9 @@ extensions = ['sphinx.ext.todo', 'sphinxcontrib.phpdomain', 'sphinx.ext.extlinks
 # The extension for code editors is the file code_editor.py in the
 # '_extensions' directory
 sys.path.append(os.path.abspath('_extensions'))
-extensions += ['code_editor']
+extensions += ['code_editor', 'chaos_domain']
+
+primary_domain = 'chaos'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
