@@ -130,11 +130,17 @@ and values, i.e.  <tt class="code docutils literal"><span class="pre">field1=val
 <p>This page documents the <tt class="docutils literal"><span class="pre">Actions</span></tt> you can use in CHAOS. Each section has a
 heading of the form <tt class="code docutils literal"><span class="pre">Extension/Action</span></tt> which you can simply copy into your
 URL.</p>
-<span class="target" id="module-Session"></span><dl class="function">
-<dt id="Session.Create">
-<tt class="descclassname">Session.</tt><tt class="descname">Create</tt><big>(</big><big>)</big><a class="headerlink" href="#Session.Create" title="Permalink to this definition">¶</a></dt>
+<dl class="module">
+<dt id="Portal.Portal">
+<tt class="descname">Portal</tt><em class="property"> module</em><a class="headerlink" href="#Portal.Portal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="extension">
+<dt id="Portal.Session">
+<tt class="descname">Session</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.Session" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="action">
+<dt id="Portal.Session/Create">
+<tt class="descclassname">Session/</tt><tt class="descname">Create</tt><a class="headerlink" href="#Portal.Session/Create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a session, which can be authenticated via the
-<a class="reference internal" href="#EmailPassword.Login" title="EmailPassword.Login"><tt class="xref py py-func docutils literal"><span class="pre">EmailPassword.Login()</span></tt></a> method.</p>
+<a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a> method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -163,14 +169,24 @@ URL.</p>
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
 <li><a class="reference internal" href="authentication.html#authentication-login"><em>Authentication -&gt; Login</em></a></li>
-<li><a class="reference internal" href="#EmailPassword.Login" title="EmailPassword.Login"><tt class="xref py py-func docutils literal"><span class="pre">EmailPassword.Login()</span></tt></a></li>
+<li><a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a></li>
 </ul>
 </div>
 </dd></dl>
 
-<span class="target" id="module-EmailPassword"></span><dl class="function">
-<dt id="EmailPassword.Login">
-<tt class="descclassname">EmailPassword.</tt><tt class="descname">Login</tt><big>(</big><big>)</big><a class="headerlink" href="#EmailPassword.Login" title="Permalink to this definition">¶</a></dt>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-Portal"></span><dl class="module">
+<dt id="EmailPassword.EmailPassword">
+<tt class="descname">EmailPassword</tt><em class="property"> module</em><a class="headerlink" href="#EmailPassword.EmailPassword" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="extension">
+<dt>
+<tt class="descname">EmailPassword</tt><em class="property"> extension</em></dt>
+<dd><dl class="action">
+<dt id="EmailPassword.EmailPassword/Login">
+<tt class="descclassname">EmailPassword/</tt><tt class="descname">Login</tt><a class="headerlink" href="#EmailPassword.EmailPassword/Login" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -207,9 +223,23 @@ and
 &lt;/PortalResult&gt;</code></pre>
 </dd></dl>
 
-<span class="target" id="module-Object"></span><dl class="function">
-<dt id="Object.Get">
-<tt class="descclassname">Object.</tt><tt class="descname">Get</tt><big>(</big><big>)</big><a class="headerlink" href="#Object.Get" title="Permalink to this definition">¶</a></dt>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-EmailPassword"></span><dl class="module">
+<dt id="MCM.MCM">
+<tt class="descname">MCM</tt><em class="property"> module</em><a class="headerlink" href="#MCM.MCM" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>The <tt class="docutils literal"><span class="pre">MCM</span></tt> module stands for <em>Media Content Manager</em> and does exactly
+that: it contains functions for managing the media in the database.</div></blockquote>
+<dl class="extension">
+<dt id="MCM.Object">
+<tt class="descname">Object</tt><em class="property"> extension</em><a class="headerlink" href="#MCM.Object" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <tt class="docutils literal"><span class="pre">Object</span></tt> extension gets, sets and updates objects in the database.</p>
+<dl class="action">
+<dt id="MCM.Object/Get">
+<tt class="descclassname">Object/</tt><tt class="descname">Get</tt><a class="headerlink" href="#MCM.Object/Get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves objects according to a query.</p>
 <p><tt class="docutils literal"><span class="pre">Object/Get</span></tt> is the main search and object retrieval function in  CHAOS.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -240,9 +270,9 @@ and
 returned.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="Object.SetPublishSettings">
-<tt class="descclassname">Object.</tt><tt class="descname">SetPublishSettings</tt><big>(</big><big>)</big><a class="headerlink" href="#Object.SetPublishSettings" title="Permalink to this definition">¶</a></dt>
+<dl class="action">
+<dt id="MCM.Object/SetPublishSettings">
+<tt class="descclassname">Object/</tt><tt class="descname">SetPublishSettings</tt><a class="headerlink" href="#MCM.Object/SetPublishSettings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Publishes/unpublishes an object on an <tt class="code docutils literal"><span class="pre">accessPointGUID</span></tt> in a given time
 period (or indefinitely).</p>
 <p>You need to be logged in to use this feature.</p>
@@ -345,7 +375,11 @@ until you change the publish period or remove the accessPoint.</p>
 </div>
 </dd></dl>
 
-</div>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-MCM"></span></div>
 
 
 

@@ -35,14 +35,15 @@ succesfull search like this:
 To combine searches in multiple fields, Solr provides the operators :code:`AND`
 and :code:`OR`.
 You use by inserting them (with spaces) between field searches:
-:code:`field1:search_value1 OR field2:search_value1`
+:code:`field1:search_value1 OR field2:search_value2`
 
-You cannot have space-characters in a URL – these should be replaced by either
-:code:`+` or :code:`%20`. Here we search for objects with either *hest* or
-*ukendt* in their title:
-:chaos_api_link_object_get_apg:`pageSize=5&query=DKA-Title_string:hest+OR+DKA-Title_string:ukendt`
+.. note:: You cannot have space-characters in a URL. In a URL spaces are represented
+          with either :code:`+` or :code:`%20`.
 
 .. When to use `%20` vs `+`? See: http://stackoverflow.com/a/8116989/118608
+
+Here we search for objects with either *hest* or *ukendt* in their title:
+:chaos_api_link_object_get_apg:`pageSize=5&query=DKA-Title_string:hest+OR+DKA-Title_string:ukendt`
 
 Spaces (without any operator) are interpreted as :code:`OR`:
 :chaos_api_link_object_get_apg:`pageSize=5&query=DKA-Title_string:hest+DKA-Title_string:ukendt`

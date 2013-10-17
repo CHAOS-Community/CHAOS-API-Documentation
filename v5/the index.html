@@ -112,7 +112,7 @@ pagename: "the index" <br>
 <p>In order to find objects in the database CHAOS uses <a class="reference external" href="http://lucene.apache.org/solr/">Solr</a>.</p>
 <p>Solr is a search engine to which you can send search queries.
 Solr uses an <tt class="docutils literal"><span class="pre">Index</span></tt> for searching. The index has a number of fields.</p>
-<p>The <tt class="code docutils literal"><span class="pre">query</span></tt> argument of the <a class="reference internal" href="API.html#Object.Get" title="Object.Get"><tt class="xref py py-func docutils literal"><span class="pre">Object.Get()</span></tt></a>-function passes its value
+<p>The <tt class="code docutils literal"><span class="pre">query</span></tt> argument of the <a class="reference internal" href="API.html#MCM.Object/Get" title="MCM.Object/Get"><tt class="xref chaos chaos-func docutils literal"><span class="pre">Object.Get</span></tt></a>-function passes its value
 on to Solr as a search string.</p>
 <p>Fields present in the Solr Index are called <tt class="docutils literal"><span class="pre">indexed</span></tt> fields.</p>
 <div class="section" id="solr-query-syntax">
@@ -129,10 +129,13 @@ succesfull search like this:
 <p>To combine searches in multiple fields, Solr provides the operators <tt class="code docutils literal"><span class="pre">AND</span></tt>
 and <tt class="code docutils literal"><span class="pre">OR</span></tt>.
 You use by inserting them (with spaces) between field searches:
-<tt class="code docutils literal"><span class="pre">field1:search_value1</span> <span class="pre">OR</span> <span class="pre">field2:search_value1</span></tt></p>
-<p>You cannot have space-characters in a URL – these should be replaced by either
-<tt class="code docutils literal"><span class="pre">+</span></tt> or <tt class="code docutils literal"><span class="pre">%20</span></tt>. Here we search for objects with either <em>hest</em> or
-<em>ukendt</em> in their title:
+<tt class="code docutils literal"><span class="pre">field1:search_value1</span> <span class="pre">OR</span> <span class="pre">field2:search_value2</span></tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot have space-characters in a URL. In a URL spaces are represented
+with either <tt class="code docutils literal"><span class="pre">+</span></tt> or <tt class="code docutils literal"><span class="pre">%20</span></tt>.</p>
+</div>
+<p>Here we search for objects with either <em>hest</em> or <em>ukendt</em> in their title:
 <a class="reference external" href="http://api.danskkulturarv.dk/Object/Get?accessPointGUID=7A06C4FF-D15A-48D9-A908-088F9796AF28&amp;pageSize=5&amp;query=DKA-Title_string:hest+OR+DKA-Title_string:ukendt">http://api.danskkulturarv.dk/Object/Get?accessPointGUID=7A06C4FF-D15A-48D9-A908-088F9796AF28&amp;pageSize=5&amp;query=DKA-Title_string:hest+OR+DKA-Title_string:ukendt</a></p>
 <p>Spaces (without any operator) are interpreted as <tt class="code docutils literal"><span class="pre">OR</span></tt>:
 <a class="reference external" href="http://api.danskkulturarv.dk/Object/Get?accessPointGUID=7A06C4FF-D15A-48D9-A908-088F9796AF28&amp;pageSize=5&amp;query=DKA-Title_string:hest+DKA-Title_string:ukendt">http://api.danskkulturarv.dk/Object/Get?accessPointGUID=7A06C4FF-D15A-48D9-A908-088F9796AF28&amp;pageSize=5&amp;query=DKA-Title_string:hest+DKA-Title_string:ukendt</a></p>
