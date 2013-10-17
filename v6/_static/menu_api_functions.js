@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  $menu_links = $('dl.function dt').map(function() {
+  $menu_links = $('dl.action dt').map(function() {
     var $li = $('<li />');
     var $a = $('<a />');
 
     $a.attr('href', '#' + this.id);
     var content = $.trim( $(this).text() );
-    $a.text( content.substring(0, content.length-3) );
+    $a.text( content.substring(0, content.length-1) );
 
     $li.append($a);
     return $li;
