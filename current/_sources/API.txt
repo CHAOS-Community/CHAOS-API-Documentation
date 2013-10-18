@@ -35,9 +35,70 @@ Such an HTTP Request executes the specified ``Action``. |br|
 ``Arguments`` to an ``Action`` should be passed via the query string as fields
 and values, i.e.  :code:`field1=value1&field2=value2...`
 
+``ProtocolVersion`` and its following slash can be omitted. In that case the current
+version will be used.
+
 This page documents the ``Actions`` you can use in CHAOS. Each section has a
 heading of the form :code:`Extension/Action` which you can simply copy into your
 URL.
+
+Each ``Extension`` belongs to a module.
+
+On a succesfull request Portal will return a structure similar to the following:
+
+.. code-editor:: xml
+
+  <PortalResult Duration="CHAOS call duration">
+    <ModuleResults>
+      <ModuleResult Fullname="Module name" Duration="0" Count="Number of results">
+        <Results>
+          <Result FullName="Name of object">
+             ...
+          </Result>
+          ...
+        </Results>
+      </ModuleResult>
+    </ModuleResults>
+  </PortalResult>
+
+The ``Fullname`` attribute of :code:`<ModuleResult>` will correspond to the name
+of module of the extension you called. The ``Count`` attribute tells you how
+many :code:`<Result>` elements the :code:`<Results>` tag contains.
+
+:code:`<Result>` will contain a number of elements corresponding to the fields
+of the object you requested.
+
+Here's an example result from the action ``Object/Get``:
+
+.. code-editor:: xml
+
+  <PortalResult Duration="84">
+    <ModuleResults>
+      <ModuleResult Fullname="MCM" Duration="0" Count="2" TotalCount="5">
+        <Results>
+          <Result FullName="CHAOS.MCM.Data.DTO.Object">
+            <GUID>00000000-0000-0000-0000-00007d080016</GUID>
+            <ObjectTypeID>36</ObjectTypeID>
+            <DateCreated>25-05-2012 15:50:01</DateCreated>
+            <Metadatas/>
+            <Files/>
+            <ObjectRelations/>
+          </Result>
+          <Result FullName="CHAOS.MCM.Data.DTO.Object">
+            <GUID>546f2bc2-dcd4-424e-b695-729e0152bdeb</GUID>
+            <ObjectTypeID>36</ObjectTypeID>
+            <DateCreated>21-03-2013 17:29:23</DateCreated>
+            <Metadatas/>
+            <Files/>
+            <ObjectRelations/>
+          </Result>
+        </Results>
+      </ModuleResult>
+    </ModuleResults>
+  </PortalResult>
+
+``TotalCount`` is specific to the ``Object/Get`` action which is
+paginated and tells you the total number of results for the request.
 
 .. module:: Portal
 
@@ -235,3 +296,66 @@ URL.
       .. seealso::
 
           :ref:`Authentication -> accessPointGUID <authentication-accesspointguid>`
+
+  .. extension:: MetadataSchema
+
+    .. action:: Get
+
+      Gets one or all MetadataSchemas in the database.
+
+      You need to be logged in to use this feature.
+
+      :param metadataSchemaGUID: the GUID of the schema to get
+      :type metadataSchemaGUID: optional
+      :rtype: A list of MetadataSchemas.
+
+      If no ``metadataSchemaGUID`` is given, all MetadataSchemas which the user
+      has rights to read are returned.
+
+      .. code-editor:: xml
+
+        <PortalResult Duration="24">
+          <ModuleResults>
+            <ModuleResult Fullname="MCM" Duration="0" Count="9">
+              <Results>
+                <Result FullName="CHAOS.MCM.Data.Dto.Standard.MetadataSchema">
+                  <GUID>00000000-0000-0000-0000-000063c30000</GUID>
+                  <Name>DKA</Name>
+                  <SchemaXML>
+                  <![CDATA[
+                  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified"><xs:element name="DKA"><xs:complexType><xs:sequence minOccurs="0" maxOccurs="unbounded"><xs:element name="Title" type="xs:string" /><xs:element name="Abstract" type="xs:string" /><xs:element name="Description" type="xs:string" /><xs:element name="Organization" type="xs:string" /><xs:element name="Type" type="xs:string" /><xs:element name="CreatedDate" type="xs:date" minOccurs="0" maxOccurs="unbounded" /><xs:element name="FirstPublishedDate" type="xs:dateTime" /><xs:element name="Identifier" type="xs:string" /><xs:element name="Contributor"><xs:complexType><xs:sequence><xs:element name="Person" minOccurs="0" maxOccurs="unbounded"><xs:complexType><xs:attribute name="Name" type="xs:string" use="required" /><xs:attribute name="Role" type="xs:string" /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:element name="Creator"><xs:complexType><xs:sequence><xs:element name="Person" minOccurs="0" maxOccurs="unbounded"><xs:complexType><xs:attribute name="Name" type="xs:string" use="required" /><xs:attribute name="Role" type="xs:string" /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:element name="TechnicalComment" type="xs:string" /><xs:element name="Location" type="xs:string" /><xs:element name="RightsDescription" type="xs:string" /><xs:element name="GeoData" minOccurs="0" maxOccurs="unbounded"><xs:complexType><xs:sequence><xs:element name="Latitude" type="xs:decimal" /><xs:element name="Longitude" type="xs:decimal" /></xs:sequence></xs:complexType></xs:element><xs:element name="Categories"><xs:complexType><xs:sequence><xs:element maxOccurs="unbounded" name="Category" type="xs:string" /></xs:sequence></xs:complexType></xs:element><xs:element name="Tags"><xs:complexType><xs:sequence><xs:element maxOccurs="unbounded" name="Tag" type="xs:string" /></xs:sequence></xs:complexType></xs:element><xs:element name="Metafield" minOccurs="0" maxOccurs="unbounded"><xs:complexType><xs:sequence><xs:element name="Key" type="xs:string" /><xs:element name="Value" type="xs:string" /></xs:sequence></xs:complexType></xs:element><xs:element name="ProductionID" type="xs:string" minOccurs="0" maxOccurs="unbounded" /><xs:element name="StreamDuration" type="xs:string" minOccurs="0" maxOccurs="unbounded" /></xs:sequence></xs:complexType></xs:element></xs:schema>
+                  ]]>
+                  </SchemaXML>
+                  <DateCreated>09-04-2012 10:33:42</DateCreated>
+                </Result>
+              </Results>
+            </ModuleResult>
+          </ModuleResults>
+        </PortalResult>
+
+    .. action:: Update
+
+       Updates a MetadataSchema in the database.
+
+       You need to be logged in to use this feature.
+
+       :param metadataSchemaGUID: the GUID of the schema to update
+       :param name: a new (or the same) name for schema
+       :param xml: a new (or the same) XML for the schema
+       :rtype: The GUID of the updated MetadataSchema
+
+    .. action:: Create
+
+       Adds a new MetadataSchema to the database.
+
+       You need to be logged in to use this feature and the user must have
+       administritive rights.
+
+       :param name: a new name for the new schema
+       :param xml: the XML for the new schema
+       :param metadataSchemaGUID: the GUID for new schema
+       :type metadataSchemaGUID: optional
+       :rtype: The GUID of the created MetadataSchema
+
+       If no ``metadataSchemaGUID`` is given, CHAOS assign a GUID to the new
+       schema. The new GUID is returned as a result.

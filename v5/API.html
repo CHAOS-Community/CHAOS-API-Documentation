@@ -127,9 +127,57 @@ pagename: "API" <br>
 <p>Such an HTTP Request executes the specified <tt class="docutils literal"><span class="pre">Action</span></tt>. <br>
 <tt class="docutils literal"><span class="pre">Arguments</span></tt> to an <tt class="docutils literal"><span class="pre">Action</span></tt> should be passed via the query string as fields
 and values, i.e.  <tt class="code docutils literal"><span class="pre">field1=value1&amp;field2=value2...</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">ProtocolVersion</span></tt> and its following slash can be omitted. In that case the current
+version will be used.</p>
 <p>This page documents the <tt class="docutils literal"><span class="pre">Actions</span></tt> you can use in CHAOS. Each section has a
 heading of the form <tt class="code docutils literal"><span class="pre">Extension/Action</span></tt> which you can simply copy into your
 URL.</p>
+<p>Each <tt class="docutils literal"><span class="pre">Extension</span></tt> belongs to a module.</p>
+<p>On a succesfull request Portal will return a structure similar to the following:</p>
+<pre><code class="language-xml">&lt;PortalResult Duration="CHAOS call duration"&gt;
+  &lt;ModuleResults&gt;
+    &lt;ModuleResult Fullname="Module name" Duration="0" Count="Number of results"&gt;
+      &lt;Results&gt;
+        &lt;Result FullName="Name of object"&gt;
+           ...
+        &lt;/Result&gt;
+        ...
+      &lt;/Results&gt;
+    &lt;/ModuleResult&gt;
+  &lt;/ModuleResults&gt;
+&lt;/PortalResult&gt;</code></pre>
+<p>The <tt class="docutils literal"><span class="pre">Fullname</span></tt> attribute of <tt class="code docutils literal"><span class="pre">&lt;ModuleResult&gt;</span></tt> will correspond to the name
+of module of the extension you called. The <tt class="docutils literal"><span class="pre">Count</span></tt> attribute tells you how
+many <tt class="code docutils literal"><span class="pre">&lt;Result&gt;</span></tt> elements the <tt class="code docutils literal"><span class="pre">&lt;Results&gt;</span></tt> tag contains.</p>
+<p><tt class="code docutils literal"><span class="pre">&lt;Result&gt;</span></tt> will contain a number of elements corresponding to the fields
+of the object you requested.</p>
+<p>Here&#8217;s an example result from the action <tt class="docutils literal"><span class="pre">Object/Get</span></tt>:</p>
+<pre><code class="language-xml">&lt;PortalResult Duration="84"&gt;
+  &lt;ModuleResults&gt;
+    &lt;ModuleResult Fullname="MCM" Duration="0" Count="2" TotalCount="5"&gt;
+      &lt;Results&gt;
+        &lt;Result FullName="CHAOS.MCM.Data.DTO.Object"&gt;
+          &lt;GUID&gt;00000000-0000-0000-0000-00007d080016&lt;/GUID&gt;
+          &lt;ObjectTypeID&gt;36&lt;/ObjectTypeID&gt;
+          &lt;DateCreated&gt;25-05-2012 15:50:01&lt;/DateCreated&gt;
+          &lt;Metadatas/&gt;
+          &lt;Files/&gt;
+          &lt;ObjectRelations/&gt;
+        &lt;/Result&gt;
+        &lt;Result FullName="CHAOS.MCM.Data.DTO.Object"&gt;
+          &lt;GUID&gt;546f2bc2-dcd4-424e-b695-729e0152bdeb&lt;/GUID&gt;
+          &lt;ObjectTypeID&gt;36&lt;/ObjectTypeID&gt;
+          &lt;DateCreated&gt;21-03-2013 17:29:23&lt;/DateCreated&gt;
+          &lt;Metadatas/&gt;
+          &lt;Files/&gt;
+          &lt;ObjectRelations/&gt;
+        &lt;/Result&gt;
+      &lt;/Results&gt;
+    &lt;/ModuleResult&gt;
+  &lt;/ModuleResults&gt;
+&lt;/PortalResult&gt;</code></pre>
+<p><tt class="docutils literal"><span class="pre">TotalCount</span></tt> is specific to the <tt class="docutils literal"><span class="pre">Object/Get</span></tt> action which is
+paginated and tells you the total number of results for the request.</p>
 <dl class="module">
 <dt id="Portal.Portal">
 <tt class="descname">Portal</tt><em class="property"> module</em><a class="headerlink" href="#Portal.Portal" title="Permalink to this definition">¶</a></dt>
@@ -373,6 +421,97 @@ until you change the publish period or remove the accessPoint.</p>
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="authentication.html#authentication-accesspointguid"><em>Authentication -&gt; accessPointGUID</em></a></p>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="extension">
+<dt id="MCM.MetadataSchema">
+<tt class="descname">MetadataSchema</tt><em class="property"> extension</em><a class="headerlink" href="#MCM.MetadataSchema" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="action">
+<dt id="MCM.MetadataSchema/Get">
+<tt class="descclassname">MetadataSchema/</tt><tt class="descname">Get</tt><a class="headerlink" href="#MCM.MetadataSchema/Get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets one or all MetadataSchemas in the database.</p>
+<p>You need to be logged in to use this feature.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guid</strong> (<em>optional</em>) &#8211; the GUID of the schema to get</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">A list of MetadataSchemas.</td>
+</tr>
+</tbody>
+</table>
+<p>If no <tt class="docutils literal"><span class="pre">guid</span></tt> is given, all MetadataSchemas which the user
+has rights to read are returned.</p>
+<pre><code class="language-xml">&lt;PortalResult Duration="24"&gt;
+  &lt;ModuleResults&gt;
+    &lt;ModuleResult Fullname="MCM" Duration="0" Count="9"&gt;
+      &lt;Results&gt;
+        &lt;Result FullName="CHAOS.MCM.Data.Dto.Standard.MetadataSchema"&gt;
+          &lt;GUID&gt;00000000-0000-0000-0000-000063c30000&lt;/GUID&gt;
+          &lt;Name&gt;DKA&lt;/Name&gt;
+          &lt;SchemaXML&gt;
+          &lt;![CDATA[
+          &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified"&gt;&lt;xs:element name="DKA"&gt;&lt;xs:complexType&gt;&lt;xs:sequence minOccurs="0" maxOccurs="unbounded"&gt;&lt;xs:element name="Title" type="xs:string" /&gt;&lt;xs:element name="Abstract" type="xs:string" /&gt;&lt;xs:element name="Description" type="xs:string" /&gt;&lt;xs:element name="Organization" type="xs:string" /&gt;&lt;xs:element name="Type" type="xs:string" /&gt;&lt;xs:element name="CreatedDate" type="xs:date" minOccurs="0" maxOccurs="unbounded" /&gt;&lt;xs:element name="FirstPublishedDate" type="xs:dateTime" /&gt;&lt;xs:element name="Identifier" type="xs:string" /&gt;&lt;xs:element name="Contributor"&gt;&lt;xs:complexType&gt;&lt;xs:sequence&gt;&lt;xs:element name="Person" minOccurs="0" maxOccurs="unbounded"&gt;&lt;xs:complexType&gt;&lt;xs:attribute name="Name" type="xs:string" use="required" /&gt;&lt;xs:attribute name="Role" type="xs:string" /&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;xs:element name="Creator"&gt;&lt;xs:complexType&gt;&lt;xs:sequence&gt;&lt;xs:element name="Person" minOccurs="0" maxOccurs="unbounded"&gt;&lt;xs:complexType&gt;&lt;xs:attribute name="Name" type="xs:string" use="required" /&gt;&lt;xs:attribute name="Role" type="xs:string" /&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;xs:element name="TechnicalComment" type="xs:string" /&gt;&lt;xs:element name="Location" type="xs:string" /&gt;&lt;xs:element name="RightsDescription" type="xs:string" /&gt;&lt;xs:element name="GeoData" minOccurs="0" maxOccurs="unbounded"&gt;&lt;xs:complexType&gt;&lt;xs:sequence&gt;&lt;xs:element name="Latitude" type="xs:decimal" /&gt;&lt;xs:element name="Longitude" type="xs:decimal" /&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;xs:element name="Categories"&gt;&lt;xs:complexType&gt;&lt;xs:sequence&gt;&lt;xs:element maxOccurs="unbounded" name="Category" type="xs:string" /&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;xs:element name="Tags"&gt;&lt;xs:complexType&gt;&lt;xs:sequence&gt;&lt;xs:element maxOccurs="unbounded" name="Tag" type="xs:string" /&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;xs:element name="Metafield" minOccurs="0" maxOccurs="unbounded"&gt;&lt;xs:complexType&gt;&lt;xs:sequence&gt;&lt;xs:element name="Key" type="xs:string" /&gt;&lt;xs:element name="Value" type="xs:string" /&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;xs:element name="ProductionID" type="xs:string" minOccurs="0" maxOccurs="unbounded" /&gt;&lt;xs:element name="StreamDuration" type="xs:string" minOccurs="0" maxOccurs="unbounded" /&gt;&lt;/xs:sequence&gt;&lt;/xs:complexType&gt;&lt;/xs:element&gt;&lt;/xs:schema&gt;
+          ]]&gt;
+          &lt;/SchemaXML&gt;
+          &lt;DateCreated&gt;09-04-2012 10:33:42&lt;/DateCreated&gt;
+        &lt;/Result&gt;
+      &lt;/Results&gt;
+    &lt;/ModuleResult&gt;
+  &lt;/ModuleResults&gt;
+&lt;/PortalResult&gt;</code></pre>
+</dd></dl>
+
+<dl class="action">
+<dt id="MCM.MetadataSchema/Update">
+<tt class="descclassname">MetadataSchema/</tt><tt class="descname">Update</tt><a class="headerlink" href="#MCM.MetadataSchema/Update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a MetadataSchema in the database.</p>
+<p>You need to be logged in to use this feature.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>guid</strong> &#8211; the GUID of the schema to update</li>
+<li><strong>name</strong> &#8211; a new (or the same) name for schema</li>
+<li><strong>schemaXml</strong> &#8211; a new (or the same) XML for the schema</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the updated MetadataSchema</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="MCM.MetadataSchema/Create">
+<tt class="descclassname">MetadataSchema/</tt><tt class="descname">Create</tt><a class="headerlink" href="#MCM.MetadataSchema/Create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new MetadataSchema to the database.</p>
+<p>You need to be logged in to use this feature and the user must have
+administritive rights.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; a new name for the new schema</li>
+<li><strong>schemaXml</strong> &#8211; the XML for the new schema</li>
+<li><strong>guid</strong> (<em>optional</em>) &#8211; the GUID for new schema</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the created MetadataSchema</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If no <tt class="docutils literal"><span class="pre">guid</span></tt> is given, CHAOS assign a GUID to the new
+schema. The new GUID is returned as a result.</p>
 </dd></dl>
 
 </dd></dl>
