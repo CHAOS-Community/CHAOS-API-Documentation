@@ -323,7 +323,6 @@ returned.</p>
 <tt class="descclassname">Object/</tt><tt class="descname">SetPublishSettings</tt><a class="headerlink" href="#MCM.Object/SetPublishSettings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Publishes/unpublishes an object on an <tt class="code docutils literal"><span class="pre">accessPointGUID</span></tt> in a given time
 period (or indefinitely).</p>
-<p>You need to be logged in to use this feature.</p>
 <p>The <tt class="code docutils literal"><span class="pre">accessPointGUID</span></tt> must exists in the database in order to publish on
 it. As of 7th October 2013 you cannot create an <tt class="code docutils literal"><span class="pre">accessPointGUID</span></tt> in the
 database via the API.</p>
@@ -331,7 +330,14 @@ database via the API.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
+<li><strong>Write permission</strong> &#8211; you need have write-permission to the AccessPoint
+you are publishing to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>objectGUID</strong> &#8211; the GUID of the object for which you want to set <tt class="code docutils literal"><span class="pre">accessPointGUID</span></tt></li>
 <li><strong>accessPointGUID</strong> &#8211; the <tt class="code docutils literal"><span class="pre">accessPointGUID</span></tt> you want to publish on</li>
 <li><strong>sessionGUID</strong> &#8211; the GUID of an authorized session</li>
@@ -340,7 +346,7 @@ database via the API.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><ul class="simple">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><ul class="simple">
 <li>On success: <tt class="code docutils literal"><span class="pre">CHAOS.Portal.DTO.Standard.ScalarResult</span></tt> with value <tt class="code docutils literal"><span class="pre">1</span></tt></li>
 <li>On error: a number of different errors can be given on erroneous dates,
 accessPointsGUID or objectsGUIDs. If the accessPoint does not exists you will
@@ -432,14 +438,21 @@ until you change the publish period or remove the accessPoint.</p>
 <dt id="MCM.MetadataSchema/Get">
 <tt class="descclassname">MetadataSchema/</tt><tt class="descname">Get</tt><a class="headerlink" href="#MCM.MetadataSchema/Get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets one or all MetadataSchemas in the database.</p>
-<p>You need to be logged in to use this feature.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>metadataSchemaGUID</strong> (<em>optional</em>) &#8211; the GUID of the schema to get</td>
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
+<li><strong>Read permission</strong> &#8211; you will get the MetadataSchemas you have permission to read.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">A list of MetadataSchemas.</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>metadataSchemaGUID</strong> (<em>optional</em>) &#8211; the GUID of the schema to get</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A list of MetadataSchemas.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -469,19 +482,24 @@ has rights to read are returned.</p>
 <dt id="MCM.MetadataSchema/Update">
 <tt class="descclassname">MetadataSchema/</tt><tt class="descname">Update</tt><a class="headerlink" href="#MCM.MetadataSchema/Update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates a MetadataSchema in the database.</p>
-<p>You need to be logged in to use this feature.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
+<li><strong>Write permission</strong> &#8211; you need to have write-permissions to the MetadataSchema.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>metadataSchemaGUID</strong> &#8211; the GUID of the schema to update</li>
 <li><strong>name</strong> &#8211; a new (or the same) name for schema</li>
 <li><strong>xml</strong> &#8211; a new (or the same) XML for the schema</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the updated MetadataSchema</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the updated MetadataSchema</p>
 </td>
 </tr>
 </tbody>
@@ -498,14 +516,20 @@ administritive rights.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
+<li><strong>Manage permission</strong> &#8211; Requires the SystemPermissons.Manage permission.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> &#8211; a new name for the new schema</li>
 <li><strong>xml</strong> &#8211; the XML for the new schema</li>
 <li><strong>metadataSchemaGUID</strong> (<em>optional</em>) &#8211; the GUID for new schema</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the created MetadataSchema</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the created MetadataSchema</p>
 </td>
 </tr>
 </tbody>
