@@ -12,11 +12,11 @@ MetadataSchema
 
          :auth logged_in:
          :auth Read_permission: you will get the MetadataSchemas you have permission to read
-         :param metadataSchemaGUID: the GUID of the schema to get
-         :type metadataSchemaGUID: optional
+         :param guid: the GUID of the schema to get
+         :type guid: optional
          :returns: A list of MetadataSchemas
 
-         If no ``metadataSchemaGUID`` is given, all MetadataSchemas which the user
+         If no ``guid`` is given, all MetadataSchemas which the user
          has rights to read are returned.
 
          .. code-editor:: xml
@@ -51,11 +51,11 @@ MetadataSchema
          :auth system_manage_permission:
          :param name: a new name for the new schema
          :param schemaXml: the XML for the new schema
-         :param metadataSchemaGUID: the GUID for new schema
-         :type metadataSchemaGUID: optional
+         :param guid: the GUID for new schema
+         :type guid: optional
          :returns: The GUID of the created MetadataSchema
 
-         If no ``metadataSchemaGUID`` is given, CHAOS assigns a GUID to the new
+         If no ``guid`` is given, CHAOS assigns a GUID to the new
          schema. The new GUID is returned as a result.
 
       .. action:: Update
@@ -64,7 +64,7 @@ MetadataSchema
 
          :auth logged_in:
          :auth Write_permission: you need to have write-permissions to the MetadataSchema
-         :param metadataSchemaGUID: the GUID of the schema to update
+         :param guid: the GUID of the schema to update
          :param name: a new (or the same) name for schema
          :param schemaXml: a new (or the same) XML for the schema
          :returns: The GUID of the updated MetadataSchema
