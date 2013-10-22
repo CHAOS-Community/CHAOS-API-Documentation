@@ -24,6 +24,55 @@ from sphinx.util.compat import Directive
 from sphinx.util.docfields import Field, GroupedField, TypedField
 
 
+class AuthField(GroupedField):
+    '''
+    A field for specifying required authentication for Actions in CHAOS.
+
+    Inspired by:
+    https://github.com/deceze/Sphinx-HTTP-domain/blob/master/sphinx_http_domain/docfields.py
+    (David Zentgraf, BSD License... hmmm, should I include his license?)
+    '''
+
+    # List of authentication types for actions
+    auth_help_msgs = {
+        # 'field_name': ('Displayed title', 'Displayed description'),
+        'logged_in': ('Logged in', 'You need to be logged in to use this feature.'),
+        'system_manage_permission': ('Manage permission', 'Requires the SystemPermissons.Manage permission.'),
+    }
+
+    def default_content(self, fieldarg):
+        """
+        Given a fieldarg, returns the status code description in list form.
+
+        The default status codes are provided in self.status_codes.
+        """
+        try:
+            return (nodes.Text(f) for f in self.auth_help_msgs[fieldarg])
+        except KeyError:
+            ### Old version raises exception on non-existent entries
+            ## import inspect
+            ## frame = inspect.currentframe()
+            ## filename = frame.f_code.co_filename
+            ## line = frame.f_lineno
+            ## raise Exception(
+            ##           ('The authentication spec "%s" could not be found.\n'
+            ##            'Either fix the spelling error, or add it to the list in '
+            ##            'this Python file (%s around line %u).') % (fieldarg, filename, line)
+            ##       )
+            # If no entry is found just replace underscores with spaces in the
+            # name
+            fieldarg_spaces = fieldarg.replace('_', ' ')
+            return (nodes.Text(fieldarg_spaces), '')
+
+    def make_entry(self, fieldarg, content):
+        # Wrap Field.make_entry, but intercept empty content and replace
+        # it with default content.
+        name, default_content = self.default_content(fieldarg)
+        if content.astext() == '':
+            content = default_content
+        return super(GroupedField, self).make_entry(name, content)
+
+
 class CHAOSObject(ObjectDescription):
     """
     Description of a general CHAOS object.
@@ -51,6 +100,9 @@ class CHAOSObject(ObjectDescription):
               names=('returns', 'return')),
         Field('returntype', label=l_('Return type'), has_arg=False,
               names=('rtype',)),
+        GroupedField('formparameter', label='Form Parameters',
+                     names=('formparameter', 'formparam', 'fparam', 'form')),
+        AuthField('auth', label='Authentication', names=('auth', 'authentication')),
     ]
 
     def get_signature_postfix(self, sig):
@@ -588,8 +640,3 @@ class CHAOSDomain(Domain):
 # Extension setup method
 def setup(app):
     app.add_domain(CHAOSDomain)
-    # try:
-    #     get_lexer_by_name('http')
-    # except ClassNotFound:
-    #     app.add_lexer('http', HTTPLexer())
-    # app.add_config_value('http_index_ignore_prefixes', [], None)
