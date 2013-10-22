@@ -234,6 +234,9 @@ table.docutils td {
   font-size: 12px;
   padding-right: 5px;
 }
+table.docutils td p {
+  margin: 0 !important;
+}
 
 table.docutils th {
   border-width: 0;
@@ -241,7 +244,7 @@ table.docutils th {
   font-size: 12px;
 }
 
-table.docutils tr:first-of-type th[colspan] {
+table.docutils thead tr:first-of-type th[colspan] {
   border-bottom: 1px solid black;
   font-size: 15px;
   font-weight: normal;
