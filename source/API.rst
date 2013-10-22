@@ -185,7 +185,7 @@ paginated and tells you the total number of results for the request.
 
       ``Object/Get`` is the main search and object retrieval function in  CHAOS.
 
-      :param query: the Solr search query
+      :param query: the Solr search query (See :doc:`the index`)
       :param pageIndex: the index of page that should be returned
       :type pageIndex: optional
       :param pageSize: the number of object returned (one request gives one page)
