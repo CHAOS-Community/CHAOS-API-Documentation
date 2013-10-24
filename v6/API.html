@@ -182,6 +182,277 @@ paginated and tells you the total number of results for the request.</p>
 <dt id="Portal.Portal">
 <tt class="descname">Portal</tt><em class="property"> module</em><a class="headerlink" href="#Portal.Portal" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="extension">
+<dt id="Portal.ClientSettings">
+<tt class="descname">ClientSettings</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.ClientSettings" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="action">
+<dt id="Portal.ClientSettings/Get">
+<tt class="descclassname">ClientSettings/</tt><tt class="descname">Get</tt><a class="headerlink" href="#Portal.ClientSettings/Get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get settings of a client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guid</strong> &#8211; GUID of the client</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.ClientSettings/Set">
+<tt class="descclassname">ClientSettings/</tt><tt class="descname">Set</tt><a class="headerlink" href="#Portal.ClientSettings/Set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set settings of a client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>guid</strong> &#8211; The (new) GUID of the client</li>
+<li><strong>name</strong> &#8211; The (new) name of the client</li>
+<li><strong>settings</strong> &#8211; The new settings of the client</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="extension">
+<dt id="Portal.Group">
+<tt class="descname">Group</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.Group" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="action">
+<dt id="Portal.Group/Get">
+<tt class="descclassname">Group/</tt><tt class="descname">Get</tt><a class="headerlink" href="#Portal.Group/Get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets groups by guid or gets the groups a user belongs to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional authentication:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>UserManager permission</strong> &#8211; Requires the System.UserManager
+permission if you get the group of
+another user</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>guid</strong> (<em>optional</em>) &#8211; GUID of the group you want to get</li>
+<li><strong>userGuid</strong> (<em>optional</em>) &#8211; GUID of the user whose groups you want to get</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of groups</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If neither <tt class="docutils literal"><span class="pre">guid</span></tt> nor <tt class="docutils literal"><span class="pre">userGuid</span></tt> is given it returns the group of the
+user that is logged in. If <tt class="docutils literal"><span class="pre">guid</span></tt> is given then the group with the
+specific guid is returned. If <tt class="docutils literal"><span class="pre">userGuid</span></tt> is given, then the groups of
+the given user is returned.</p>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Group/Create">
+<tt class="descclassname">Group/</tt><tt class="descname">Create</tt><a class="headerlink" href="#Portal.Group/Create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+<li><strong>CreateGroup permission</strong> &#8211; Requires the SystemPermissons.CreateGroup permission</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the new group</li>
+<li><strong>systemPermission</strong> (<em>integer</em>) &#8211; the permissions of the new group (an integer
+from the <tt class="docutils literal"><span class="pre">SystemPermissons</span></tt> struct)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The created group</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Group/Delete">
+<tt class="descclassname">Group/</tt><tt class="descname">Delete</tt><a class="headerlink" href="#Portal.Group/Delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>guid</strong> &#8211; The GUID of the group that should be deleted</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Number of affected rows in the database</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Group/Update">
+<tt class="descclassname">Group/</tt><tt class="descname">Update</tt><a class="headerlink" href="#Portal.Group/Update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>guid</strong> &#8211; The GUID of the group that should be updated</li>
+<li><strong>newName</strong> &#8211; The (new) name of the group</li>
+<li><strong>newSystemPermission</strong> (<em>integer, optional</em>) &#8211; new permissions for the group (an integer from the
+<tt class="docutils literal"><span class="pre">SystemPermissons</span></tt> struct)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Number of affected rows in the database</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Group/AddUser">
+<tt class="descclassname">Group/</tt><tt class="descname">AddUser</tt><a class="headerlink" href="#Portal.Group/AddUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a user to a group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional authentication:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>UserManager permission</strong> &#8211; May require the SystemPermissons.UserManager permission</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>guid</strong> &#8211; The GUID of the group that the user should be added to</li>
+<li><strong>userGuid</strong> &#8211; The GUID of the user that should be added</li>
+<li><strong>permissions</strong> (<em>integer</em>) &#8211; permissions for the new user (an integer from the
+<tt class="docutils literal"><span class="pre">SystemPermissons</span></tt> struct)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Number of affected rows in the database</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the user has UserManager permissions (SystemPermissons.UserManager)
+he will be able to add users to all groups. Otherwise he has to have
+the required permission for the specific group.</p>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Group/RemoveUser">
+<tt class="descclassname">Group/</tt><tt class="descname">RemoveUser</tt><a class="headerlink" href="#Portal.Group/RemoveUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a user from a group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional authentication:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>UserManager permission</strong> &#8211; May require the SystemPermissons.UserManager permission</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>guid</strong> &#8211; The GUID of the group that the user should be removed from</li>
+<li><strong>userGuid</strong> &#8211; The GUID of the user that should be removed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Number of affected rows in the database</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the user has UserManager permissions (SystemPermissons.UserManager)
+he will be able to remove users from all groups. Otherwise he has to have
+the required permission for the specific group.</p>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Group/UpdateUserPermissions">
+<tt class="descclassname">Group/</tt><tt class="descname">UpdateUserPermissions</tt><a class="headerlink" href="#Portal.Group/UpdateUserPermissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a user to a group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional authentication:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>UserManager permission</strong> &#8211; May require the SystemPermissons.UserManager permission</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>guid</strong> &#8211; The GUID of the group to which the user&#8217;s permissions
+should be changed</li>
+<li><strong>userGuid</strong> &#8211; The GUID of the user whose permissions should be
+altered</li>
+<li><strong>permissions</strong> (<em>integer</em>) &#8211; the new permissions for the user
+(an integer from the <tt class="docutils literal"><span class="pre">SystemPermissons</span></tt> struct)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Number of affected rows in the database</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the user has UserManager permissions (SystemPermissons.UserManager)
+he will be able to change permissions for all users and all groups.
+Otherwise he has to have the required permission for the specific group.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="extension">
 <dt id="Portal.Session">
 <tt class="descname">Session</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.Session" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="action">
@@ -189,16 +460,14 @@ paginated and tells you the total number of results for the request.</p>
 <tt class="descclassname">Session/</tt><tt class="descname">Create</tt><a class="headerlink" href="#Portal.Session/Create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a session, which can be authenticated via the
 <a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a> method.</p>
+</dd></dl>
+
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">None</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">A <tt class="code docutils literal"><span class="pre">ModuleResult</span></tt> with a single <tt class="code docutils literal"><span class="pre">Result</span></tt> with a <tt class="code docutils literal"><span class="pre">SessionGUID</span></tt></td>
-</tr>
-</tbody>
-</table>
+<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body"><p class="first">None
+:returns: A <tt class="code docutils literal"><span class="pre">ModuleResult</span></tt> with a single <tt class="code docutils literal"><span class="pre">Result</span></tt> with a <tt class="code docutils literal"><span class="pre">SessionGUID</span></tt></p>
 <pre><code class="language-xml">&lt;PortalResult Duration="12"&gt;
   &lt;ModuleResults&gt;
     &lt;ModuleResult Fullname="Portal" Duration="0" Count="1"&gt;
@@ -213,15 +482,17 @@ paginated and tells you the total number of results for the request.</p>
     &lt;/ModuleResult&gt;
   &lt;/ModuleResults&gt;
 &lt;/PortalResult&gt;</code></pre>
-<div class="admonition seealso">
+<div class="last admonition seealso">
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
 <li><a class="reference internal" href="authentication.html#authentication-login"><em>Authentication -&gt; Login</em></a></li>
 <li><a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a></li>
 </ul>
 </div>
-</dd></dl>
-
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -246,7 +517,7 @@ paginated and tells you the total number of results for the request.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="code docutils literal"><span class="pre">CHAOS.Portal.Authentication.Exception.LoginException</span></tt> on error
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="code docutils literal"><span class="pre">CHAOS.Portal.Authentication.Exception.LoginException</span></tt> on error
 and
 <tt class="code docutils literal"><span class="pre">CHAOS.Portal.DTO.Standard.UserInfo</span></tt> on success</p>
 </td>
@@ -284,7 +555,8 @@ that: it contains functions for managing the media in the database.</div></block
 <dl class="extension">
 <dt id="MCM.Object">
 <tt class="descname">Object</tt><em class="property"> extension</em><a class="headerlink" href="#MCM.Object" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <tt class="docutils literal"><span class="pre">Object</span></tt> extension gets, sets and updates objects in the database.</p>
+<dd><blockquote>
+<div><p>The <tt class="docutils literal"><span class="pre">Object</span></tt> extension gets, sets and updates objects in the database.</p>
 <dl class="action">
 <dt id="MCM.Object/Get">
 <tt class="descclassname">Object/</tt><tt class="descname">Get</tt><a class="headerlink" href="#MCM.Object/Get" title="Permalink to this definition">¶</a></dt>
@@ -308,7 +580,7 @@ that: it contains functions for managing the media in the database.</div></block
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A list of objects.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of objects</p>
 </td>
 </tr>
 </tbody>
@@ -331,7 +603,7 @@ database via the API.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
-<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
 <li><strong>Write permission</strong> &#8211; you need have write-permission to the AccessPoint
 you are publishing to.</li>
 </ul>
@@ -346,7 +618,7 @@ you are publishing to.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><ul class="simple">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
 <li>On success: <tt class="code docutils literal"><span class="pre">CHAOS.Portal.DTO.Standard.ScalarResult</span></tt> with value <tt class="code docutils literal"><span class="pre">1</span></tt></li>
 <li>On error: a number of different errors can be given on erroneous dates,
 accessPointsGUID or objectsGUIDs. If the accessPoint does not exists you will
@@ -429,29 +701,28 @@ until you change the publish period or remove the accessPoint.</p>
 </div>
 </dd></dl>
 
-</dd></dl>
-
+</div></blockquote>
 <dl class="extension">
-<dt id="MCM.MetadataSchema">
-<tt class="descname">MetadataSchema</tt><em class="property"> extension</em><a class="headerlink" href="#MCM.MetadataSchema" title="Permalink to this definition">¶</a></dt>
+<dt id="MCM.Object/MetadataSchema">
+<tt class="descclassname">Object/</tt><tt class="descname">MetadataSchema</tt><em class="property"> extension</em><a class="headerlink" href="#MCM.Object/MetadataSchema" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="action">
-<dt id="MCM.MetadataSchema/Get">
-<tt class="descclassname">MetadataSchema/</tt><tt class="descname">Get</tt><a class="headerlink" href="#MCM.MetadataSchema/Get" title="Permalink to this definition">¶</a></dt>
+<dt id="MCM.Object/MetadataSchema/Get">
+<tt class="descclassname">Object/MetadataSchema/</tt><tt class="descname">Get</tt><a class="headerlink" href="#MCM.Object/MetadataSchema/Get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets one or all MetadataSchemas in the database.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
-<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
-<li><strong>Read permission</strong> &#8211; you will get the MetadataSchemas you have permission to read.</li>
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+<li><strong>Read permission</strong> &#8211; you will get the MetadataSchemas you have permission to read</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>guid</strong> (<em>optional</em>) &#8211; the GUID of the schema to get</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A list of MetadataSchemas.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of MetadataSchemas</p>
 </td>
 </tr>
 </tbody>
@@ -479,16 +750,16 @@ has rights to read are returned.</p>
 </dd></dl>
 
 <dl class="action">
-<dt id="MCM.MetadataSchema/Update">
-<tt class="descclassname">MetadataSchema/</tt><tt class="descname">Update</tt><a class="headerlink" href="#MCM.MetadataSchema/Update" title="Permalink to this definition">¶</a></dt>
+<dt id="MCM.Object/MetadataSchema/Update">
+<tt class="descclassname">Object/MetadataSchema/</tt><tt class="descname">Update</tt><a class="headerlink" href="#MCM.Object/MetadataSchema/Update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates a MetadataSchema in the database.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
-<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
-<li><strong>Write permission</strong> &#8211; you need to have write-permissions to the MetadataSchema.</li>
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+<li><strong>Write permission</strong> &#8211; you need to have write-permissions to the MetadataSchema</li>
 </ul>
 </td>
 </tr>
@@ -499,7 +770,7 @@ has rights to read are returned.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the updated MetadataSchema</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The GUID of the updated MetadataSchema</p>
 </td>
 </tr>
 </tbody>
@@ -507,8 +778,8 @@ has rights to read are returned.</p>
 </dd></dl>
 
 <dl class="action">
-<dt id="MCM.MetadataSchema/Create">
-<tt class="descclassname">MetadataSchema/</tt><tt class="descname">Create</tt><a class="headerlink" href="#MCM.MetadataSchema/Create" title="Permalink to this definition">¶</a></dt>
+<dt id="MCM.Object/MetadataSchema/Create">
+<tt class="descclassname">Object/MetadataSchema/</tt><tt class="descname">Create</tt><a class="headerlink" href="#MCM.Object/MetadataSchema/Create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a new MetadataSchema to the database.</p>
 <p>You need to be logged in to use this feature and the user must have
 administritive rights.</p>
@@ -517,8 +788,8 @@ administritive rights.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
-<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature.</li>
-<li><strong>Manage permission</strong> &#8211; Requires the SystemPermissons.Manage permission.</li>
+<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+<li><strong>Manage permission</strong> &#8211; Requires the SystemPermissons.Manage permission</li>
 </ul>
 </td>
 </tr>
@@ -529,13 +800,15 @@ administritive rights.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">The GUID of the created MetadataSchema</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The GUID of the created MetadataSchema</p>
 </td>
 </tr>
 </tbody>
 </table>
-<p>If no <tt class="docutils literal"><span class="pre">guid</span></tt> is given, CHAOS assign a GUID to the new
+<p>If no <tt class="docutils literal"><span class="pre">guid</span></tt> is given, CHAOS assigns a GUID to the new
 schema. The new GUID is returned as a result.</p>
+</dd></dl>
+
 </dd></dl>
 
 </dd></dl>
