@@ -119,6 +119,25 @@ paginated and tells you the total number of results for the request.
          :param settings: The new settings of the client
          :type setting: a string
 
+   .. extension:: Group
+
+      .. action:: Get
+
+         Gets groups by guid or gets the groups a user belongs to.
+
+         :auth logged_in:
+         :auth user_manager_permission: Requires the System.UserManager
+                                        permission if you get the group of
+                                        another user
+         :param guid: GUID of the group you want to get
+         :type guid: optional
+         :param userGuid: GUID of the user whose groups you want to get
+         :type userGuid: optional
+
+         If neither ``guid`` nor ``userGuid`` is given it returns the group of the
+         user that is logged in. If ``guid`` is given then the group with the
+         specific guid is returned. If ``userGuid`` is given, then the groups of
+         the given user is returned.
 
 
    .. extension:: Session
