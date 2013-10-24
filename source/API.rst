@@ -140,6 +140,27 @@ paginated and tells you the total number of results for the request.
          :type systemPermission: integer
          :returns: The created group
 
+      .. action:: Delete
+
+         Deletes a group.
+
+         :auth logged_in:
+         :param guid: The GUID of the group that should be deleted
+         :returns: Number of affected rows in the database
+
+      .. action:: Update
+
+         Updates a group.
+
+         :auth logged_in:
+         :param guid: The GUID of the group that should be updated
+         :param newName: The (new) name of the group
+         :param newSystemPermission: new permissions for the group (an integer from the
+                                     ``SystemPermissons`` struct)
+         :type newSystemPermission: integer, optional
+         :returns: Number of affected rows in the database
+
+
    .. extension:: Session
 
       .. action:: Create
