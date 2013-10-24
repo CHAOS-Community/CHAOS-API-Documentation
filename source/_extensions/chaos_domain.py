@@ -36,8 +36,8 @@ class AuthField(GroupedField):
     # List of authentication types for actions
     auth_help_msgs = {
         # 'field_name': ('Displayed title', 'Displayed description'),
-        'logged_in': ('Logged in', 'You need to be logged in to use this feature.'),
-        'system_manage_permission': ('Manage permission', 'Requires the SystemPermissons.Manage permission.'),
+        'logged_in': ('Logged in', 'You need to be logged in to use this feature'),
+        'system_manage_permission': ('Manage permission', 'Requires the SystemPermissons.Manage permission'),
     }
 
     def default_content(self, fieldarg):

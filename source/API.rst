@@ -223,7 +223,7 @@ paginated and tells you the total number of results for the request.
       :type accessPointGUID: optional
       :param sessionGUID: the GUID of an authorized session
       :type sessionGUID: optional
-      :rtype: A list of objects.
+      :rtype: A list of objects
 
       Either an authorized sessionGUID or accessPointGUID must be provided.
 
@@ -324,10 +324,10 @@ paginated and tells you the total number of results for the request.
       Gets one or all MetadataSchemas in the database.
 
       :auth logged_in:
-      :auth Read_permission: you will get the MetadataSchemas you have permission to read.
+      :auth Read_permission: you will get the MetadataSchemas you have permission to read
       :param metadataSchemaGUID: the GUID of the schema to get
       :type metadataSchemaGUID: optional
-      :rtype: A list of MetadataSchemas.
+      :rtype: A list of MetadataSchemas
 
       If no ``metadataSchemaGUID`` is given, all MetadataSchemas which the user
       has rights to read are returned.
@@ -358,7 +358,7 @@ paginated and tells you the total number of results for the request.
        Updates a MetadataSchema in the database.
 
        :auth logged_in:
-       :auth Write_permission: you need to have write-permissions to the MetadataSchema.
+       :auth Write_permission: you need to have write-permissions to the MetadataSchema
        :param metadataSchemaGUID: the GUID of the schema to update
        :param name: a new (or the same) name for schema
        :param xml: a new (or the same) XML for the schema
