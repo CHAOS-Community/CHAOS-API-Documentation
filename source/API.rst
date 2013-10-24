@@ -398,5 +398,5 @@ paginated and tells you the total number of results for the request.
          :type metadataSchemaGUID: optional
          :rtype: The GUID of the created MetadataSchema
 
-         If no ``metadataSchemaGUID`` is given, CHAOS assign a GUID to the new
+         If no ``metadataSchemaGUID`` is given, CHAOS assigns a GUID to the new
          schema. The new GUID is returned as a result.
