@@ -327,18 +327,17 @@ from the <tt class="docutils literal"><span class="pre">SystemPermissons</span><
 <dt id="Portal.Session">
 <tt class="descname">Session</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.Session" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="action">
-<dt id="Portal.Session/Create">
-<tt class="descclassname">Session/</tt><tt class="descname">Create</tt><a class="headerlink" href="#Portal.Session/Create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a session, which can be authenticated via the
-<a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a> method.</p>
-</dd></dl>
-
+<dt id="Portal.Session/Get">
+<tt class="descclassname">Session/</tt><tt class="descname">Get</tt><a class="headerlink" href="#Portal.Session/Get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current session.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body"><p class="first">None
-:returns: A <tt class="code docutils literal"><span class="pre">ModuleResult</span></tt> with a single <tt class="code docutils literal"><span class="pre">Result</span></tt> with a <tt class="code docutils literal"><span class="pre">SessionGUID</span></tt></p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The current session</td>
+</tr>
+</tbody>
+</table>
 <pre><code class="language-xml">&lt;PortalResult Duration="12"&gt;
   &lt;ModuleResults&gt;
     &lt;ModuleResult Fullname="Portal" Duration="0" Count="1"&gt;
@@ -353,17 +352,88 @@ from the <tt class="docutils literal"><span class="pre">SystemPermissons</span><
     &lt;/ModuleResult&gt;
   &lt;/ModuleResults&gt;
 &lt;/PortalResult&gt;</code></pre>
-<div class="last admonition seealso">
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Session/Create">
+<tt class="descclassname">Session/</tt><tt class="descname">Create</tt><a class="headerlink" href="#Portal.Session/Create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a session, which can be authenticated via the
+<a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param :</th><td class="field-body">None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The created session</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-xml">&lt;PortalResult Duration="12"&gt;
+  &lt;ModuleResults&gt;
+    &lt;ModuleResult Fullname="Portal" Duration="0" Count="1"&gt;
+      &lt;Results&gt;
+        &lt;Result FullName="CHAOS.Portal.DTO.Standard.Session"&gt;
+          &lt;SessionGUID&gt;47c72c3c-9126-9549-8517-340c4275e22b&lt;/SessionGUID&gt;
+          &lt;UserGUID&gt;c0b231e9-7d98-4f52-885e-af4837faa352&lt;/UserGUID&gt;
+          &lt;DateCreated&gt;03-10-2013 14:00:20&lt;/DateCreated&gt;
+          &lt;DateModified&gt;03-10-2013 14:00:20&lt;/DateModified&gt;
+        &lt;/Result&gt;
+      &lt;/Results&gt;
+    &lt;/ModuleResult&gt;
+  &lt;/ModuleResults&gt;
+&lt;/PortalResult&gt;</code></pre>
+<div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
 <li><a class="reference internal" href="authentication.html#authentication-login"><em>Authentication -&gt; Login</em></a></li>
 <li><a class="reference internal" href="#EmailPassword.EmailPassword/Login" title="EmailPassword.EmailPassword/Login"><tt class="xref chaos chaos-act docutils literal"><span class="pre">EmailPassword/Login</span></tt></a></li>
 </ul>
 </div>
-</td>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Session/Update">
+<tt class="descclassname">Session/</tt><tt class="descname">Update</tt><a class="headerlink" href="#Portal.Session/Update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the current session – in effect extending its lifetime.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The current session</td>
 </tr>
 </tbody>
 </table>
+<pre><code class="language-xml">&lt;PortalResult Duration="12"&gt;
+  &lt;ModuleResults&gt;
+    &lt;ModuleResult Fullname="Portal" Duration="0" Count="1"&gt;
+      &lt;Results&gt;
+        &lt;Result FullName="CHAOS.Portal.DTO.Standard.Session"&gt;
+          &lt;SessionGUID&gt;47c72c3c-9126-9549-8517-340c4275e22b&lt;/SessionGUID&gt;
+          &lt;UserGUID&gt;c0b231e9-7d98-4f52-885e-af4837faa352&lt;/UserGUID&gt;
+          &lt;DateCreated&gt;03-10-2013 14:00:20&lt;/DateCreated&gt;
+          &lt;DateModified&gt;03-10-2013 14:00:20&lt;/DateModified&gt;
+        &lt;/Result&gt;
+      &lt;/Results&gt;
+    &lt;/ModuleResult&gt;
+  &lt;/ModuleResults&gt;
+&lt;/PortalResult&gt;</code></pre>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.Session/Delete">
+<tt class="descclassname">Session/</tt><tt class="descname">Delete</tt><a class="headerlink" href="#Portal.Session/Delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the current session – the equivalent of logging out.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The number of affected rows in the database</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </dd></dl>
