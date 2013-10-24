@@ -361,7 +361,7 @@ paginated and tells you the total number of results for the request.
        :auth Write_permission: you need to have write-permissions to the MetadataSchema
        :param metadataSchemaGUID: the GUID of the schema to update
        :param name: a new (or the same) name for schema
-       :param xml: a new (or the same) XML for the schema
+       :param schemaXml: a new (or the same) XML for the schema
        :rtype: The GUID of the updated MetadataSchema
 
     .. action:: Create
@@ -374,7 +374,7 @@ paginated and tells you the total number of results for the request.
        :auth logged_in:
        :auth system_manage_permission:
        :param name: a new name for the new schema
-       :param xml: the XML for the new schema
+       :param schemaXml: the XML for the new schema
        :param metadataSchemaGUID: the GUID for new schema
        :type metadataSchemaGUID: optional
        :rtype: The GUID of the created MetadataSchema
