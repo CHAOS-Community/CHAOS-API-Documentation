@@ -28,6 +28,21 @@ Guide
 Sphinx uses reStructuredText (`.rst`) as markup language for its pages. A quick
 guide to reStructuredText can be found [here](http://docutils.sourceforge.net/docs/user/rst/quickref.html).
 
+### Indentation
+We use 3 spaces for indentation in the reST source (the same as the [Python docs]).
+This, of course, does not apply to code examples inside the reST
+source/documentation.
+
+Example:
+
+    .. module:: MCM
+
+       .. extension:: Object
+
+          .. action:: Get
+
+[Python docs]: http://docs.python.org/devguide/documenting.html#use-of-whitespace
+
 PHP Portal Client documentation
 ----------------------------
 
