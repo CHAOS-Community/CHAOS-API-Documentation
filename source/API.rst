@@ -127,6 +127,18 @@ paginated and tells you the total number of results for the request.
 
          :auth logged_in:
 
+      .. action:: Create
+
+         Creates a new group.
+
+         :auth logged_in:
+         :auth create_group_permission:
+         :param name: The name of the new group
+         :param systemPermission: the permissions of the new group (an integer
+                                  from the ``SystemPermissons`` struct)
+         :type systemPermission: integer
+         :returns: The created group
+
    .. extension:: Session
 
       .. action:: Create
