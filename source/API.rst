@@ -126,9 +126,9 @@ paginated and tells you the total number of results for the request.
          Gets groups by guid or gets the groups a user belongs to.
 
          :auth logged_in:
-         :auth user_manager_permission: Requires the System.UserManager
-                                        permission if you get the group of
-                                        another user
+         :optauth user_manager_permission: Requires the System.UserManager
+                                           permission if you get the group of
+                                           another user
          :param guid: GUID of the group you want to get
          :type guid: optional
          :param userGuid: GUID of the user whose groups you want to get

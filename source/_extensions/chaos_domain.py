@@ -24,7 +24,7 @@ from sphinx.util.compat import Directive
 from sphinx.util.docfields import Field, GroupedField, TypedField
 
 
-class AuthField(GroupedField):
+class AuthField(TypedField):
     '''
     A field for specifying required authentication for Actions in CHAOS.
 
@@ -71,7 +71,17 @@ class AuthField(GroupedField):
         name, default_content = self.default_content(fieldarg)
         if content.astext() == '':
             content = default_content
-        return super(GroupedField, self).make_entry(name, content)
+        return super(TypedField, self).make_entry(name, content)
+
+
+class OptAuthField(AuthField):
+    # List of authentication types for actions
+    auth_help_msgs = {
+        # 'field_name': ('Displayed title', 'Displayed description'),
+        'logged_in': ('Logged in', 'You may need to be logged in to use this feature'),
+        'system_manage_permission': ('Manage permission', 'May require the SystemPermissons.Manage permission'),
+        'user_manager_permission': ('UserManager permission', 'May require the SystemPermissons.UserManager permission'),
+    }
 
 
 class CHAOSObject(ObjectDescription):
@@ -103,7 +113,16 @@ class CHAOSObject(ObjectDescription):
               names=('rtype',)),
         GroupedField('formparameter', label='Form Parameters',
                      names=('formparameter', 'formparam', 'fparam', 'form')),
-        AuthField('auth', label='Authentication', names=('auth', 'authentication')),
+        AuthField('auth',
+                  label='Authentication',
+                  names=('auth', 'authentication'),
+                  # typerolename='authnote', typenames=('authtype', 'authnote')
+                 ),
+        OptAuthField('optauth',
+                  label='Optional authentication',
+                  names=('optauth', 'optional_authentication'),
+                  # typerolename='authnote', typenames=('authtype', 'authnote')
+                 ),
     ]
 
     def get_signature_postfix(self, sig):
