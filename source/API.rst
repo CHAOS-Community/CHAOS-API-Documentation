@@ -48,18 +48,18 @@ On a succesfull request Portal will return a structure similar to the following:
 
 .. code-editor:: xml
 
-  <PortalResult Duration="CHAOS call duration">
-    <ModuleResults>
-      <ModuleResult Fullname="Module name" Duration="0" Count="Number of results">
-        <Results>
-          <Result FullName="Name of object">
-             ...
-          </Result>
-          ...
-        </Results>
-      </ModuleResult>
-    </ModuleResults>
-  </PortalResult>
+   <PortalResult Duration="CHAOS call duration">
+     <ModuleResults>
+       <ModuleResult Fullname="Module name" Duration="0" Count="Number of results">
+         <Results>
+           <Result FullName="Name of object">
+              ...
+           </Result>
+           ...
+         </Results>
+       </ModuleResult>
+     </ModuleResults>
+   </PortalResult>
 
 The ``Fullname`` attribute of :code:`<ModuleResult>` will correspond to the name
 of module of the extension you called. The ``Count`` attribute tells you how
@@ -72,67 +72,71 @@ Here's an example result from the action ``Object/Get``:
 
 .. code-editor:: xml
 
-  <PortalResult Duration="84">
-    <ModuleResults>
-      <ModuleResult Fullname="MCM" Duration="0" Count="2" TotalCount="5">
-        <Results>
-          <Result FullName="CHAOS.MCM.Data.DTO.Object">
-            <GUID>00000000-0000-0000-0000-00007d080016</GUID>
-            <ObjectTypeID>36</ObjectTypeID>
-            <DateCreated>25-05-2012 15:50:01</DateCreated>
-            <Metadatas/>
-            <Files/>
-            <ObjectRelations/>
-          </Result>
-          <Result FullName="CHAOS.MCM.Data.DTO.Object">
-            <GUID>546f2bc2-dcd4-424e-b695-729e0152bdeb</GUID>
-            <ObjectTypeID>36</ObjectTypeID>
-            <DateCreated>21-03-2013 17:29:23</DateCreated>
-            <Metadatas/>
-            <Files/>
-            <ObjectRelations/>
-          </Result>
-        </Results>
-      </ModuleResult>
-    </ModuleResults>
-  </PortalResult>
+   <PortalResult Duration="84">
+     <ModuleResults>
+       <ModuleResult Fullname="MCM" Duration="0" Count="2" TotalCount="5">
+         <Results>
+           <Result FullName="CHAOS.MCM.Data.DTO.Object">
+             <GUID>00000000-0000-0000-0000-00007d080016</GUID>
+             <ObjectTypeID>36</ObjectTypeID>
+             <DateCreated>25-05-2012 15:50:01</DateCreated>
+             <Metadatas/>
+             <Files/>
+             <ObjectRelations/>
+           </Result>
+           <Result FullName="CHAOS.MCM.Data.DTO.Object">
+             <GUID>546f2bc2-dcd4-424e-b695-729e0152bdeb</GUID>
+             <ObjectTypeID>36</ObjectTypeID>
+             <DateCreated>21-03-2013 17:29:23</DateCreated>
+             <Metadatas/>
+             <Files/>
+             <ObjectRelations/>
+           </Result>
+         </Results>
+       </ModuleResult>
+     </ModuleResults>
+   </PortalResult>
 
 ``TotalCount`` is specific to the ``Object/Get`` action which is
 paginated and tells you the total number of results for the request.
 
 .. module:: Portal
 
-  .. extension:: Session
 
-    .. action:: Create
 
-      Creates a session, which can be authenticated via the
-      :act:`EmailPassword/Login` method.
 
-      :param protocolVersion: must have a value of :code:`4`
-      :rtype: A :code:`ModuleResult` with a single :code:`Result` with a :code:`SessionGUID`
 
-      .. code-editor:: xml
-      
-          <PortalResult Duration="12">
-            <ModuleResults>
-              <ModuleResult Fullname="Portal" Duration="0" Count="1">
-                <Results>
-                  <Result FullName="CHAOS.Portal.DTO.Standard.Session">
-                    <SessionGUID>47c72c3c-9126-9549-8517-340c4275e22b</SessionGUID>
-                    <UserGUID>c0b231e9-7d98-4f52-885e-af4837faa352</UserGUID>
-                    <DateCreated>03-10-2013 14:00:20</DateCreated>
-                    <DateModified>03-10-2013 14:00:20</DateModified>
-                  </Result>
-                </Results>
-              </ModuleResult>
-            </ModuleResults>
-          </PortalResult>
+   .. extension:: Session
 
-      .. seealso::
+      .. action:: Create
 
-          * :ref:`Authentication -> Login <authentication-login>`
-          * :act:`EmailPassword/Login`
+         Creates a session, which can be authenticated via the
+         :act:`EmailPassword/Login` method.
+
+         :param protocolVersion: must have a value of :code:`4`
+         :rtype: A :code:`ModuleResult` with a single :code:`Result` with a :code:`SessionGUID`
+
+         .. code-editor:: xml
+
+             <PortalResult Duration="12">
+               <ModuleResults>
+                 <ModuleResult Fullname="Portal" Duration="0" Count="1">
+                   <Results>
+                     <Result FullName="CHAOS.Portal.DTO.Standard.Session">
+                       <SessionGUID>47c72c3c-9126-9549-8517-340c4275e22b</SessionGUID>
+                       <UserGUID>c0b231e9-7d98-4f52-885e-af4837faa352</UserGUID>
+                       <DateCreated>03-10-2013 14:00:20</DateCreated>
+                       <DateModified>03-10-2013 14:00:20</DateModified>
+                     </Result>
+                   </Results>
+                 </ModuleResult>
+               </ModuleResults>
+             </PortalResult>
+
+         .. seealso::
+
+             * :ref:`Authentication -> Login <authentication-login>`
+             * :act:`EmailPassword/Login`
 
 
 .. module:: EmailPassword
