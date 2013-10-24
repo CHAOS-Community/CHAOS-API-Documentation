@@ -39,6 +39,7 @@ class AuthField(TypedField):
         'logged_in': ('Logged in', 'You need to be logged in to use this feature'),
         'system_manage_permission': ('Manage permission', 'Requires the SystemPermissons.Manage permission'),
         'user_manager_permission': ('UserManager permission', 'Requires the SystemPermissons.UserManager permission'),
+        'create_group_permission': ('CreateGroup permission', 'Requires the SystemPermissons.CreateGroup permission'),
     }
 
     def default_content(self, fieldarg):
