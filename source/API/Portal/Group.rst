@@ -8,10 +8,23 @@ Group
 
       .. action:: Get
 
-         Gets the groups the current user belongs to.
+         Gets groups by guid or gets the groups a user belongs to.
 
          :auth logged_in:
+         :optauth user_manager_permission: Requires the System.UserManager
+                                           permission if you get the group of
+                                           another user
+         :param guid: GUID of the group you want to get
+         :type guid: optional
+         :param userGuid: GUID of the user whose groups you want to get
+         :type userGuid: optional
          :returns: A list of groups
+
+         If neither ``guid`` nor ``userGuid`` is given it returns the group of the
+         user that is logged in. If ``guid`` is given then the group with the
+         specific guid is returned. If ``userGuid`` is given, then the groups of
+         the given user is returned.
+
 
       .. action:: Create
 
