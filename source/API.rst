@@ -126,6 +126,7 @@ paginated and tells you the total number of results for the request.
          Gets the groups the current user belongs to.
 
          :auth logged_in:
+         :returns: A list of groups
 
       .. action:: Create
 
@@ -147,7 +148,7 @@ paginated and tells you the total number of results for the request.
          :act:`EmailPassword/Login` method.
 
          :param protocolVersion: must have a value of :code:`4`
-         :rtype: A :code:`ModuleResult` with a single :code:`Result` with a :code:`SessionGUID`
+         :returns: A :code:`ModuleResult` with a single :code:`Result` with a :code:`SessionGUID`
 
          .. code-editor:: xml
 
@@ -182,9 +183,9 @@ paginated and tells you the total number of results for the request.
       :param password: the user's password
       :param sessionGUID: the GUID of a recently created session
 
-      :rtype: :code:`CHAOS.Portal.Authentication.Exception.LoginException` on error
-              and
-              :code:`CHAOS.Portal.DTO.Standard.UserInfo` on success
+      :returns: :code:`CHAOS.Portal.Authentication.Exception.LoginException` on error
+                and
+                :code:`CHAOS.Portal.DTO.Standard.UserInfo` on success
 
       http://api.danskkulturarv.dk/EmailPassword/Login?email=test@example.org&password=mysecret
 
@@ -241,7 +242,7 @@ paginated and tells you the total number of results for the request.
         :type accessPointGUID: optional
         :param sessionGUID: the GUID of an authorized session
         :type sessionGUID: optional
-        :rtype: A list of objects
+        :returns: A list of objects
         
         Either an authorized sessionGUID or accessPointGUID must be provided.
         
@@ -267,10 +268,10 @@ paginated and tells you the total number of results for the request.
         :type startDate: optional
         :param endDate: the end of the publishing period
         :type endDate: optional
-        :rtype: * On success: :code:`CHAOS.Portal.DTO.Standard.ScalarResult` with value :code:`1`
-                * On error: a number of different errors can be given on erroneous dates,
-                  accessPointsGUID or objectsGUIDs. If the accessPoint does not exists you will
-                  get :code:`CHAOS.Portal.Exception.InsufficientPermissionsException`
+        :returns: * On success: :code:`CHAOS.Portal.DTO.Standard.ScalarResult` with value :code:`1`
+                  * On error: a number of different errors can be given on erroneous dates,
+                    accessPointsGUID or objectsGUIDs. If the accessPoint does not exists you will
+                    get :code:`CHAOS.Portal.Exception.InsufficientPermissionsException`
      
         *startDate* and *endDate* should be in the format 
         :code:`DD-MM-YYYY HH:MM:SS` where the first :code:`MM` is month and the seconds
@@ -345,7 +346,7 @@ paginated and tells you the total number of results for the request.
          :auth Read_permission: you will get the MetadataSchemas you have permission to read
          :param metadataSchemaGUID: the GUID of the schema to get
          :type metadataSchemaGUID: optional
-         :rtype: A list of MetadataSchemas
+         :returns: A list of MetadataSchemas
 
          If no ``metadataSchemaGUID`` is given, all MetadataSchemas which the user
          has rights to read are returned.
@@ -380,7 +381,7 @@ paginated and tells you the total number of results for the request.
          :param metadataSchemaGUID: the GUID of the schema to update
          :param name: a new (or the same) name for schema
          :param schemaXml: a new (or the same) XML for the schema
-         :rtype: The GUID of the updated MetadataSchema
+         :returns: The GUID of the updated MetadataSchema
 
       .. action:: Create
 
@@ -395,7 +396,7 @@ paginated and tells you the total number of results for the request.
          :param schemaXml: the XML for the new schema
          :param metadataSchemaGUID: the GUID for new schema
          :type metadataSchemaGUID: optional
-         :rtype: The GUID of the created MetadataSchema
+         :returns: The GUID of the created MetadataSchema
 
          If no ``metadataSchemaGUID`` is given, CHAOS assigns a GUID to the new
          schema. The new GUID is returned as a result.
