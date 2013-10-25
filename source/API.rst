@@ -362,6 +362,19 @@ paginated and tells you the total number of results for the request.
    The ``MCM`` module stands for *Media Content Manager* and does exactly
    that: it contains functions for managing the media in the database.
 
+   .. extension:: Destination
+
+      .. action:: Get
+
+         Gets a destination.
+
+         :param id: The id the of the Destination
+         :type id: optional
+         :returns: A list of destinations
+         :rtype: DestinationInfo
+
+         If no ``id`` is given, all destinations will be returned.
+
    .. extension:: Object
 
       The ``Object`` extension gets, sets and updates objects in the database.
