@@ -286,6 +286,16 @@ paginated and tells you the total number of results for the request.
          :param name: The new name of the subscription
          :returns: The number of affected rows in the database
 
+   .. extension:: User
+
+      .. action:: Get
+
+         Gets the current user.
+
+         :auth logged_in:
+         :returns: The current (logged in) user.
+
+
 .. module:: EmailPassword
 
   .. extension:: EmailPassword
