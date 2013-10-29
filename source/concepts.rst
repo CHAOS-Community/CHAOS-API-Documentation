@@ -2,6 +2,8 @@
 CHAOS concepts
 ==============
 
+.. _concepts-objects:
+
 Objects
 -------
 Each media reference in CHAOS is called an ``Object``. Objects have a number of
@@ -29,6 +31,7 @@ Files            A list of file objects (FileInfo)
 ObjectRelations  A list of objects related to this object
 ===============  ========================================
 
+.. _concepts-files:
 
 Files
 -----
@@ -65,6 +68,8 @@ FormatType       Image, Video, Sound, Document
 FormatCategory   Image Thumbnail, Image Original, Movie Clip, Movie Original etc.
 Format           Image JPEG 320x480, Movie AVI 378x210 etc.
 ===============  ========================================
+
+.. _concepts-metadata:
 
 Metadata
 --------
@@ -104,6 +109,8 @@ LanguageCode        Language code indicating the language
 
 .. _IETF language tags: http://en.wikipedia.org/wiki/IETF_language_tag
 
+.. _concepts-related_objects:
+
 Related objects
 ---------------
 An object can have relations to other objects. These related objects can be
@@ -111,6 +118,8 @@ found in the ``ObjectRelations`` property of the ``Object``.  The related
 objects are regular ``Object``\s and should be treated as such, although you
 probably want to display them differently to the user (in comparison to the
 primary object).
+
+.. _concepts-object_retieval_and_search:
 
 Object retrieval and search
 ---------------------------
