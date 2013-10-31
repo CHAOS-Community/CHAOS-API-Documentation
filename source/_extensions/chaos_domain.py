@@ -505,14 +505,14 @@ class CHAOSDomain(Domain):
     name = 'chaos'
     label = 'chaos'
     object_types = {
-        'module':       ObjType(l_('module'),        'mod', 'obj'),
-        'extension':    ObjType(l_('extension'),     'ext', 'obj'),
-        'action':       ObjType(l_('action'),        'act', 'obj'),
+        'module':       ObjType(l_('module'),    'mod', 'obj'),
+        'extension':    ObjType(l_('extension'), 'ext', 'obj'),
+        'action':       ObjType(l_('action'),    'act', 'obj'),
 
-        'data':         ObjType(l_('data'),          'data', 'obj'),
-        'exception':    ObjType(l_('exception'),     'exc',  'obj'),
-        'method':       ObjType(l_('method'),        'meth', 'obj'),
-        'attribute':    ObjType(l_('attribute'),     'attr', 'obj'),
+        'data':         ObjType(l_('data'),      'data', 'obj'),
+        'exception':    ObjType(l_('exception'), 'exc',  'obj'),
+        'method':       ObjType(l_('method'),    'meth', 'obj'),
+        'attribute':    ObjType(l_('attribute'), 'attr', 'obj'),
     }
 
     directives = {
