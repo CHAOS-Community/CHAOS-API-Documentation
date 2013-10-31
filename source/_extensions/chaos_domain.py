@@ -588,34 +588,28 @@ class CHAOSDomain(Domain):
                         matches = [(oname, objects[oname]) for oname in objects
                                    if oname.endswith(searchname)
                                    and objects[oname][1] in objtypes]
+            return matches
         else:
-            # NOTE: searching for exact match, object type is not considered
+            # We have an exact match
             if name in objects:
-                newname = name
+                return [(name, objects[name])]
             elif type == 'mod':
-                # only exact matches allowed for modules
+                # We have a module and did not get an exact match -> failed
                 return []
-            regex = re.compile(r'.*%s' % name)
-            key_matches = filter(regex.match, objects.keys())
-            matches = [(key, objects[key]) for key in key_matches]
-            # elif extname and extname + '/' + name in objects:
-            #     newname = extname + '/' + name
-            # elif modname and modname + '.' + name in objects:
-            #     newname = modname + '.' + name
-            # elif modname and extname and \
-            #          modname + '.' + extname + '.' + name in objects:
-            #     newname = modname + '.' + extname + '.' + name
-            # # special case: builtin exceptions have module "exceptions" set
-            # elif type == 'exc' and '.' not in name and \
-            #      'exceptions.' + name in objects:
-            #     newname = 'exceptions.' + name
-            # # special case: object methods
-            # elif type in ('func', 'meth') and '.' not in name and \
-            #      'object.' + name in objects:
-            #     newname = 'object.' + name
-        if newname is not None:
-            matches.append((newname, objects[newname]))
-        return matches
+            elif type == 'ext':
+                # Extension are `module.extension` but the module can be
+                # omitted
+                regex = re.compile(r'(.+\.)?%s$' % name)
+                key_matches = filter(regex.match, objects.keys())
+                matches = [(key, objects[key]) for key in key_matches]
+                return matches
+            elif type == 'act':
+                # Actions are `module.extension/action` but the module and
+                # extension can be omitted
+                regex = re.compile(r'.*%s$' % name)
+                key_matches = filter(regex.match, objects.keys())
+                matches = [(key, objects[key]) for key in key_matches]
+                return matches
 
     def resolve_xref(self, env, fromdocname, builder,
                      type, target, node, contnode):
