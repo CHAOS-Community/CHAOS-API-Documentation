@@ -381,128 +381,292 @@ paginated and tells you the total number of results for the request.
    The ``MCM`` module stands for *Media Content Manager* and does exactly
    that: it contains functions for managing the media in the database.
 
-  .. extension:: Object
+   .. extension:: Destination
 
-     The ``Object`` extension gets, sets and updates objects in the database.
-     
-     .. action:: Get
-     
-        Retrieves objects according to a query.
-        
-        ``Object/Get`` is the main search and object retrieval function in  CHAOS.
-        
-        :param query: the Solr search query (See :doc:`the index`)
-        :param pageIndex: the index of page that should be returned
-        :type pageIndex: optional
-        :param pageSize: the number of object returned (one request gives one page)
-        :type pageSize: optional
-        :param includeMetadata: whether metadata should be returned for each object
-        :type includeMetadata: optional
-        :param includeFiles: whether files should be returned for each object
-        :type includeFiles: optional
-        :param includeAccessPoints: whether accessPoints should be returned for each object
-        :type includeAccessPoints: optional
-        :param includeObjectRelations: whether objectRelations should be returned for each object
-        :type includeObjectRelations: optional
-        :param includeFolders: whether objectRelations should be returned for each object
-        :type includeFolders: optional
-        :param accessPointGUID:
-        :type accessPointGUID: optional
-        :param sessionGUID: the GUID of an authorized session
-        :type sessionGUID: optional
-        :returns: A list of objects
-        
-        Either an authorized sessionGUID or accessPointGUID must be provided.
-        
-        By default no files, metadata, accessPoints or object relations will be
-        returned.
-     
-     .. action:: SetPublishSettings
-     
-        Publishes/unpublishes an object on an :code:`accessPointGUID` in a given time
-        period (or indefinitely). 
-     
-        The :code:`accessPointGUID` must exists in the database in order to publish on
-        it. As of 7th October 2013 you cannot create an :code:`accessPointGUID` in the
-        database via the API.
-     
-        :auth logged_in:
-        :auth Write_permission: you need have write-permission to the AccessPoint
-                                you are publishing to.
-        :param objectGUID: the GUID of the object for which you want to set :code:`accessPointGUID`
-        :param accessPointGUID: the :code:`accessPointGUID` you want to publish on
-        :param sessionGUID: the GUID of an authorized session
-        :param startDate: the start of publishing period
-        :type startDate: optional
-        :param endDate: the end of the publishing period
-        :type endDate: optional
-        :returns: * On success: :code:`CHAOS.Portal.DTO.Standard.ScalarResult` with value :code:`1`
-                  * On error: a number of different errors can be given on erroneous dates,
-                    accessPointsGUID or objectsGUIDs. If the accessPoint does not exists you will
-                    get :code:`CHAOS.Portal.Exception.InsufficientPermissionsException`
-     
-        *startDate* and *endDate* should be in the format 
-        :code:`DD-MM-YYYY HH:MM:SS` where the first :code:`MM` is month and the seconds
-        is minutes.
-        e.g. :code:`03-10-2013 14:25:42` is the 3rd of October 2013, twenty-five minutes
-        and fourty-two seconds past 2 PM.
-     
-        If no *startDate* is given the object will is unpublished, i.e. it will not be
-        accessible from the given accessPoint. That is the following situations will
-        unpublish the object:
-     
-        .. role:: gbg
-     
-        .. role:: rbg
-     
-        ================  ================  ================================
-          ``SetPublishSettings`` parameters
-        --------------------------------------------------------------------
-        startDate         endDate           What happens
-        ================  ================  ================================
-        :rbg:`not given`  :rbg:`not given`  Object is unpublished
-        :rbg:`not given`  :gbg:`given`      Object is unpublished
-        :gbg:`given`      :rbg:`not given`  Object is published indefinitely
-        :gbg:`given`      :gbg:`given`      Object is published in given
-                                            time period
-        ================  ================  ================================
-     
-        .. raw:: html
-     
-           <script>
-             // depends on jQuery and Bootstrap
-             $(document).ready(function() {
-               $('.gbg').parent().addClass('gbg');
-               $('.rbg').parent().addClass('rbg');
-             });
-           </script>
-           <style>
-             td.gbg { text-align: center; background-color: #F2DEDE; }
-             td.rbg { text-align: center; background-color: #DFF0D8; }
-           </style>
-     
-        If *startDate* is given but no *endDate* is given the object will be published
-        until you change the publish period or remove the accessPoint.
-     
-        :chaos_api_link_object_setpublishsettings_apg:`objectGUID=00000000-0000-0000-0000-000000820016&sessionGUID=9755b31c-c0d4-2a47-9605-487b1401d1fa&startDate=01-10-2013+06:00:00`
-     
-        .. code-editor:: xml
-     
-           <PortalResult Duration="104">
-             <ModuleResults>
-               <ModuleResult Fullname="MCM" Duration="0" Count="1">
-                 <Results>
-                   <Result FullName="CHAOS.Portal.DTO.Standard.ScalarResult">
-                     <Value>1</Value>
-                   </Result>
-                 </Results>
-               </ModuleResult>
-             </ModuleResults>
-           </PortalResult>
-     
-        .. seealso::
-     
-           :ref:`Authentication -> accessPointGUID <authentication-accesspointguid>`
+      Destinations are information about the file hosts which host the media in
+      the CHAOS database. Each destination corresponds to a host with a
+      particular URL-pattern.
+
+      Destinations have a ``StringFormat`` which describes how the URLs to the
+      media (on the particular host) should be formed.
+
+      ``StringFormat`` is a string in which the following tokens can be used:
+
+      * :code:`{BASE_PATH}` will be replaced by the Destination's ``BasePath``
+      * :code:`{FOLDER_PATH}` will be replaced by the File's ``FolderPath``
+      * :code:`{FILENAME}` will be replaced by the File's ``FolderPath``
+      * :code:`{SESSION_GUID}` will be replaced current session GUID
+      * :code:`{OBJECT_GUID}` will be replaced by the Objects's ``GUID``
+
+      each token will be replaced with the corresponding value according to the
+      file, its destination and so on. None of the tokens are required and can
+      be omitted. If ``{SESSION_GUID}`` is present in the string but no session
+      guid is available to CHAOS (e.g. if no user is logged in) it will be
+      replaced with ``{SESSION_GUID_MISSING}``. The other tokens work the same
+      way.
+
+      The ``URL`` field of every ``File`` belonging to the ``Destination`` will be
+      generated by the ``StringFormat`` of the ``Destination``.
+
+      Destinations have a ``BasePath`` field, which typically is the first part
+      of the URL for files hosted on the particular destination. The token
+      ``{BASE_PATH}`` will be replaced with value of this field.
+
+      .. action:: Get
+
+         Gets a destination.
+
+         :param id: The id the of the Destination
+         :type id: optional
+         :returns: A list of destinations
+         :rtype: DestinationInfo
+
+         If no ``id`` is given, all destinations will be returned.
+
+   .. extension:: File
+
+      .. action:: Create
+
+         Creates a new file.
+
+         :auth logged_in:
+         :auth CreateUpdateObjects_permission: The user has to have the 
+                                               ``FolderPermission.CreateUpdateObjects``
+                                               permission for the object on
+                                               which the file is created.
+         :param objectGuid: The object to which the file should belong
+         :param parentFileID: a parent file
+         :type parentFileID: optional
+         :param formatID: the FormatID of the file
+         :param destinationID: The ID of the destination the file belongs to
+         :param filename: the filename on the host, see :ext:`Destination`
+                          extension
+         :param originalFilename: the filename
+         :param folderPath: the folder path on the host, see :ext:`Destination`
+                            extension
+         :returns: The created file
+
+         The ``FormatID`` parameter is described in
+         :ref:`Concepts -> Files <concepts-files>`.
+
+      .. action:: Delete
+
+         Deletes a file.
+
+         :auth logged_in:
+         :auth CreateUpdateObjects_permission: The user has to have the 
+                                               ``FolderPermission.CreateUpdateObjects``
+                                               permission for the object to
+                                               which the file belongs.
+         :param id: the ID of the file to be deleted
+         :type id: unsigned integer
+         :returns: The number of affected rows in the database
+
+
+   .. extension:: Folder
+
+      .. action:: GetPermission
+
+         Get permissions for a specific folder.
+
+         :param folderID: the FolderID of the folder
+         :type id: unsigned integer
+         :returns: the permissions of the folder
+         :rtype: FolderPermission:
+
+      .. action:: SetPermission
+
+         Sets the permissions for a specific user or group to a specific folder.
+
+         :auth logged_in:
+         :auth Folder_permissions: User must have permission to update the
+                                   folder
+         :param userGuid: the guid of the user whose permissions should be updated
+         :type userGuid: optional
+         :param groupGuid: the guid of the group whose permissions should be
+                           updated
+         :type groupGuid: optional
+         :param folderID: the FolderID of the folder
+         :type id: unsigned integer
+         :param permission: the new permissions for the folder
+         :type permission: unsigned integer
+         :returns: The number of affected rows in the database
+
+         Either ``userGuid`` or ``groupGuid`` must be given.
+
+      .. action:: Get
+
+         Gets a specific folder (``id``), all folders in a folder
+         (``parentID``), or all the folders the current user has access to.
+
+         :auth logged_in:
+         :auth Folder_permission: The user has to have permission to read the
+                                  folders. (``Permission.FolderPermission.Read``)
+         :param id: the ID of the folder to get
+         :type id: optional
+         :param parentID: get all folders in the folder with this ID
+         :type parentID: optional
+         :param permission: Get only folders with these permissions
+         :type permission: optional
+
+         You may not specify both ``id`` and ``parentID`` at the same time.
+         If neither ``id`` nor ``parentID`` is specified all folders the user
+         has access to are returned. If ``permission`` is specified only folders
+         with these permissions will be returned.
+
+         .. Sending ``folderTypeID`` has no effect, so I've commented it out for
+            now.
+            :param folderTypeID:
+            :type id: optional
+
+      .. action:: Delete
+
+         Deletes a folder.
+
+         :auth logged_in:
+         :auth Folder_permission: The user has to have permission to delete the
+                                  folder. (``Permission.FolderPermission.Update``)
+         :param id: the ID of the folder to delete
+         :returns: The number of affected rows in the database
+
+      .. action:: Update
+
+         Updates a folder.
+
+         :auth logged_in:
+         :auth Folder_permission: The user has to have permission to update the
+                                  folder. (``Permission.FolderPermission.Delete``)
+         :param id: the ID of the folder to update
+         :param newTitle: the (new) title of folder
+         :type newTitle: string
+         :param newFolderTypeID: the new FolderTypeID of the folder
+         :type newFolderTypeID: optional
+         :param newParentID: the ID of the new parent folder
+         :type newParentID: optional
+         :returns: The number of affected rows in the database
+
+         If ``newParentID`` is specified the folder (with ID ``id``) is moved to
+         the ``newParentID`` folder.
+
+      .. action:: Create
+
+         Creates a new folder.
+
+         :auth logged_in:
+         :optauth Folder_permission: If ``parentID`` is specified the user has
+                                     to have permission to update the folder.
+                                     (``Permission.FolderPermission.Write``)
+         :optauth Subscription_permission: If ``subscriptionGuid`` is specified
+                                           the has to have permission to create
+                                           folders in the subscription.
+                                           (``SubscriptionPermission.CreateFolder``))
+         :param subscriptionGuid: the GUID of the subscription the folder should
+                                  belong to
+         :type subscriptionGuid: optional
+         :param title: the title of the new folder
+         :param folderTypeID: the FolderTypeID of the new folder
+         :param parentID: the ID of the folder the new folder should be put into
+         :type parentID: optional
+         :returns: The new folder
+
+         You must either specify either ``subscriptionGuid`` or ``parentID``.
+
+   .. extension:: Format
+
+      .. action:: Get
+
+         Gets a file format.
+
+         :auth logged_in:
+         :param id: The ID of the format to get
+         :type id: optional
+         :param name: Name of the format to get
+
+      .. action:: Create
+
+         Creates a new file format.
+
+         :auth logged_in:
+         :param formatCategoryID: The ID of the FormatCategory the new Format
+				  should
+	                          be in
+         :type formatCategoryID: optional
+         :param name: The name of the format
+         :param formatXml: ???
+         :param mimeType: The mime-type of the new file format
+         :param extension: The file extension of the new file format
+         
+   .. extension:: Link
+
+      Links are like shortcuts on Windows or symbolic links in Unix:
+      they can make an Object appear in multiple folder by having "links" to the
+      object in other folders than its parent folder.
+
+      .. action:: Create
+
+	 Creates a new link.
+
+	 :auth logged_in:
+	 :auth Permission_to_create_links: The user needs the ``FolderPermission.CreateLink``
+					   on the object
+	 :param objectGuid: The GUID of object on which to create the link
+	 :param folderID: The ID of folder in which to
+         :returns: The number of affected rows in the database
+	 
+      .. action:: Update
+
+	 Moves a link from one folder to another.
+
+	 :auth logged_in:
+	 :auth Permission_to_create_links: The user needs the ``FolderPermission.CreateLink``
+					   on the object
+	 :param objectGuid: The GUID of the object the link points to
+	 :param folderID: The ID of the folder where link is currently residing
+	 :param newFolderID: The ID of the folder where the link should be moved
+			     to
+         :returns: The number of affected rows in the database
+
+      .. action:: Delete
+
+	 Deletes a link.
+
+	 :auth logged_in:
+	 :auth Permission_to_create_links: The user needs the ``FolderPermission.CreateLink``
+					   on the object
+	 :param objectGuid: The GUID of the objects the link points to
+	 :param folderID: The ID of folder in which link resides
+         :returns: The number of affected rows in the database
+
+   .. extension:: Mcm
+
+      .. action:: Index
+
+	 (Re-)indexes all objects, a folder or a view.
+
+	 :auth logged_in:
+	 :param view: The name of the view to index (may be empty)
+	 :param folderID: The ID of the folder to index
+         :type folderID: optional
+         :param cleanIndex: Removes objects from the index, before re-indexing
+         :type cleanIndex: boolean, optional
+         :returns: A ``Trace`` which is a list of lines with timings of the
+                   different stages of the indexing
+
+   .. extension:: Metadata
+
+      .. action:: Set
+
+         Adds metadata to an object.
+
+         :auth logged_in:
+         :auth Permission_to_create_objects: The user needs the ``FolderPermission.CreateUpdateObjects``
+                                             on the object
+         :param objectGuid: the GUID of the object this metadata describes
+         :param metadataSchemaGuid: the GUID of the MetadataSchema this metadata conforms to
+         :param languageCode: the language of the metadata as a language code
+         :param revisionID: an integer representing the revision of the metadata
+         :type revisionID: integer
+         :param metadataXml: The XML of the metadata
 
    .. extension:: MetadataSchema
 
@@ -540,17 +704,6 @@ paginated and tells you the total number of results for the request.
               </ModuleResults>
             </PortalResult>
 
-      .. action:: Update
-
-         Updates a MetadataSchema in the database.
-
-         :auth logged_in:
-         :auth Write_permission: you need to have write-permissions to the MetadataSchema
-         :param guid: the GUID of the schema to update
-         :param name: a new (or the same) name for schema
-         :param schemaXml: a new (or the same) XML for the schema
-         :returns: The GUID of the updated MetadataSchema
-
       .. action:: Create
 
          Adds a new MetadataSchema to the database.
@@ -568,3 +721,301 @@ paginated and tells you the total number of results for the request.
 
          If no ``guid`` is given, CHAOS assigns a GUID to the new
          schema. The new GUID is returned as a result.
+
+      .. action:: Update
+
+         Updates a MetadataSchema in the database.
+
+         :auth logged_in:
+         :auth Write_permission: you need to have write-permissions to the MetadataSchema
+         :param guid: the GUID of the schema to update
+         :param name: a new (or the same) name for schema
+         :param schemaXml: a new (or the same) XML for the schema
+         :returns: The GUID of the updated MetadataSchema
+
+      .. action:: Delete
+
+         Deletes a MetadataSchema in the database.
+
+         :auth logged_in:
+         :auth Delete_permission: you need to have permissions delete the MetadataSchema
+                                 (``MetadataSchemaPermission.Delete``)
+         :param guid: the GUID of the schema to delete
+         :returns: The number of affected rows in the database
+
+   .. extension:: Object
+
+      The ``Object`` extension gets, sets and updates objects in the database.
+     
+      .. action:: Get
+     
+         Retrieves objects according to a query.
+         
+         ``Object/Get`` is the main search and object retrieval function in  CHAOS.
+         
+         :param query: the Solr search query (See :doc:`the index`)
+         :param pageIndex: the index of page that should be returned
+         :type pageIndex: optional
+         :param pageSize: the number of object returned (one request gives one page)
+         :type pageSize: optional
+         :param includeMetadata: whether metadata should be returned for each object
+         :type includeMetadata: optional
+         :param includeFiles: whether files should be returned for each object
+         :type includeFiles: optional
+         :param includeAccessPoints: whether accessPoints should be returned for each object
+         :type includeAccessPoints: optional
+         :param includeObjectRelations: whether objectRelations should be returned for each object
+         :type includeObjectRelations: optional
+         :param includeFolders: whether objectRelations should be returned for each object
+         :type includeFolders: optional
+         :param accessPointGUID:
+         :type accessPointGUID: optional
+         :param sessionGUID: the GUID of an authorized session
+         :type sessionGUID: optional
+         :returns: A list of objects
+         
+         Either an authorized sessionGUID or accessPointGUID must be provided.
+         
+         By default no files, metadata, accessPoints or object relations will be
+         returned.
+     
+      .. action:: SetPublishSettings
+     
+         Publishes/unpublishes an object on an :code:`accessPointGUID` in a given time
+         period (or indefinitely). 
+         
+         The :code:`accessPointGUID` must exists in the database in order to publish on
+         it. As of 7th October 2013 you cannot create an :code:`accessPointGUID` in the
+         database via the API.
+         
+         :auth logged_in:
+         :auth Write_permission: you need have write-permission to the AccessPoint
+                                 you are publishing to.
+         :param objectGUID: the GUID of the object for which you want to set :code:`accessPointGUID`
+         :param accessPointGUID: the :code:`accessPointGUID` you want to publish on
+         :param sessionGUID: the GUID of an authorized session
+         :param startDate: the start of publishing period
+         :type startDate: optional
+         :param endDate: the end of the publishing period
+         :type endDate: optional
+         :returns: * On success: :code:`CHAOS.Portal.DTO.Standard.ScalarResult` with value :code:`1`
+                   * On error: a number of different errors can be given on erroneous dates,
+                     accessPointsGUID or objectsGUIDs. If the accessPoint does not exists you will
+                     get :code:`CHAOS.Portal.Exception.InsufficientPermissionsException`
+         
+         *startDate* and *endDate* should be in the format 
+         :code:`DD-MM-YYYY HH:MM:SS` where the first :code:`MM` is month and the seconds
+         is minutes.
+         e.g. :code:`03-10-2013 14:25:42` is the 3rd of October 2013, twenty-five minutes
+         and fourty-two seconds past 2 PM.
+         
+         If no *startDate* is given the object will is unpublished, i.e. it will not be
+         accessible from the given accessPoint. That is the following situations will
+         unpublish the object:
+         
+         .. role:: gbg
+         
+         .. role:: rbg
+         
+         ================  ================  ================================
+           ``SetPublishSettings`` parameters
+         --------------------------------------------------------------------
+         startDate         endDate           What happens
+         ================  ================  ================================
+         :rbg:`not given`  :rbg:`not given`  Object is unpublished
+         :rbg:`not given`  :gbg:`given`      Object is unpublished
+         :gbg:`given`      :rbg:`not given`  Object is published indefinitely
+         :gbg:`given`      :gbg:`given`      Object is published in given
+                                             time period
+         ================  ================  ================================
+         
+         .. raw:: html
+         
+            <script>
+              // depends on jQuery and Bootstrap
+              $(document).ready(function() {
+                $('.gbg').parent().addClass('gbg');
+                $('.rbg').parent().addClass('rbg');
+              });
+            </script>
+            <style>
+              td.gbg { text-align: center; background-color: #F2DEDE; }
+              td.rbg { text-align: center; background-color: #DFF0D8; }
+            </style>
+         
+         If *startDate* is given but no *endDate* is given the object will be published
+         until you change the publish period or remove the accessPoint.
+         
+         :chaos_api_link_object_setpublishsettings_apg:`objectGUID=00000000-0000-0000-0000-000000820016&sessionGUID=9755b31c-c0d4-2a47-9605-487b1401d1fa&startDate=01-10-2013+06:00:00`
+         
+         .. code-editor:: xml
+         
+            <PortalResult Duration="104">
+              <ModuleResults>
+                <ModuleResult Fullname="MCM" Duration="0" Count="1">
+                  <Results>
+                    <Result FullName="CHAOS.Portal.DTO.Standard.ScalarResult">
+                      <Value>1</Value>
+                    </Result>
+                  </Results>
+                </ModuleResult>
+              </ModuleResults>
+            </PortalResult>
+         
+         .. seealso::
+         
+            :ref:`Authentication -> accessPointGUID <authentication-accesspointguid>`
+
+      .. action:: Create
+
+         Creates an Object.
+
+         :auth logged_in:
+         :auth Permission_to_folder: You need to have permission to create objects
+                                     in the folder
+                                     (``FolderPermission.CreateUpdateObjects``)
+         :param guid: The GUID of the new object
+         :type guid: optional
+         :param objectTypeID: ID of the ObjectType of the new object
+         :param folderID: The ID of folder in which the object should be created
+         :returns: The created Object
+
+         If no GUID is given, CHAOS will generate a guid for the new object.
+
+      .. action:: Delete
+
+         Deletes an Object.
+
+         :auth logged_in:
+         :auth Permission_to_folder: You need to have permission to delete objects
+                                     in the folder in which the object resides
+                                     (``FolderPermission.DeleteObject``)
+         :param guid: The GUID of the object to delete
+         :returns: The number of affected rows in the database
+
+   .. extension:: ObjectRelation
+
+      ``ObjectRelation`` can be used to create relations between objects in
+      the CHAOS database. The relation can optionally be annotated with
+      metadata.
+
+      .. action:: Set
+
+         Sets a relation between two Objects, optionally with metadata tied
+         to the connection.
+
+         :param object1Guid: GUID of the first object of the relation
+         :param object2Guid: GUID of the second object of the relation
+         :param objectRelationTypeID: ID of the type of the relation
+         :param sequence:
+         :type sequence: integer, optional
+         :param metadataGuid: GUID of the metadata
+         :type metadataGuid: optional
+         :param metadataSchemaGuid: the GUID of the MetadataSchema the metadata conforms to
+         :type metadataSchemaGuid: optional
+         :param languageCode: language of the metadata as a language code
+         :param metadataXml: metadata for the relation
+         :returns: The number of affected rows in the database
+
+         Annotating the relation with metadata is optional and thus metadataXml,
+         languageCode can be empty.
+
+      .. action:: Delete
+
+         Delete a relation between two Objects.
+
+         :param object1Guid: GUID of the first object of the relation
+         :param object2Guid: GUID of the second object of the relation
+         :param objectRelationTypeID: ID of the type of the relation
+         :returns: The number of affected rows in the database
+
+   .. extension:: ObjectType
+
+      .. action:: Set
+
+         Creates or updates an ObjectType.
+
+         :auth logged_in:
+         :auth system_manage_permission:
+         :param id: ID of the (new) ObjectType
+         :param name: Name of the (new) ObjectType
+         :returns: The updated or new ObjectType
+
+         If the no ObjectType with the specific ``id`` exists a
+         new ObjectType is created.
+
+      .. action:: Get
+
+         Gets all ObjectTypes.
+
+         :returns: A list of ``ObjectType``s
+
+      .. action:: Delete
+
+         Deletes an ObjectType.
+
+         :auth logged_in:
+         :auth system_manage_permission:
+         :param id: ID of the ObjectType to delete
+         :returns: The number of affected rows in the database
+
+   .. extension:: UserManagement
+
+      Users can have their own folder and also their object.
+      The ``UserManagement`` extension lets you create and access those.
+      By having their own object a user can have metadata about themselves,
+      and also have their own set of objects.
+
+      .. action:: GetUserFolder
+
+         Gets the folder of the current user or a specified user.
+
+         :param userGuid: Get user folder of user with this GUID
+         :type userGuid: optional
+         :param createIfMissing: Create user folder if it doesn't exist
+         :type createIfMissing: boolean, optional, default = true
+         :returns: The user's folder
+
+         If no ``userGuid`` is given the current user's user folder is returned.
+
+      .. action:: GetUserObject
+
+         Get the Object of the current user or a specified user.
+
+         :param userGuid: Get the user object of the user with this GUID
+         :type userGuid: optional
+         :param createIfMissing: Create user object if it doesn't exist
+         :type createIfMissing: boolean, optional, default = true
+         :param includeMetata: Include metadata of the user object
+         :type includeMetata: boolean, optional, default = false
+         :param includeFiles: Include files of the user object
+         :type includeFiles: boolean, optional, default = false
+         :returns: A list of Objects
+
+         If no ``userGuid`` is given the current user's user object is returned.
+
+   .. extension:: UserProfile
+
+      .. action:: Get
+
+         Gets the profile of the current user or a specified user.
+
+         :param metadataSchemaGuid: the GUID of the MetadataSchema that describes
+                                    the user profile
+         :param userGuid: the GUID of the user whose profile to get
+         :type userGuid: optional
+
+         If no ``userGuid`` is specified, the current user's profile is returned.
+
+      .. action:: Set
+
+         Sets the user profile of the current user or a specified user.
+
+         :param metadataSchemaGuid: the GUID of the MetadataSchema that describes
+                                    the user profile
+         :param metadata: The XML representing the user profile
+         :param userGuid: the GUID of the user whose profile to get
+         :type userGuid: optional
+         :returns: The number of affected rows in the database
+
+         If no ``userGuid`` is specified, the current user's profile is set.

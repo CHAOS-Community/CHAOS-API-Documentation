@@ -113,7 +113,7 @@ pagename: "concepts" <br>
            <div class="section" id="chaos-concepts">
 <h1>CHAOS concepts<a class="headerlink" href="#chaos-concepts" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="objects">
-<h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h2>
+<span id="concepts-objects"></span><h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h2>
 <p>Each media reference in CHAOS is called an <tt class="docutils literal"><span class="pre">Object</span></tt>. Objects have a number of
 fields (also called properties). The two most important properties are <tt class="code docutils literal"><span class="pre">Files</span></tt> and
 <tt class="code docutils literal"><span class="pre">Metadatas</span></tt>.</p>
@@ -157,7 +157,7 @@ fields (also called properties). The two most important properties are <tt class
 </table>
 </div>
 <div class="section" id="files">
-<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<span id="concepts-files"></span><h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
 <p>A file consists of a filename, a URL and some type specifications. The URL can
 be used as-is, meaning that you don&#8217;t have to concatenate the URL and the
 filename.</p>
@@ -210,7 +210,7 @@ particular database.</p>
 </table>
 </div>
 <div class="section" id="metadata">
-<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<span id="concepts-metadata"></span><h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
 <p>The metadata is typically some form of description of the object, but could also
 be data related to the object such as tags or geodata. Every metadata
 XML-document conforms to a specific XML-schema called the <tt class="code docutils literal"><span class="pre">MetadataSchema</span></tt>
@@ -259,7 +259,7 @@ of the metadata.</td>
 (the <em>primary language subtag</em>).</p>
 </div>
 <div class="section" id="related-objects">
-<h2>Related objects<a class="headerlink" href="#related-objects" title="Permalink to this headline">¶</a></h2>
+<span id="concepts-related-objects"></span><h2>Related objects<a class="headerlink" href="#related-objects" title="Permalink to this headline">¶</a></h2>
 <p>An object can have relations to other objects. These related objects can be
 found in the <tt class="docutils literal"><span class="pre">ObjectRelations</span></tt> property of the <tt class="docutils literal"><span class="pre">Object</span></tt>.  The related
 objects are regular <tt class="docutils literal"><span class="pre">Object</span></tt>s and should be treated as such, although you
@@ -267,7 +267,7 @@ probably want to display them differently to the user (in comparison to the
 primary object).</p>
 </div>
 <div class="section" id="object-retrieval-and-search">
-<h2>Object retrieval and search<a class="headerlink" href="#object-retrieval-and-search" title="Permalink to this headline">¶</a></h2>
+<span id="concepts-object-retieval-and-search"></span><h2>Object retrieval and search<a class="headerlink" href="#object-retrieval-and-search" title="Permalink to this headline">¶</a></h2>
 <p>The CHAOS database is indexed in a Apache Solr index, and searching but also
 retrieving objects in general is done through this index.</p>
 <p>To search the index you specify some query string and send it to CHAOS which

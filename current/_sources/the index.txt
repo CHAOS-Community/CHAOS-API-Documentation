@@ -9,7 +9,7 @@ In order to find objects in the database CHAOS uses Solr_.
 Solr is a search engine to which you can send search queries.
 Solr uses an ``Index`` for searching. The index has a number of fields.
 
-The :code:`query` argument of the :func:`Object.Get`-function passes its value
+The :code:`query` argument of the :act:`Object/Get` action passes its value
 on to Solr as a search string.
 
 Fields present in the Solr Index are called ``indexed`` fields.
