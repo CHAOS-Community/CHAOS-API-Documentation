@@ -847,3 +847,30 @@ paginated and tells you the total number of results for the request.
          
             :ref:`Authentication -> accessPointGUID <authentication-accesspointguid>`
 
+      .. action:: Create
+
+         Creates an Object.
+
+         :auth logged_in:
+         :auth Permission_to_folder: You need to have permission to create objects
+                                     in the folder
+                                     (``FolderPermission.CreateUpdateObjects``)
+         :param guid: The GUID of the new object
+         :type guid: optional
+         :param objectTypeID: ID of the ObjectType of the new object
+         :param folderID: The ID of folder in which the object should be created
+         :returns: The created Object
+
+         If no GUID is given, CHAOS will generate a guid for the new object.
+
+      .. action:: Delete
+
+         Deletes an Object.
+
+         :auth logged_in:
+         :auth Permission_to_folder: You need to have permission to delete objects
+                                     in the folder in which the object resides
+                                     (``FolderPermission.DeleteObject``)
+         :param guid: The GUID of the object to delete
+         :returns: The number of affected rows in the database
+
