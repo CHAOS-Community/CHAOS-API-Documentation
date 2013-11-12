@@ -57,3 +57,54 @@ Group
                                      ``SystemPermissons`` struct)
          :type newSystemPermission: integer, optional
          :returns: Number of affected rows in the database
+
+      .. action:: AddUser
+
+         Adds a user to a group.
+
+         :auth logged_in:
+         :optauth user_manager_permission:
+         :param guid: The GUID of the group that the user should be added to
+         :param userGuid: The GUID of the user that should be added
+         :param permissions: permissions for the new user (an integer from the
+                                     ``SystemPermissons`` struct)
+         :type permissions: integer
+         :returns: Number of affected rows in the database
+
+         If the user has UserManager permissions (SystemPermissons.UserManager)
+         he will be able to add users to all groups. Otherwise he has to have
+         the required permission for the specific group.
+
+      .. action:: RemoveUser
+
+         Removes a user from a group.
+
+         :auth logged_in:
+         :optauth user_manager_permission:
+         :param guid: The GUID of the group that the user should be removed from
+         :param userGuid: The GUID of the user that should be removed
+         :returns: Number of affected rows in the database
+
+         If the user has UserManager permissions (SystemPermissons.UserManager)
+         he will be able to remove users from all groups. Otherwise he has to have
+         the required permission for the specific group.
+
+      .. action:: UpdateUserPermissions
+
+         Adds a user to a group.
+
+         :auth logged_in:
+         :optauth user_manager_permission:
+         :param guid: The GUID of the group to which the user's permissions
+                      should be changed
+         :param userGuid: The GUID of the user whose permissions should be
+                          altered
+         :param permissions: the new permissions for the user
+                             (an integer from the ``SystemPermissons`` struct)
+         :type permissions: integer
+         :returns: Number of affected rows in the database
+
+         If the user has UserManager permissions (SystemPermissons.UserManager)
+         he will be able to change permissions for all users and all groups.
+         Otherwise he has to have the required permission for the specific group.
+
