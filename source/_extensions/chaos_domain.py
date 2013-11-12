@@ -253,27 +253,9 @@ class CHAOSObject(ObjectDescription):
             self.env.temp_data['chaos:extension'] = None
 
 
-class CHAOSModulelevel(CHAOSObject):
+class CHAOSExtension(CHAOSObject):
     """
-    Description of an object on module level (functions, data).
-    """
-
-    def get_index_text(self, modname, name_cls):
-        if self.objtype == 'function':
-            if not modname:
-                return _('%s() (built-in function)') % name_cls[0]
-            return _('%s() (in module %s)') % (name_cls[0], modname)
-        elif self.objtype == 'data':
-            if not modname:
-                return _('%s (built-in variable)') % name_cls[0]
-            return _('%s (in module %s)') % (name_cls[0], modname)
-        else:
-            return ''
-
-
-class CHAOSClasslike(CHAOSObject):
-    """
-    Description of a class-like object (classes, interfaces, exceptions).
+    Description of a CHAOS extension.
     """
 
     def get_signature_postfix(self, sig):
@@ -296,9 +278,9 @@ class CHAOSClasslike(CHAOSObject):
             self.clsname_set = True
 
 
-class CHAOSClassmember(CHAOSObject):
+class CHAOSAction(CHAOSObject):
     """
-    Description of a class member (methods, attributes).
+    Description of CHAOS action.
     """
 
     def get_signature_prefix(self, sig):
@@ -384,7 +366,6 @@ class CHAOSModule(CHAOSObject):
                                              'module-' + modname, '')])
             ret.append(inode)
         return ret
-
 
 class CHAOSCurrentModule(Directive):
     """
@@ -517,14 +498,9 @@ class CHAOSDomain(Domain):
 
     directives = {
         'module':          CHAOSModule,
-        'extension':       CHAOSClasslike,
-        'action':          CHAOSClassmember,
-
-        'function':        CHAOSModulelevel,
-        'data':            CHAOSModulelevel,
-        'exception':       CHAOSClasslike,
-        'attribute':       CHAOSClassmember,
-        'currentmodule':   CHAOSCurrentModule,
+        'extension':       CHAOSExtension,
+        'action':          CHAOSAction,
+    #    'currentmodule':   CHAOSCurrentModule,
     }
     roles = {
         'mod':   CHAOSXRefRole(),
