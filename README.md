@@ -25,10 +25,11 @@ The docs will then be in `build/html`.
 
 Guide
 -----
+#### reStructuredText
 Sphinx uses reStructuredText (`.rst`) as markup language for its pages. A quick
 guide to reStructuredText can be found [here](http://docutils.sourceforge.net/docs/user/rst/quickref.html).
 
-### Indentation
+##### Indentation
 We use 3 spaces for indentation in the reST source (the same as the [Python docs]).
 This, of course, does not apply to code examples inside the reST
 source/documentation.
@@ -42,6 +43,21 @@ Example:
           .. action:: Get
 
 [Python docs]: http://docs.python.org/devguide/documenting.html#use-of-whitespace
+
+#### Repository structure
+The master branch (`v4`) is the "oldest" version, newer versions should be branches that originate in this branch.
+
+This means that documentation that applies to all versions can be committed to master. After that 
+you should run: 
+
+    > ./update-branches.sh
+
+What this does is basically a rebase of `v5` onto the `master` branch and `v6` onto the `v5` branch:
+
+    > git checkout v5 && git rebase master # rebase v5 onto master
+    > git checkout v6 && git rebase v5     # rebase v6 onto v5
+
+If find out you need to update `v4` but not `v5` and `v6`, you can do the commit to master as usual, and then rebase v5 onto master and then do a `git revert <COMMIT_HASH>` of the commit that changed v4. 
 
 PHP Portal Client documentation
 ----------------------------
