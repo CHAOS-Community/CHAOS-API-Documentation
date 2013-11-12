@@ -13,3 +13,4 @@ Portal
    Subscription
    User
    UserSettings
+   View
