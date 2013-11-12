@@ -91,7 +91,6 @@ class CHAOSObject(ObjectDescription):
     """
     option_spec = {
         'noindex': directives.flag,
-        'module': directives.unchanged,
         'annotation': directives.unchanged,
     }
 
