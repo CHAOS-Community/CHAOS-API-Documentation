@@ -261,15 +261,13 @@ class CHAOSExtension(CHAOSObject):
     def get_signature_postfix(self, sig):
         return ' ' + self.objtype
 
-    def get_index_text(self, modname, name_cls):
-        if self.objtype == 'class':
-            if not modname:
-                return _('%s (built-in class)') % name_cls[0]
-            return _('%s (class in %s)') % (name_cls[0], modname)
-        elif self.objtype == 'exception':
-            return name_cls[0]
+    def get_index_text(self, modname, name_ext):
+        extname, ext = name_ext
+        add_modules = self.env.config.add_module_names
+        if modname and add_modules:
+            return _('%s (in module %s)') % (extname, modname)
         else:
-            return ''
+            raise "Not in any module"
 
     def before_content(self):
         CHAOSObject.before_content(self)
@@ -286,35 +284,17 @@ class CHAOSAction(CHAOSObject):
     def get_signature_prefix(self, sig):
         return ''
 
-    def get_index_text(self, modname, name_cls):
-        name, cls = name_cls
+    def get_index_text(self, modname, name_ext):
+        name, ext = name_ext
         add_modules = self.env.config.add_module_names
-        if self.objtype == 'method':
-            try:
-                clsname, methname = name.rsplit('/', 1)
-            except ValueError:
-                if modname:
-                    return _('%s() (in module %s)') % (name, modname)
-                else:
-                    return '%s()' % name
-            if modname and add_modules:
-                return _('%s() (%s.%s method)') % (methname, modname, clsname)
-            else:
-                return _('%s() (%s method)') % (methname, clsname)
-        elif self.objtype == 'attribute':
-            try:
-                clsname, attrname = name.rsplit('.', 1)
-            except ValueError:
-                if modname:
-                    return _('%s (in module %s)') % (name, modname)
-                else:
-                    return name
-            if modname and add_modules:
-                return _('%s (%s.%s attribute)') % (attrname, modname, clsname)
-            else:
-                return _('%s (%s attribute)') % (attrname, clsname)
+        try:
+            extname, actname = name.rsplit('/', 1)
+        except ValueError:
+            raise
+        if modname and add_modules:
+            return _('%s/%s (in extension %s.%s)') % (extname, actname, modname, extname)
         else:
-            return ''
+            raise "Not in any module"
 
     def before_content(self):
         CHAOSObject.before_content(self)
@@ -361,10 +341,6 @@ class CHAOSModule(CHAOSObject):
             # the platform and synopsis aren't printed; in fact, they are only
             # used in the modindex currently
             ret.append(targetnode)
-            indextext = _('%s (module)') % modname
-            inode = addnodes.index(entries=[('single', indextext,
-                                             'module-' + modname, '')])
-            ret.append(inode)
         return ret
 
 class CHAOSCurrentModule(Directive):
