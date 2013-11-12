@@ -220,9 +220,17 @@ class CHAOSObject(ObjectDescription):
         raise NotImplementedError('must be implemented in subclasses')
 
     def add_target_and_index(self, name_cls, sig, signode):
-        modname = self.options.get(
-            'module', self.env.temp_data.get('chaos:module'))
-        fullname = (modname and modname + '.' or '') + name_cls[0]
+        modname = None
+        fullname = name_cls[0]
+        if not self.objtype == 'module':
+            try:
+                modname = self.env.temp_data['chaos:module']
+                fullname = modname + '.' + name_cls[0]
+            except KeyError:
+                self.state_machine.reporter.warning(
+                    'The %s %s, ' % (self.objtype, fullname) +
+                    'is being defined out side a module; ' +
+                    'this is not recommended.', line=self.lineno)
         # note target
         if fullname not in self.state.document.ids:
             signode['names'].append(fullname)
@@ -322,25 +330,35 @@ class CHAOSModule(CHAOSObject):
             self.env.temp_data['chaos:extension'] = lastname.strip('.')
             self.clsname_set = True
 
+    def after_content(self):
+        CHAOSObject.after_content(self)
+        self.env.temp_data['chaos:module'] = None
+        self.env.temp_data['chaos:extension'] = None
+        self.clsname_set = False
+
     def run(self):
+        ret = []
+        noindex = 'noindex' in self.options
         env = self.state.document.settings.env
         modname = self.arguments[0].strip()
-        noindex = 'noindex' in self.options
-        env.temp_data['chaos:module'] = modname
-        ret = CHAOSObject.run(self)
+        if modname == 'None':
+            env.temp_data['chaos:module'] = None
+        else:
+            env.temp_data['chaos:module'] = modname
+
         if not noindex:
             env.domaindata['chaos']['modules'][modname] = \
                 (env.docname, self.options.get('synopsis', ''),
                  self.options.get('platform', ''), 'deprecated' in self.options)
             # make a duplicate entry in 'objects' to facilitate searching for
             # the module in CHAOSDomain.find_obj()
-            env.domaindata['chaos']['objects'][modname] = (env.docname, 'module')
             targetnode = nodes.target('', '', ids=['module-' + modname],
                                       ismod=True)
             self.state.document.note_explicit_target(targetnode)
             # the platform and synopsis aren't printed; in fact, they are only
             # used in the modindex currently
             ret.append(targetnode)
+        ret += CHAOSObject.run(self)
         return ret
 
 class CHAOSCurrentModule(Directive):
@@ -510,7 +528,7 @@ class CHAOSDomain(Domain):
         """Find a CHAOS object for "name", perhaps using the given module
         and/or extname.  Returns a list of (name, object entry) tuples.
         """
-        # skip parens
+        # skip parens if any
         if name[-2:] == '()':
             name = name[:-2]
 
@@ -543,25 +561,32 @@ class CHAOSDomain(Domain):
             return matches
         else:
             # We have an exact match
-            if name in objects:
-                return [(name, objects[name])]
+            if name in objects and objects[name][1][:3] == type:
+                matches = [(name, objects[name])]
             elif type == 'mod':
                 # We have a module and did not get an exact match -> failed
-                return []
+                pass
             elif type == 'ext':
                 # Extension are `module.extension` but the module can be
                 # omitted
                 regex = re.compile(r'(.+\.)?%s$' % name)
                 key_matches = filter(regex.match, objects.keys())
                 matches = [(key, objects[key]) for key in key_matches]
-                return matches
             elif type == 'act':
                 # Actions are `module.extension/action` but the module and
                 # extension can be omitted
                 regex = re.compile(r'.*%s$' % name)
                 key_matches = filter(regex.match, objects.keys())
                 matches = [(key, objects[key]) for key in key_matches]
-                return matches
+
+        # Delete matches of wrong type
+        dels = set()
+        for i, (refname, (docname, match_type)) in enumerate(matches):
+            if match_type[0:3] != type:
+                dels.add(i)
+        matches = [i for j, i in enumerate(matches) if j not in dels]
+
+        return matches
 
     def resolve_xref(self, env, fromdocname, builder,
                      type, target, node, contnode):
@@ -571,7 +596,18 @@ class CHAOSDomain(Domain):
         matches = self.find_obj(env, modname, extname, target, type, searchmode)
         if not matches:
             if type != 'type':
-                env.warn_node('No match found for cross-reference: %r. (Searchmode: %s)' % (target, searchmode), node)
+                try:
+                    global __glob
+                    if __glob == False:
+                        __glob = True
+                except NameError:
+                    global __glob
+                    __glob = True
+                    import pprint
+                    pp = pprint.PrettyPrinter(indent=2)
+                    objects = env.domaindata['chaos']['objects']
+                    pp.pprint(objects)
+                env.warn_node('No match found for cross-reference: %r, %s. (Searchmode: %s)' % (target, type, searchmode), node)
             return None
         elif len(matches) > 1:
             env.warn_node(
