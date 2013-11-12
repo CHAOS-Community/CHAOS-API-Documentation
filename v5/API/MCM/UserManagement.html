@@ -1,0 +1,296 @@
+
+<!doctype html>
+
+<html lang="">
+
+<head><title>UserManagement &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+  <!-- <meta name="robots" content="index" /> -->
+  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/API/MCM/UserManagement.txt"/> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="release" content="v4"/>
+
+  
+
+  
+  
+   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="../../_static/code-editor.css" type="text/css" />
+      
+   <script type="text/javascript">
+     var DOCUMENTATION_OPTIONS = {
+         URL_ROOT: '../../',
+         VERSION: 'v5',
+         COLLAPSE_INDEX: false,
+         FILE_SUFFIX: '.html',
+         HAS_SOURCE: true,
+     };
+   </script>
+   
+   
+   
+       <script type="text/javascript" src="../../_static/jquery.js"></script>
+       <script type="text/javascript" src="../../_static/underscore.js"></script>
+       <script type="text/javascript" src="../../_static/doctools.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="../../_static/CHAOS.Portal.Client.PortalClient.js"></script>
+       <script type="text/javascript" src="../../_static/code-editor.js"></script>
+       <script type="text/javascript" src="../../_static/scrollspy.js"></script>
+       <script type="text/javascript" src="../../_static/base.js"></script>
+          <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
+<link rel="top" title="CHAOS API" href="../../index.html" />
+<link rel="up" title="MCM" href="index.html" />
+<link rel="next" title="UserProfile" href="UserProfile.html" />
+<link rel="prev" title="ObjectType" href="ObjectType.html" />
+          <script>
+            // (function() {
+            //    var cx = '017213726194841070573:WMX6838984';
+            //    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+            //    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
+            //    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+            // })();
+          </script></head>
+<body>
+      <div id="main-column">
+        <!-- Logo -->
+            <div id="logo">
+              <a href="http://chaos-community.org/"><img class="logo"
+                    src="http://chaos-community.org/img/chaoscommunity.png" alt="CHAOS Community Logo"/></a>
+            </div><!-- Menu on left -->
+       <div class="sphinxsidebar">
+         <div class="sphinxsidebarwrapper">
+<h3>
+  <!-- <a href="../../index.html">CHAOS API</a> -->
+  CHAOS API <span id="vn">v5</span>
+</h3>
+
+<div class="site-contents"><a href="../../index.html">Table of contents</a></div>
+
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">CHAOS overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">CHAOS concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../the index.html">The Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JavaScript Portal Client/index.html">CHAOS.Portal JavaScript Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PHP Portal Client/index.html">CHAOS.Portal PHP Client</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Portal/index.html">Portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EmailPassword/index.html">EmailPassword</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">MCM</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Destination.html">Destination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="File.html">File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Folder.html">Folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Format.html">Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Link.html">Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Mcm.html">Mcm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Metadata.html">Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MetadataSchema.html">MetadataSchema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Object.html">Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ObjectRelation.html">ObjectRelation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ObjectType.html">ObjectType</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">UserManagement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UserProfile.html">UserProfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<div class="site-index"><a href="../../genindex.html">Index</a></div>
+
+<form action="../../search.html" method="get" class="search">
+  <input type="text" name="q" value="" />
+  <input type="submit" value="search" />
+</form>
+
+<!-- Edit this page on Github -->
+<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/API/MCM/UserManagement.rst" target="_blank" title="Edit API/MCM/UserManagement.txt on GitHub">
+  Edit this Page
+</a>
+
+<!--
+<strong>Debug:</strong> <br>
+pagename: "API/MCM/UserManagement" <br>
+<br>
+-->
+         </div>
+       </div>
+
+        <!-- Main -->
+           <!--<h3>API</h3>--><div class="section" id="usermanagement">
+<h1>UserManagement<a class="headerlink" href="#usermanagement" title="Permalink to this headline">¶</a></h1>
+<dl class="module">
+<dt>
+<tt class="descname">MCM</tt><em class="property"> module</em></dt>
+<dd><dl class="extension">
+<dt id="MCM.UserManagement">
+<tt class="descname">UserManagement</tt><em class="property"> extension</em><a class="headerlink" href="#MCM.UserManagement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Users can have their own folder and also their object.
+The <tt class="docutils literal"><span class="pre">UserManagement</span></tt> extension lets you create and access those.
+By having their own object a user can have metadata about themselves,
+and also have their own set of objects.</p>
+<dl class="action">
+<dt id="MCM.UserManagement/GetUserFolder">
+<tt class="descclassname">UserManagement/</tt><tt class="descname">GetUserFolder</tt><a class="headerlink" href="#MCM.UserManagement/GetUserFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the folder of the current user or a specified user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>userGuid</strong> (<em>optional</em>) &#8211; Get user folder of user with this GUID</li>
+<li><strong>createIfMissing</strong> (<em>boolean, optional, default = true</em>) &#8211; Create user folder if it doesn&#8217;t exist</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The user&#8217;s folder</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If no <tt class="docutils literal"><span class="pre">userGuid</span></tt> is given the current user&#8217;s user folder is returned.</p>
+</dd></dl>
+
+<dl class="action">
+<dt id="MCM.UserManagement/GetUserObject">
+<tt class="descclassname">UserManagement/</tt><tt class="descname">GetUserObject</tt><a class="headerlink" href="#MCM.UserManagement/GetUserObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Object of the current user or a specified user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>userGuid</strong> (<em>optional</em>) &#8211; Get the user object of the user with this GUID</li>
+<li><strong>createIfMissing</strong> (<em>boolean, optional, default = true</em>) &#8211; Create user object if it doesn&#8217;t exist</li>
+<li><strong>includeMetata</strong> (<em>boolean, optional, default = false</em>) &#8211; Include metadata of the user object</li>
+<li><strong>includeFiles</strong> (<em>boolean, optional, default = false</em>) &#8211; Include files of the user object</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of Objects</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If no <tt class="docutils literal"><span class="pre">userGuid</span></tt> is given the current user&#8217;s user object is returned.</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+        <!-- Bottom prev/next -->
+    <div class="nav-buttons">
+      <div class="button-row">
+        <div class="prev">
+          <a href="ObjectType.html" title="Previous Section: ObjectType">&#8592; &nbsp; ObjectType</a>
+          <br>Previous
+        </div>
+        <div class="up">
+          <a href="../index.html" title="Parent Section: API" >&#8593;&nbsp; API</a>
+          <br>Up
+        </div>
+        <div class="next">
+          <a href="UserProfile.html" title="Next Section: UserProfile">UserProfile &nbsp;&#8594;</a>
+          <br>Next
+        </div>
+      </div>
+    </div></div>  
+  
+
+  <!-- <div id="cse&#45;results"> -->
+  <!--   <gcse:searchresults linkTarget="_top"></gcse:searchresults> -->
+  <!-- </div> -->
+  <!--
+  -->
+
+  <!--<div id="top-right">
+        <div class="user-right">
+          <ul id="header-menu-bar" class="ajs-menu-bar">
+            <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+            <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+            <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+            <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+            <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+            <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+          <div id="etp">
+            <ul>
+            </ul>
+          </div>
+      <div class="footer">
+        <p>
+          &copy; <a href="">Copyright</a> 2013, Malthe Jørgensen 
+          MongoDB&reg;, Mongo&reg;, and the leaf logo are registered trademarks of <a href="http://www.10gen.com/">10gen, Inc.</a>
+        </p>
+      </div>
+
+  --><script type="text/javascript">
+var versions = {
+ "v6": { "branch_name": "v6", "directory_name": "v6" },
+ "v5": { "branch_name": "v5", "directory_name": "v5" },
+ "v4": { "branch_name": "master", "directory_name": "current", "current": true }
+};
+var pagename = 'API/MCM/UserManagement';
+var stable = 'v';
+
+// Change URL on version change
+function vfnav() {
+
+    // If the pagename is "index" don't write anything
+    var pn = pagename;
+    if (pagename=='index') {
+      pn = '';
+    }
+
+    // Get selected version in the version <select>
+    var new_version = $(this).children("option:selected").attr('value');
+    var new_dir = versions[new_version].directory_name;
+    var current_dir = versions['v5'].directory_name;
+
+    var current_url = window.location.href;
+
+    // Replace first occurence of this version's dir with the selected version's
+    // dir in the URL
+    window.location.href = current_url.replace(current_dir, new_dir);
+}
+
+$(document).ready(function() {
+    // Populate version <select>
+    $("#vn").html(function() {
+        var s = $("<select/>");
+        var o = '<option/>';
+
+        for (name in versions) {
+          // Create an <option> for each version
+          var option_text = name;
+          if (versions[name].current) {
+            option_text += ' (current)';
+          }
+          $(o, {value: name, text: option_text}).appendTo(s);
+        }
+
+        return(s);
+    });
+
+    // Setup URL change on version <select>
+    $("#vn select").bind('change', vfnav);
+    $('#vn select').val('v5');
+});
+</script>
+</body>
+</html>

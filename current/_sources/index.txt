@@ -15,6 +15,7 @@ CHAOS API documentation
 
 .. If you don't want subsection within a page to show up you can use the
    :titlesonly: directive
+
 .. toctree::
    :maxdepth: 4
    :glob:
@@ -26,7 +27,7 @@ CHAOS API documentation
    the index
    JavaScript Portal Client/index
    PHP Portal Client/index
-   API
+   API/index
 
 
 Indices and tables

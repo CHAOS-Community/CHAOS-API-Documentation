@@ -204,7 +204,7 @@ div#main-column h1 {
   color: black;
 }
 
-div#main-column h2 {
+div#main-column h2, p.rubric {
   font-size: 40px;
   font-weight: 100;
   line-height: 1;
@@ -249,6 +249,10 @@ table.docutils thead tr:first-of-type th[colspan] {
   font-size: 15px;
   font-weight: normal;
 }
+
+/* table.columns { */
+/*   min-width: 40%; */
+/* } */
 
 dl {
   margin-left: 1em;

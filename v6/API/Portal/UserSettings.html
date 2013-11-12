@@ -1,0 +1,295 @@
+
+<!doctype html>
+
+<html lang="">
+
+<head><title>UserSettings &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+  <!-- <meta name="robots" content="index" /> -->
+  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/API/Portal/UserSettings.txt"/> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="release" content="v4"/>
+
+  
+
+  
+  
+   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="../../_static/code-editor.css" type="text/css" />
+      
+   <script type="text/javascript">
+     var DOCUMENTATION_OPTIONS = {
+         URL_ROOT: '../../',
+         VERSION: 'v6',
+         COLLAPSE_INDEX: false,
+         FILE_SUFFIX: '.html',
+         HAS_SOURCE: true,
+     };
+   </script>
+   
+   
+   
+       <script type="text/javascript" src="../../_static/jquery.js"></script>
+       <script type="text/javascript" src="../../_static/underscore.js"></script>
+       <script type="text/javascript" src="../../_static/doctools.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="../../_static/CHAOS.Portal.Client.PortalClient.js"></script>
+       <script type="text/javascript" src="../../_static/code-editor.js"></script>
+       <script type="text/javascript" src="../../_static/scrollspy.js"></script>
+       <script type="text/javascript" src="../../_static/base.js"></script>
+          <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
+<link rel="top" title="CHAOS API" href="../../index.html" />
+<link rel="up" title="Portal" href="index.html" />
+<link rel="next" title="View" href="View.html" />
+<link rel="prev" title="User" href="User.html" />
+          <script>
+            // (function() {
+            //    var cx = '017213726194841070573:WMX6838984';
+            //    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+            //    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
+            //    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+            // })();
+          </script></head>
+<body>
+      <div id="main-column">
+        <!-- Logo -->
+            <div id="logo">
+              <a href="http://chaos-community.org/"><img class="logo"
+                    src="http://chaos-community.org/img/chaoscommunity.png" alt="CHAOS Community Logo"/></a>
+            </div><!-- Menu on left -->
+       <div class="sphinxsidebar">
+         <div class="sphinxsidebarwrapper">
+<h3>
+  <!-- <a href="../../index.html">CHAOS API</a> -->
+  CHAOS API <span id="vn">v6</span>
+</h3>
+
+<div class="site-contents"><a href="../../index.html">Table of contents</a></div>
+
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">CHAOS overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">CHAOS concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../the index.html">The Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JavaScript Portal Client/index.html">CHAOS.Portal JavaScript Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PHP Portal Client/index.html">CHAOS.Portal PHP Client</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Portal</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ClientSettings.html">ClientSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Group.html">Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Session.html">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Subscription.html">Subscription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="User.html">User</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">UserSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="View.html">View</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../EmailPassword/index.html">EmailPassword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MCM/index.html">MCM</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div class="site-index"><a href="../../genindex.html">Index</a></div>
+
+<form action="../../search.html" method="get" class="search">
+  <input type="text" name="q" value="" />
+  <input type="submit" value="search" />
+</form>
+
+<!-- Edit this page on Github -->
+<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/API/Portal/UserSettings.rst" target="_blank" title="Edit API/Portal/UserSettings.txt on GitHub">
+  Edit this Page
+</a>
+
+<!--
+<strong>Debug:</strong> <br>
+pagename: "API/Portal/UserSettings" <br>
+<br>
+-->
+         </div>
+       </div>
+
+        <!-- Main -->
+           <!--<h3>API</h3>--><div class="section" id="usersettings">
+<h1>UserSettings<a class="headerlink" href="#usersettings" title="Permalink to this headline">¶</a></h1>
+<dl class="module">
+<dt>
+<tt class="descname">Portal</tt><em class="property"> module</em></dt>
+<dd><dl class="extension">
+<dt id="Portal.UserSettings">
+<tt class="descname">UserSettings</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.UserSettings" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="action">
+<dt id="Portal.UserSettings/Get">
+<tt class="descclassname">UserSettings/</tt><tt class="descname">Get</tt><a class="headerlink" href="#Portal.UserSettings/Get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets settings for current user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clientGUID</strong> &#8211; GUID of the client for which to get settings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The settings for the specified client for the current user</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">UserSettings</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.UserSettings/Set">
+<tt class="descclassname">UserSettings/</tt><tt class="descname">Set</tt><a class="headerlink" href="#Portal.UserSettings/Set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets settings for current user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>clientGUID</strong> &#8211; GUID of the client for which to set settings</li>
+<li><strong>settings</strong> (<em>string</em>) &#8211; the new settings</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The number of affected rows in the database</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="action">
+<dt id="Portal.UserSettings/Delete">
+<tt class="descclassname">UserSettings/</tt><tt class="descname">Delete</tt><a class="headerlink" href="#Portal.UserSettings/Delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete settings for a specific client for the current user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clientGUID</strong> &#8211; GUID of the client for which to delete settings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The number of affected rows in the database</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+        <!-- Bottom prev/next -->
+    <div class="nav-buttons">
+      <div class="button-row">
+        <div class="prev">
+          <a href="User.html" title="Previous Section: User">&#8592; &nbsp; User</a>
+          <br>Previous
+        </div>
+        <div class="up">
+          <a href="../index.html" title="Parent Section: API" >&#8593;&nbsp; API</a>
+          <br>Up
+        </div>
+        <div class="next">
+          <a href="View.html" title="Next Section: View">View &nbsp;&#8594;</a>
+          <br>Next
+        </div>
+      </div>
+    </div></div>  
+  
+
+  <!-- <div id="cse&#45;results"> -->
+  <!--   <gcse:searchresults linkTarget="_top"></gcse:searchresults> -->
+  <!-- </div> -->
+  <!--
+  -->
+
+  <!--<div id="top-right">
+        <div class="user-right">
+          <ul id="header-menu-bar" class="ajs-menu-bar">
+            <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+            <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+            <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+            <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+            <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+            <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+          <div id="etp">
+            <ul>
+            </ul>
+          </div>
+      <div class="footer">
+        <p>
+          &copy; <a href="">Copyright</a> 2013, Malthe Jørgensen 
+          MongoDB&reg;, Mongo&reg;, and the leaf logo are registered trademarks of <a href="http://www.10gen.com/">10gen, Inc.</a>
+        </p>
+      </div>
+
+  --><script type="text/javascript">
+var versions = {
+ "v6": { "branch_name": "v6", "directory_name": "v6" },
+ "v5": { "branch_name": "v5", "directory_name": "v5" },
+ "v4": { "branch_name": "master", "directory_name": "current", "current": true }
+};
+var pagename = 'API/Portal/UserSettings';
+var stable = 'v';
+
+// Change URL on version change
+function vfnav() {
+
+    // If the pagename is "index" don't write anything
+    var pn = pagename;
+    if (pagename=='index') {
+      pn = '';
+    }
+
+    // Get selected version in the version <select>
+    var new_version = $(this).children("option:selected").attr('value');
+    var new_dir = versions[new_version].directory_name;
+    var current_dir = versions['v6'].directory_name;
+
+    var current_url = window.location.href;
+
+    // Replace first occurence of this version's dir with the selected version's
+    // dir in the URL
+    window.location.href = current_url.replace(current_dir, new_dir);
+}
+
+$(document).ready(function() {
+    // Populate version <select>
+    $("#vn").html(function() {
+        var s = $("<select/>");
+        var o = '<option/>';
+
+        for (name in versions) {
+          // Create an <option> for each version
+          var option_text = name;
+          if (versions[name].current) {
+            option_text += ' (current)';
+          }
+          $(o, {value: name, text: option_text}).appendTo(s);
+        }
+
+        return(s);
+    });
+
+    // Setup URL change on version <select>
+    $("#vn select").bind('change', vfnav);
+    $('#vn select').val('v6');
+});
+</script>
+</body>
+</html>
