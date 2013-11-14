@@ -57,7 +57,12 @@ What this does is basically a rebase of `v5` onto the `master` branch and `v6` o
     > git checkout v5 && git rebase master # rebase v5 onto master
     > git checkout v6 && git rebase v5     # rebase v6 onto v5
 
-If find out you need to update `v4` but not `v5` and `v6`, you can do the commit to master as usual, and then rebase v5 onto master and then do a `git revert <COMMIT_HASH>` of the commit that changed v4. 
+If find out you need to update `v4` but not `v5` and `v6`, you can do the commit to `master` as usual, and then rebase `v5` onto `master` and then do a `git revert <COMMIT_HASH>` of the commit that changed v4:
+
+    > git commit # The update on v4 (master branch)
+    > git checkout v5 && git rebase master
+    > git revert <COMMIT_HASH>
+    > git checkout v6 && git rebase v5
 
 PHP Portal Client documentation
 ----------------------------
