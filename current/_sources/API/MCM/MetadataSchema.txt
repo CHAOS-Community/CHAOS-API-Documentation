@@ -50,7 +50,7 @@ MetadataSchema
          :auth logged_in:
          :auth system_manage_permission:
          :param name: a new name for the new schema
-         :param schemaXml: the XML for the new schema
+         :param schemaXML: the XML for the new schema
          :param metadataSchemaGUID: the GUID for new schema
          :type metadataSchemaGUID: optional
          :returns: The GUID of the created MetadataSchema
