@@ -60,6 +60,10 @@ div.sphinxsidebar {
   font-size: 12px;
 }
 
+div.sphinxsidebar ul {
+  margin-left: 1.2em;
+}
+
 div.sphinxsidebar form.search {
   margin-top: 1em;
 }

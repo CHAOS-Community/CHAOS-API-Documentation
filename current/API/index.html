@@ -15,7 +15,7 @@
   
    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css" type="text/css" />
        <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
@@ -33,11 +33,12 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js"></script>
        <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
@@ -142,7 +143,7 @@ heading of the form <tt class="code docutils literal"><span class="pre">Extensio
 URL.</p>
 <p>Each <tt class="docutils literal"><span class="pre">Extension</span></tt> belongs to a module.</p>
 <p>On a succesfull request Portal will return a structure similar to the following:</p>
-<pre><code class="language-xml">&lt;PortalResult Duration="CHAOS call duration"&gt;
+<pre class="code-editor"><code class="language-xml">&lt;PortalResult Duration="CHAOS call duration"&gt;
   &lt;ModuleResults&gt;
     &lt;ModuleResult Fullname="Module name" Duration="0" Count="Number of results"&gt;
       &lt;Results&gt;
@@ -160,7 +161,7 @@ many <tt class="code docutils literal"><span class="pre">&lt;Result&gt;</span></
 <p><tt class="code docutils literal"><span class="pre">&lt;Result&gt;</span></tt> will contain a number of elements corresponding to the fields
 of the object you requested.</p>
 <p>Here&#8217;s an example result from the action <tt class="docutils literal"><span class="pre">Object/Get</span></tt>:</p>
-<pre><code class="language-xml">&lt;PortalResult Duration="84"&gt;
+<pre class="code-editor"><code class="language-xml">&lt;PortalResult Duration="84"&gt;
   &lt;ModuleResults&gt;
     &lt;ModuleResult Fullname="MCM" Duration="0" Count="2" TotalCount="5"&gt;
       &lt;Results&gt;

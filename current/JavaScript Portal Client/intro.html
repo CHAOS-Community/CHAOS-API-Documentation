@@ -15,7 +15,7 @@
   
    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css" type="text/css" />
        <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
@@ -33,11 +33,12 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js"></script>
        <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
@@ -127,7 +128,7 @@ folder of the <a class="reference external" href="https://github.com/CHAOS-Commu
 </pre></div>
 </div>
 <p>The first thing we need to do is to instantiate the client.</p>
-<pre id="setup-code"><code class="language-javascript">// Setup settings
+<pre class="code-editor" id="setup-code"><code class="language-javascript">// Setup settings
 var ChaosSettings = {
   "servicePath":"http://api.chaos-systems.com/",
   "clientGUID":"9f62060c-64ff-e14f-a8d5-d85a1e2e21b8",
@@ -153,7 +154,7 @@ sets up a session. When the session has been set up we are ready to use
 the CHAOS.Portal.</p>
 <p>We can add callbacks to <tt class="code docutils literal"><span class="pre">PortalClient.SessionAcquired()</span></tt> in
 order to do work when the session has been set up:</p>
-<pre><code class="language-javascript eval">client.SessionAcquired().Add(function(sender, sessionGUID) {
+<pre class="code-editor"><code class="language-javascript eval">client.SessionAcquired().Add(function(sender, sessionGUID) {
       alert("Session created: " + sessionGUID);
 });</code></pre>
 <p>Now we are ready to get some objects!</p>
@@ -163,7 +164,7 @@ order to do work when the session has been set up:</p>
 <p>The easiest way to retrieve some objects from a CHAOS database is to
 search. You can do this with the function
 <tt class="code docutils literal"><span class="pre">PortalClient.Object_GetBySearch()</span></tt></p>
-<pre><code class="language-javascript eval">// Add search schemas
+<pre class="code-editor"><code class="language-javascript eval">// Add search schemas
 var fields = [
   "5906a41b-feae-48db-bfb7-714b3e105396",
   "00000000-0000-0000-0000-000063c30000",
@@ -230,7 +231,7 @@ all pages via <tt class="code docutils literal"><span class="pre">pageIndex</spa
 </dl>
 <p>Now the resulting objects are quite big, so let&#8217;s only grab one, by
 setting pageSize to 1:</p>
-<pre><code class="language-javascript eval">// Retrieve objects
+<pre class="code-editor"><code class="language-javascript eval">// Retrieve objects
 client.SessionAcquired().Add(function(sender, sessionGUID) {
   client.Object_GetBySearch(showObjects, // callback
     {
@@ -257,7 +258,7 @@ function showObjects(serviceResult) {
   $('#search-results').data('codeMirror').setValue(string_result);
 }</code></pre>
 <p>Results:</p>
-<pre id="search-results"><code class="language-json">// The result should look something like this
+<pre class="code-editor" id="search-results"><code class="language-json">// The result should look something like this
 [
   {
     "GUID": "00000000-0000-0000-0000-00004e040016",

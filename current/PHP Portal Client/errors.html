@@ -15,7 +15,7 @@
   
    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css" type="text/css" />
        <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
@@ -33,11 +33,12 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js"></script>
        <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
@@ -115,7 +116,7 @@ pagename: "PHP Portal Client/errors" <br>
            <!--<h3>CHAOS.Portal PHP Client</h3>--><div class="section" id="error-handling">
 <h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
 <p>Let&#8217;s make a call that will return an error:</p>
-<pre><code class="language-php">&lt;?php
+<pre class="code-editor"><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetSearchSchemas(
   "*",       // search string
   array("5906a41b-feae-48db-bfb7-714b3e105396"), // fields/schemas to search
@@ -149,7 +150,7 @@ if ($serviceResult-&gt;WasSuccess() && $serviceResult-&gt;MCM()-&gt;WasSuccess()
 Not much help there.</p>
 <p>Let&#8217;s have a more thorough look, by adding <tt class="code docutils literal"><span class="pre">MCM()-&gt;Exception</span></tt> and
 <tt class="code docutils literal"><span class="pre">MCM()-&gt;Stacktrace()</span></tt></p>
-<pre><code class="language-php">&lt;?php
+<pre class="code-editor"><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetSearchSchemas(
   "*",       // search string
   array("5906a41b-feae-48db-bfb7-714b3e105396"), // fields/schemas to search

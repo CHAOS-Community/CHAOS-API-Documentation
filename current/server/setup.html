@@ -15,7 +15,7 @@
   
    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css" type="text/css" />
        <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
@@ -33,11 +33,12 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js"></script>
        <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
@@ -232,7 +233,7 @@ mdoules. The following assumes that the MySQL server is running on
 Furthermore it assumes that your database is called <tt class="docutils literal"><span class="pre">CHAOS</span></tt> and that a MySQL
 user called <tt class="docutils literal"><span class="pre">CHAOS</span></tt> has access to it.</p>
 <p>In Windows Powershell:</p>
-<pre><code class="language-powershell">&gt; cd C:\Portal\sql
+<pre class="code-editor"><code class="language-powershell">&gt; cd C:\Portal\sql
 &gt; cat '1-create_tables.sql'     | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
 &gt; cat '3-create_procedures.sql' | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
 &gt; cat '4-create_views.sql'      | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
@@ -252,14 +253,14 @@ user called <tt class="docutils literal"><span class="pre">CHAOS</span></tt> has
 <p>In the <tt class="docutils literal"><span class="pre">Module</span></tt> table you need to add two rows, one for the <tt class="code docutils literal"><span class="pre">MCM</span></tt> and
 <tt class="code docutils literal"><span class="pre">Authentication</span></tt> modules.</p>
 <p>The XML-configuration of the <tt class="docutils literal"><span class="pre">MCM</span></tt>-module should be:</p>
-<pre><code class="language-xml">&lt;Settings&gt;
+<pre class="code-editor"><code class="language-xml">&lt;Settings&gt;
   &lt;ConnectionString&gt;Server=localhost;Uid=CHAOS;Pwd=Foobaz123;Database=CHAOS&lt;/ConnectionString&gt;
   &lt;ObjectCoreName&gt;Object&lt;/ObjectCoreName&gt;
   &lt;!-- AwsConfiguration Aws--&gt;
   &lt;!-- UserManagementConfiguration UserManagement --&gt;
 &lt;/Settings&gt;</code></pre>
 <p>And the XML-configuration of <tt class="docutils literal"><span class="pre">Authentication</span></tt>-module:</p>
-<pre><code class="language-xml">&lt;Settings&gt;
+<pre class="code-editor"><code class="language-xml">&lt;Settings&gt;
   &lt;ConnectionString&gt;Server=localhost;Uid=CHAOS;Pwd=Foobaz123;Database=CHAOS&lt;/ConnectionString&gt;
   &lt;!--&lt;Facebook&gt;
     &lt;AppId&gt;&lt;/AppId&gt;
@@ -281,7 +282,7 @@ email.</p>
 <li>A password for the <tt class="docutils literal"><span class="pre">admin</span></tt> user</li>
 <li>Permission for the admin to the root folder</li>
 </ul>
-<pre><code class="language-sql">INSERT INTO `Folder`
+<pre class="code-editor"><code class="language-sql">INSERT INTO `Folder`
 VALUES (
   1,      # ID
   NULL,   # ParentID

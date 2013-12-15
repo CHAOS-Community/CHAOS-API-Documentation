@@ -15,7 +15,7 @@
   
    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css" type="text/css" />
        <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
@@ -33,11 +33,12 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js"></script>
        <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
@@ -124,7 +125,7 @@ pagename: "PHP Portal Client/metadata and files" <br>
 <p>In many cases it will makes sense to only request a single known object. Objects
 are identified by their GUID.
 We can grab a single object by its GUID with <cite>PortalClient::Object()::GetByObjectGUID()</cite>:</p>
-<pre><code class="language-php">&lt;?php
+<pre class="code-editor"><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetByObjectGUID(
   "00000000-0000-0000-0000-00004e040016" // objectGUID
   , $accessPointGUID // accessPointGuid
@@ -142,7 +143,7 @@ echo "Grabbed object (GUID): " . $object-&gt;GUID;
 <p>Files belonging to an object can be of different types &#8211; video, audio, images
 and basically any other kind of file. The files can be found in the <cite>Files</cite>
 attribute of the objects in <tt class="code docutils literal"><span class="pre">serviceResult-&gt;MCM()-&gt;Results()</span></tt>:</p>
-<pre><code class="language-php">&lt;table id="file-table"&gt;
+<pre class="code-editor"><code class="language-php">&lt;table id="file-table"&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;FormatType&lt;/th&gt;
@@ -223,7 +224,7 @@ just experimenting and getting to know the interface - so let&#8217;s have a loo
 metadata can be found in the <cite>Metadatas</cite> attribute of the objects in
 <cite>serviceResult-&gt;MCM()-&gt;Results()</cite>:</p>
 <p><cite>Metadatas</cite> is an array of strings containing XML documents. Let&#8217;s have a look:</p>
-<pre><code class="language-php">&lt;?php
+<pre class="code-editor"><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetByObjectGUID(
   "00000000-0000-0000-0000-00004e040016" // objectGUID
   , $accessPointGUID // accessPointGuid
@@ -237,7 +238,7 @@ $object = $serviceResult-&gt;MCM()-&gt;Results()[0];
 echo "&lt;pre&gt;" . $object-&gt;Metadatas[1]-&gt;MetadataXML . "&lt;/pre&gt;";
 ?&gt;</code></pre>
 <p>Our object&#8217;s metadata:</p>
-<pre><code class="language-xml">&lt;DKA&gt;
+<pre class="code-editor"><code class="language-xml">&lt;DKA&gt;
   &lt;Title&gt;Uden titel&lt;/Title&gt;
   &lt;Abstract&gt;En mand i profil med sideskilning og et mut ansigtsudtryk&lt;/Abstract&gt;
   &lt;Description /&gt;
@@ -257,7 +258,7 @@ echo "&lt;pre&gt;" . $object-&gt;Metadatas[1]-&gt;MetadataXML . "&lt;/pre&gt;";
 &lt;/DKA&gt;</code></pre>
 <p>Parsing XML with PHP can be done in a <cite>number of ways</cite>.
 In the following example I will use SimpleXML to parse and access the XML.</p>
-<pre><code class="language-php">&lt;?php
+<pre class="code-editor"><code class="language-php">&lt;?php
 $serviceResult = $client-&gt;Object()-&gt;GetByObjectGUID(
   "00000000-0000-0000-0000-00004e040016" // objectGUID
   , $accessPointGUID // accessPointGuid

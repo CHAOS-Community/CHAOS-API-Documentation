@@ -15,7 +15,7 @@
   
    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css" type="text/css" />
        <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
@@ -33,11 +33,12 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
-       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js"></script>
        <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
        <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
        <script type="text/javascript" src="../_static/code-editor.js"></script>
@@ -124,7 +125,7 @@ pagename: "JavaScript Portal Client/metadata and files" <br>
 <p>In many cases it will makes sense to only request a single known object. Objects
 are identified by their GUID, and can be retrieved with
 <tt class="code docutils literal"><span class="pre">PortalClient.Object_GetByObjectGUID()</span></tt></p>
-<pre><code class="language-javascript eval">// Retrieve object
+<pre class="code-editor"><code class="language-javascript eval">// Retrieve object
 client.SessionAcquired().Add(function(sender, sessionGUID) {
   client.Object_GetByObjectGUID(showObject, // callback
     {
@@ -149,7 +150,7 @@ function showObject(serviceResult) {
 <p>Files belonging to an object can be of different types &#8211; video, audio, images
 and basically any other kind of file. The files can be found in the Files
 attribute of the objects in <tt class="code docutils literal"><span class="pre">serviceResult.MCM().Results()</span></tt>:</p>
-<pre><code class="language-javascript eval">// Retrieve object
+<pre class="code-editor"><code class="language-javascript eval">// Retrieve object
 client.SessionAcquired().Add(function(sender, sessionGUID) {
   client.Object_GetByObjectGUID(showObject, // callback
     {
@@ -221,7 +222,7 @@ documents before you begin doing serious work with CHAOS. In this case we&#8217;
 just experimenting and getting to know the interface - so let&#8217;s have a look. The
 metadata can be found in the Metadatas attribute of the objects in
 serviceResult.MCM().Results():</p>
-<pre><code class="language-javascript eval">// Retrieve object
+<pre class="code-editor"><code class="language-javascript eval">// Retrieve object
 client.SessionAcquired().Add(function(sender, sessionGUID) {
   client.Object_GetByObjectGUID(showObject, // callback
     {
@@ -244,7 +245,7 @@ function showObject(serviceResult) {
   $('#metadata-results').data('codeMirror').setValue(string_result);
 }</code></pre>
 <p>Our object&#8217;s metadata:</p>
-<pre id="metadata-results"><code class="language-json">// The result should look something like this
+<pre class="code-editor" id="metadata-results"><code class="language-json">// The result should look something like this
 [
   {
     "GUID": "29d669cf-c3e5-4749-beb9-20bb7ac18b05",
@@ -270,7 +271,7 @@ function showObject(serviceResult) {
 <p>Parsing XML with Javascript can be <a class="reference external" href="http://stackoverflow.com/a/8412989/118608">tricky business</a>. I recommend using a library
 such as jQuery. In the following example we are using <a class="reference external" href="http://jquery.com/">jQuery</a> 1.7.1 to parse and
 retrieve data from the XML.</p>
-<pre><code class="language-javascript eval"> client.SessionAcquired().Add(function(sender, sessionGUID) {
+<pre class="code-editor"><code class="language-javascript eval"> client.SessionAcquired().Add(function(sender, sessionGUID) {
    client.Object_GetByObjectGUID(showObject, // callback
      {
        objectGUID: "00000000-0000-0000-0000-00004e040016"
