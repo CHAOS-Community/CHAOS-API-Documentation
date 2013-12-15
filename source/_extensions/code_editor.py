@@ -1,10 +1,11 @@
 def builder_inited(app):
-    app.add_stylesheet("http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css")
-    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js")
-    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js")
-    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js")
-    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js")
-    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js")
+    app.add_stylesheet("http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.css")
+    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.14.0/codemirror.js")
+    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.14.0/mode/javascript/javascript.js")
+    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.14.0/mode/css/css.js")
+    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.14.0/mode/xml/xml.js")
+    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.14.0/mode/htmlmixed/htmlmixed.js")
+    app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.14.0/mode/sql/sql.js")
 
     app.add_javascript("codemirror/3.0/mode/powershell/powershell.js")
 
@@ -59,15 +60,15 @@ def visit_code_editor_node(self, node):
     if 'eval' in node and node['eval']:
         class_value += ' eval'
 
-    id_attr = ''
+    attrs = ' class="code-editor"'
     if 'id' in node and node['id']:
-        id_attr = ' id="%s"' % node['id']
+        attrs += ' id="%s"' % node['id']
 
     code_content = node.rawsource
     code_content = code_content.replace('<', '&lt;');
     code_content = code_content.replace('>', '&gt;');
 
-    self.body.append('<pre%s><code class="%s">' % (id_attr, class_value) + \
+    self.body.append('<pre%s><code class="%s">' % (attrs, class_value) + \
                                             code_content + '</code></pre>\n')
     raise nodes.SkipNode
 
