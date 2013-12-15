@@ -3,9 +3,9 @@
 
 <html lang="">
 
-<head><title>User &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+<head><title>Setting up a server &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
   <!-- <meta name="robots" content="index" /> -->
-  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/API/Portal/User.txt"/> -->
+  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/server/index.txt"/> -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="release" content="v4"/>
 
@@ -13,14 +13,14 @@
 
   
   
-   <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
        <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
-       <link rel="stylesheet" href="../../_static/code-editor.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
       
    <script type="text/javascript">
      var DOCUMENTATION_OPTIONS = {
-         URL_ROOT: '../../',
+         URL_ROOT: '../',
          VERSION: 'v4',
          COLLAPSE_INDEX: false,
          FILE_SUFFIX: '.html',
@@ -30,24 +30,23 @@
    
    
    
-       <script type="text/javascript" src="../../_static/jquery.js"></script>
-       <script type="text/javascript" src="../../_static/underscore.js"></script>
-       <script type="text/javascript" src="../../_static/doctools.js"></script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
        <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
        <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
        <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
        <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
        <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
-       <script type="text/javascript" src="../../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
-       <script type="text/javascript" src="../../_static/CHAOS.Portal.Client.PortalClient.js"></script>
-       <script type="text/javascript" src="../../_static/code-editor.js"></script>
-       <script type="text/javascript" src="../../_static/scrollspy.js"></script>
-       <script type="text/javascript" src="../../_static/base.js"></script>
+       <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
+       <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
+       <script type="text/javascript" src="../_static/code-editor.js"></script>
+       <script type="text/javascript" src="../_static/scrollspy.js"></script>
+       <script type="text/javascript" src="../_static/base.js"></script>
           <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
-<link rel="top" title="CHAOS API" href="../../index.html" />
-<link rel="up" title="Portal" href="index.html" />
-<link rel="next" title="UserSettings" href="UserSettings.html" />
-<link rel="prev" title="Subscription" href="Subscription.html" />
+<link rel="top" title="CHAOS API" href="../index.html" />
+<link rel="next" title="CHAOS server instance" href="setup.html" />
+<link rel="prev" title="CHAOS concepts" href="../concepts.html" />
           <script>
             // (function() {
             //    var cx = '017213726194841070573:WMX6838984';
@@ -66,91 +65,72 @@
        <div class="sphinxsidebar">
          <div class="sphinxsidebarwrapper">
 <h3>
-  <!-- <a href="../../index.html">CHAOS API</a> -->
+  <!-- <a href="../index.html">CHAOS API</a> -->
   CHAOS API <span id="vn">v4</span>
 </h3>
 
-<div class="site-contents"><a href="../../index.html">Table of contents</a></div>
+<div class="site-contents"><a href="../index.html">Table of contents</a></div>
 
 
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../overview.html">CHAOS overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">CHAOS concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../server/index.html">Setting up a server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../the index.html">The Index</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../JavaScript Portal Client/index.html">CHAOS.Portal JavaScript Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../PHP Portal Client/index.html">CHAOS.Portal PHP Client</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Portal</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ClientSettings.html">ClientSettings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Group.html">Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Session.html">Session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Subscription.html">Subscription</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">User</a></li>
-<li class="toctree-l3"><a class="reference internal" href="UserSettings.html">UserSettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">CHAOS overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">CHAOS concepts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Setting up a server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">CHAOS server instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solr.html">External services: MySQL, Couchbase and Solr</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../EmailPassword/index.html">EmailPassword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../MCM/index.html">MCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../the index.html">The Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JavaScript Portal Client/index.html">CHAOS.Portal JavaScript Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PHP Portal Client/index.html">CHAOS.Portal PHP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/index.html">API</a></li>
 </ul>
-</li>
-</ul>
 
 
-<div class="site-index"><a href="../../genindex.html">Index</a></div>
+<div class="site-index"><a href="../genindex.html">Index</a></div>
 
-<form action="../../search.html" method="get" class="search">
+<form action="../search.html" method="get" class="search">
   <input type="text" name="q" value="" />
   <input type="submit" value="search" />
 </form>
 
 <!-- Edit this page on Github -->
-<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/API/Portal/User.rst" target="_blank" title="Edit API/Portal/User.txt on GitHub">
+<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/server/index.rst" target="_blank" title="Edit server/index.txt on GitHub">
   Edit this Page
 </a>
 
 <!--
 <strong>Debug:</strong> <br>
-pagename: "API/Portal/User" <br>
+pagename: "server/index" <br>
 <br>
 -->
          </div>
        </div>
 
         <!-- Main -->
-           <!--<h3>API</h3>--><div class="section" id="user">
-<h1>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h1>
-<dl class="module">
-<dt>
-<tt class="descname">Portal</tt><em class="property"> module</em></dt>
-<dd><dl class="extension">
-<dt id="Portal.User">
-<tt class="descname">User</tt><em class="property"> extension</em><a class="headerlink" href="#Portal.User" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="action">
-<dt id="Portal.User/Get">
-<tt class="descclassname">User/</tt><tt class="descname">Get</tt><a class="headerlink" href="#Portal.User/Get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the current user.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Authentication:</th><td class="field-body"><ul class="first simple">
-<li><strong>Logged in</strong> &#8211; You need to be logged in to use this feature</li>
+           <div class="section" id="setting-up-a-server">
+<h1>Setting up a server<a class="headerlink" href="#setting-up-a-server" title="Permalink to this headline">¶</a></h1>
+<p>This section is a guide for setting up your own CHAOS server.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">CHAOS server instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#amazon-ec2">Amazon EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#windows-server-2012-instructions">Windows Server 2012 instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#download-and-build-chaos-modules">Download and build CHAOS modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#iis">IIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#set-database-settings">Set database settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#finishing-touches">Finishing touches</a></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The current (logged in) user.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</dd></dl>
-
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solr.html">External services: MySQL, Couchbase and Solr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="solr.html#setting-up-solr">Setting up Solr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solr.html#setting-up-mysql">Setting up MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solr.html#setting-up-couchbase">Setting up Couchbase</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
 
@@ -159,15 +139,17 @@ pagename: "API/Portal/User" <br>
     <div class="nav-buttons">
       <div class="button-row">
         <div class="prev">
-          <a href="Subscription.html" title="Previous Section: Subscription">&#8592; &nbsp; Subscription</a>
+          <a href="../concepts.html" title="Previous Section: CHAOS concepts">&#8592; &nbsp; CHAOS concepts</a>
           <br>Previous
         </div>
+        
         <div class="up">
-          <a href="../index.html" title="Parent Section: API" >&#8593;&nbsp; API</a>
+          <a href="../index.html" title="Root" >&#8593;&nbsp; Back to table of contents</a>
+          <!-- <a href="../index.html" title="Root" >&#38;#8593;&#38;nbsp; Back to table of contents</a> -->
           <br>Up
         </div>
         <div class="next">
-          <a href="UserSettings.html" title="Next Section: UserSettings">UserSettings &nbsp;&#8594;</a>
+          <a href="setup.html" title="Next Section: CHAOS server instance">CHAOS server instance &nbsp;&#8594;</a>
           <br>Next
         </div>
       </div>
@@ -210,7 +192,7 @@ var versions = {
  "v5": { "branch_name": "v5", "directory_name": "v5" },
  "v4": { "branch_name": "master", "directory_name": "current", "current": true }
 };
-var pagename = 'API/Portal/User';
+var pagename = 'server/index';
 var stable = 'v';
 
 // Change URL on version change

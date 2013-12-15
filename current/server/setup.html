@@ -1,0 +1,428 @@
+
+<!doctype html>
+
+<html lang="">
+
+<head><title>CHAOS server instance &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+  <!-- <meta name="robots" content="index" /> -->
+  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/server/setup.txt"/> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="release" content="v4"/>
+
+  
+
+  
+  
+   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       <link rel="stylesheet" href="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/code-editor.css" type="text/css" />
+      
+   <script type="text/javascript">
+     var DOCUMENTATION_OPTIONS = {
+         URL_ROOT: '../',
+         VERSION: 'v4',
+         COLLAPSE_INDEX: false,
+         FILE_SUFFIX: '.html',
+         HAS_SOURCE: true,
+     };
+   </script>
+   
+   
+   
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/codemirror.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/javascript/javascript.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/css/css.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js"></script>
+       <script type="text/javascript" src="http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js"></script>
+       <script type="text/javascript" src="../_static/codemirror/3.0/mode/powershell/powershell.js"></script>
+       <script type="text/javascript" src="../_static/CHAOS.Portal.Client.PortalClient.js"></script>
+       <script type="text/javascript" src="../_static/code-editor.js"></script>
+       <script type="text/javascript" src="../_static/scrollspy.js"></script>
+       <script type="text/javascript" src="../_static/base.js"></script>
+          <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
+<link rel="top" title="CHAOS API" href="../index.html" />
+<link rel="up" title="Setting up a server" href="index.html" />
+<link rel="next" title="External services: MySQL, Couchbase and Solr" href="solr.html" />
+<link rel="prev" title="Setting up a server" href="index.html" />
+          <script>
+            // (function() {
+            //    var cx = '017213726194841070573:WMX6838984';
+            //    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+            //    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
+            //    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+            // })();
+          </script></head>
+<body>
+      <div id="main-column">
+        <!-- Logo -->
+            <div id="logo">
+              <a href="http://chaos-community.org/"><img class="logo"
+                    src="http://chaos-community.org/img/chaoscommunity.png" alt="CHAOS Community Logo"/></a>
+            </div><!-- Menu on left -->
+       <div class="sphinxsidebar">
+         <div class="sphinxsidebarwrapper">
+<h3>
+  <!-- <a href="../index.html">CHAOS API</a> -->
+  CHAOS API <span id="vn">v4</span>
+</h3>
+
+<div class="site-contents"><a href="../index.html">Table of contents</a></div>
+
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">CHAOS overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">CHAOS concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Setting up a server</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">CHAOS server instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#amazon-ec2">Amazon EC2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows-server-2012-instructions">Windows Server 2012 instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-and-build-chaos-modules">Download and build CHAOS modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iis">IIS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-database-settings">Set database settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finishing-touches">Finishing touches</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="solr.html">External services: MySQL, Couchbase and Solr</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../the index.html">The Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JavaScript Portal Client/index.html">CHAOS.Portal JavaScript Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PHP Portal Client/index.html">CHAOS.Portal PHP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/index.html">API</a></li>
+</ul>
+
+
+<div class="site-index"><a href="../genindex.html">Index</a></div>
+
+<form action="../search.html" method="get" class="search">
+  <input type="text" name="q" value="" />
+  <input type="submit" value="search" />
+</form>
+
+<!-- Edit this page on Github -->
+<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/server/setup.rst" target="_blank" title="Edit server/setup.txt on GitHub">
+  Edit this Page
+</a>
+
+<!--
+<strong>Debug:</strong> <br>
+pagename: "server/setup" <br>
+<br>
+-->
+         </div>
+       </div>
+
+        <!-- Main -->
+           <!--<h3>Setting up a server</h3>--><div class="section" id="chaos-server-instance">
+<h1>CHAOS server instance<a class="headerlink" href="#chaos-server-instance" title="Permalink to this headline">¶</a></h1>
+<p>CHAOS is at heart a series of C# classes called &#8220;modules&#8221; running via an
+HTTP server.</p>
+<p>Therefore we recommend a settings up a Windows server running IIS, that can host
+the CHAOS web application.</p>
+<p>In the following guide we set up an Amazon EC2 instance, but you can use your
+own local server or another service for hosting CHAOS.</p>
+<div class="section" id="amazon-ec2">
+<h2>Amazon EC2<a class="headerlink" href="#amazon-ec2" title="Permalink to this headline">¶</a></h2>
+<p>We recommend at least a <tt class="docutils literal"><span class="pre">m1.small</span></tt>-instance running with the image
+<tt class="code docutils literal"><span class="pre">Microsoft</span> <span class="pre">Windows</span> <span class="pre">Server</span> <span class="pre">2012</span> <span class="pre">Base</span> <span class="pre">-</span> <span class="pre">ami-3937da4e</span> <span class="pre">(64-bit)</span></tt>.
+You can use a Windows Server 2008 as well, but it may have some
+differences in the setup process. CHAOS is by
+default 64-bit, but can be built and run on 32-bit instances if you
+change paths in the build configuration from <tt class="docutils literal"><span class="pre">Framework64</span></tt> to <tt class="docutils literal"><span class="pre">Framework</span></tt>.</p>
+<p>I gave my instance a 30 GB EBS disk and made sure that port 3389 (RDP) was open
+in the security group. These should be selected by default.
+<tt class="docutils literal"><span class="pre">RDP</span></tt> is the Remote Desktop Protocol so that we can access and manage the
+instance.</p>
+<p>When the instance has been set up, right-click on the server and choose <tt class="docutils literal"><span class="pre">Get</span>
+<span class="pre">Windows</span> <span class="pre">Password</span></tt>. This will present you with a username and password for the
+machine. You can use this to &#8220;remote desktop&#8221; into the machine.</p>
+<p><a class="reference external" href="http://windows.microsoft.com/en-us/windows/connect-using-remote-desktop-connection#connect-using-remote-desktop-connection=windows-vista">http://windows.microsoft.com/en-us/windows/connect-using-remote-desktop-connection#connect-using-remote-desktop-connection=windows-vista</a></p>
+<p>Your remote desktop client will likely say that the certificate is
+incorrect, but you can simply ignore that and connect anyway.</p>
+<p>You don&#8217;t need to tag the instance or give any special settings.</p>
+</div>
+<div class="section" id="windows-server-2012-instructions">
+<h2>Windows Server 2012 instructions<a class="headerlink" href="#windows-server-2012-instructions" title="Permalink to this headline">¶</a></h2>
+<p>When you have logged in via the Remote Desktop client, you should be able to see
+the desktop and some icons. In the lower left corner in the taskbar you should
+see the icon for <em>Server Manager</em>: open it and go to <em>Add Roles</em>.
+Add the roles <em>Application Server</em> and <em>Web Server (IIS)</em>.</p>
+<p>Under <em>Web Server Role (IIS)</em> choose the feature <em>Web Server &gt; Application
+Development &gt; .NET Extensibilty 4.5</em>.</p>
+<p>Under <em>Application Server</em> choose the feature <em>Web Server (IIS) Support</em>.</p>
+<p>This will install .Net 4.5 and IIS.</p>
+<p>You can open IIS from the <em>Server Manager</em>.</p>
+</div>
+<div class="section" id="download-and-build-chaos-modules">
+<h2>Download and build CHAOS modules<a class="headerlink" href="#download-and-build-chaos-modules" title="Permalink to this headline">¶</a></h2>
+<p>Download the sources for the CHAOS modules</p>
+<p>In <tt class="docutils literal"><span class="pre">PowerShell</span></tt> (which can be found in the taskbar next to <em>Server Manager</em>)
+you can open the web browser and navigate to the CHAOS Github repositories like
+this:</p>
+<div class="code highlight-python"><pre>explorer http://github.com/malthejorgensen/Portal-HttpModule
+explorer http://github.com/malthejorgensen/Portal
+explorer http://github.com/malthejorgensen/CHAOS.Portal.MCM
+explorer http://github.com/malthejorgensen/CHAOS.Portal.Authentication</pre>
+</div>
+<p>Download and extract the code to the following folders:</p>
+<div class="code highlight-python"><pre>C:\Portal-HttpModule
+C:\Portal
+C:\CHAOS.Portal.MCM
+C:\CHAOS.Portal.Authentication</pre>
+</div>
+<p>To build the CHAOS modules run the following:</p>
+<div class="code highlight-python"><pre>C:\Portal-HttpModule\build.bat
+C:\Portal\buil1d.bat
+C:\CHAOS.Portal.MCM\build.bat
+C:\CHAOS.Portal.Authentication\Build.bat</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>when you try to run <tt class="docutils literal"><span class="pre">build.bat</span></tt> you may have a permission error with <tt class="docutils literal"><span class="pre">nant</span></tt></p>
+<div class="code highlight-python"><pre>The action that failed was:
+Demand
+The type of the first permsission that failed was:
+System.Security.Permissions.FileIOPermission
+The Zone of the assembly that failed was:
+Internet</pre>
+</div>
+<p class="last">this is because the files have been downloaded from the internet, and Windows
+sets special permissions (security zones) for those files. You can zip and then
+unzip the folder to remove the security zone. (See <a class="reference external" href="http://stackoverflow.com/a/9028795/118608">http://stackoverflow.com/a/9028795/118608</a>)</p>
+</div>
+<ul class="simple">
+<li>Copy <tt class="code docutils literal"><span class="pre">C:\Portal-HttpModule\src\app\CHAOS.Portal.Web</span></tt> to <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web</span></tt></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you choose another directory than <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web</span></tt> you should
+change the variable <tt class="docutils literal"><span class="pre">ServiceDirectory</span></tt> in <em>Application Settings</em> in IIS
+accordingly. The variable can also be found and changed in the file <tt class="code docutils literal"><span class="pre">CHAOS.Portal.Web\Web.config</span></tt>.</p>
+</div>
+<ul class="simple">
+<li>Create the folder <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web\Modules</span></tt></li>
+</ul>
+<ul class="simple">
+<li>Copy <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.MCM\build\CHAOS.Mcm.dll</span></tt> to <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web\Modules</span></tt></li>
+<li>Copy <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Authentication\build\Chaos.Portal.Authentication.dll</span></tt> to <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web\Modules</span></tt></li>
+<li>Copy <tt class="code docutils literal"><span class="pre">C:\Portal-HttpModule\lib\CHAOS.dll</span></tt> to <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web\bin\CHAOS.dll</span></tt></li>
+<li>Copy (overwrite) <tt class="code docutils literal"><span class="pre">C:\Portal\lib\MySql.Data.dll</span></tt> to <tt class="code docutils literal"><span class="pre">C:\CHAOS.Portal.Web\bin\MySql.Data.dll</span></tt></li>
+</ul>
+<p>&#8211; as Portal-HttpModule has and old version of <tt class="docutils literal"><span class="pre">MySql.Data.dll</span></tt>.</p>
+</div>
+<div class="section" id="iis">
+<h2>IIS<a class="headerlink" href="#iis" title="Permalink to this headline">¶</a></h2>
+<p>Open <tt class="docutils literal"><span class="pre">Internet</span> <span class="pre">Information</span> <span class="pre">Services</span> <span class="pre">(IIS)</span> <span class="pre">Manager</span></tt> and set up a new site.
+(Right-click on sites and click <em>Add site...</em>)</p>
+<p>In the <em>Physical path:</em> you should choose <tt class="docutils literal"><span class="pre">C:\CHAOS.Portal.Web</span></tt>.</p>
+<p>In either <em>Application Settings</em> in IIS or in the XML-file
+<tt class="docutils literal"><span class="pre">CHAOS.Portal.Web\Web.config</span></tt> you should edit the default <tt class="docutils literal"><span class="pre">ConnectionString</span></tt>
+to contain the credentials and location for your database.</p>
+</div>
+<div class="section" id="set-database-settings">
+<h2>Set database settings<a class="headerlink" href="#set-database-settings" title="Permalink to this headline">¶</a></h2>
+<p>Run the MySQL-scripts that setup the tables and procedures the different CHAOS
+mdoules. The following assumes that the MySQL server is running on
+<tt class="docutils literal"><span class="pre">localhost</span></tt> and that you have <tt class="docutils literal"><span class="pre">MySQL</span> <span class="pre">Workbench</span> <span class="pre">CE</span> <span class="pre">6.0.8</span></tt> installed.
+Furthermore it assumes that your database is called <tt class="docutils literal"><span class="pre">CHAOS</span></tt> and that a MySQL
+user called <tt class="docutils literal"><span class="pre">CHAOS</span></tt> has access to it.</p>
+<p>In Windows Powershell:</p>
+<pre><code class="language-powershell">&gt; cd C:\Portal\sql
+&gt; cat '1-create_tables.sql'     | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '3-create_procedures.sql' | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '4-create_views.sql'      | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '6-create_data.sql'       | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+
+&gt; cd C:\CHAOS.Portal.MCM\sql
+&gt; cat '1-create_tables.sql'     | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '2-apply_changes.sql'     | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '3-create_procedures.sql' | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '4-create_views.sql'      | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '6-insert_data.sql'       | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+
+&gt; cd C:\CHAOS.Portal.Authentication\src\sql\Chaos.Portal.Authentication.Sql
+&gt; cat '1-create_tables.sql'     | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '3-create_procedures.sql' | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p
+&gt; cat '6-insert_data.sql'       | & 'C:\Program Files (x86)\MySQL\MySQL Workbench CE 6.0.8\mysql.exe' CHAOS -u CHAOS -p</code></pre>
+<p>In the <tt class="docutils literal"><span class="pre">Module</span></tt> table you need to add two rows, one for the <tt class="code docutils literal"><span class="pre">MCM</span></tt> and
+<tt class="code docutils literal"><span class="pre">Authentication</span></tt> modules.</p>
+<p>The XML-configuration of the <tt class="docutils literal"><span class="pre">MCM</span></tt>-module should be:</p>
+<pre><code class="language-xml">&lt;Settings&gt;
+  &lt;ConnectionString&gt;Server=localhost;Uid=CHAOS;Pwd=Foobaz123;Database=CHAOS&lt;/ConnectionString&gt;
+  &lt;ObjectCoreName&gt;Object&lt;/ObjectCoreName&gt;
+  &lt;!-- AwsConfiguration Aws--&gt;
+  &lt;!-- UserManagementConfiguration UserManagement --&gt;
+&lt;/Settings&gt;</code></pre>
+<p>And the XML-configuration of <tt class="docutils literal"><span class="pre">Authentication</span></tt>-module:</p>
+<pre><code class="language-xml">&lt;Settings&gt;
+  &lt;ConnectionString&gt;Server=localhost;Uid=CHAOS;Pwd=Foobaz123;Database=CHAOS&lt;/ConnectionString&gt;
+  &lt;!--&lt;Facebook&gt;
+    &lt;AppId&gt;&lt;/AppId&gt;
+    &lt;AppSecret&gt;&lt;/AppSecret&gt;
+  &lt;/Facebook&gt;--&gt;
+&lt;/Settings&gt;</code></pre>
+<p>The values of the <tt class="code docutils literal"><span class="pre">&lt;ConnectionString&gt;</span></tt> should correspond to your MySQL-database settings.</p>
+</div>
+<div class="section" id="finishing-touches">
+<h2>Finishing touches<a class="headerlink" href="#finishing-touches" title="Permalink to this headline">¶</a></h2>
+<p>Lastly we need some basic setup.
+An administrator account has been automatically added to the <tt class="docutils literal"><span class="pre">User</span></tt> database.
+It has the GUID <tt class="code docutils literal"><span class="pre">34613336383661632d333562392d3131</span></tt> and the email
+<tt class="code docutils literal"><span class="pre">admin</span></tt>. Yes, the email is simply <tt class="code docutils literal"><span class="pre">admin</span></tt>. Yes, it is not a valid
+email.</p>
+<p>We now setup a:</p>
+<ul class="simple">
+<li>A root folder</li>
+<li>A password for the <tt class="docutils literal"><span class="pre">admin</span></tt> user</li>
+<li>Permission for the admin to the root folder</li>
+</ul>
+<pre><code class="language-sql">INSERT INTO `Folder`
+VALUES (
+  1,      # ID
+  NULL,   # ParentID
+  1,      # FolderTypeID
+  NULL,   # SubscriptionGUID
+  "root", # Name
+  NOW()   # DateCreated
+);
+
+INSERT INTO `Folder_User_Join`
+VALUES (
+  1,                                  # FolderID
+  0x34613336383661632d333562392d3131, # UserGUID (admin)
+  255,                                # Permission
+  NOW()                               # DateCreated
+);
+
+INSERT INTO `EmailPassword`
+VALUES (
+    0x34613336383661632d333562392d3131,         # UserGUID (admin)
+    "91554f150aff4801fa2e771a382fe0fc185f5f8c", # Password (SHA1(UTF-16("Foobaz123"))),
+    NOW(),                                      # DateCreated
+    NOW()                                       # DateModified
+);</code></pre>
+<p>You can now login with your <tt class="code docutils literal"><span class="pre">admin</span></tt> user (you should insert the
+corresponding sessionGUID, of course):</p>
+<ul class="simple">
+<li><a class="reference external" href="http://localhost/v6/Session/Create">http://localhost/v6/Session/Create</a></li>
+<li><a class="reference external" href="http://localhost/v6/EmailPassword/Login?email=admin&amp;password=Foobaz123&amp;sessionGUID=0a1b2b02-d531-4a36-a68f-bbba8f3bbd22">http://localhost/v6/EmailPassword/Login?email=admin&amp;password=Foobaz123&amp;sessionGUID=0a1b2b02-d531-4a36-a68f-bbba8f3bbd22</a></li>
+</ul>
+<p>And create a new folder and an object in that folder:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://localhost/v6/Folder/Create?title=myfolder&amp;folderTypeID=1&amp;parentID=1&amp;sessionGUID=0a1b2b02-d531-4a36-a68f-bbba8f3bbd22">http://localhost/v6/Folder/Create?title=myfolder&amp;folderTypeID=1&amp;parentID=1&amp;sessionGUID=0a1b2b02-d531-4a36-a68f-bbba8f3bbd22</a></li>
+<li><a class="reference external" href="http://localhost/v6/Object/Create?objectTypeID=1&amp;folderID=2&amp;sessionGUID=0a1b2b02-d531-4a36-a68f-bbba8f3bbd22">http://localhost/v6/Object/Create?objectTypeID=1&amp;folderID=2&amp;sessionGUID=0a1b2b02-d531-4a36-a68f-bbba8f3bbd22</a></li>
+</ul>
+</div>
+</div>
+
+
+
+        <!-- Bottom prev/next -->
+    <div class="nav-buttons">
+      <div class="button-row">
+        <div class="prev">
+          <a href="index.html" title="Previous Section: Setting up a server">&#8592; &nbsp; Setting up a server</a>
+          <br>Previous
+        </div>
+        <div class="up">
+          <a href="index.html" title="Parent Section: Setting up a server" >&#8593;&nbsp; Setting up a server</a>
+          <br>Up
+        </div>
+        <div class="next">
+          <a href="solr.html" title="Next Section: External services: MySQL, Couchbase and Solr">External services: MySQL, Couchbase and Solr &nbsp;&#8594;</a>
+          <br>Next
+        </div>
+      </div>
+    </div></div>  
+  
+
+  <!-- <div id="cse&#45;results"> -->
+  <!--   <gcse:searchresults linkTarget="_top"></gcse:searchresults> -->
+  <!-- </div> -->
+  <!--
+  -->
+
+  <!--<div id="top-right">
+        <div class="user-right">
+          <ul id="header-menu-bar" class="ajs-menu-bar">
+            <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+            <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+            <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+            <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+            <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+            <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+          <div id="etp">
+            <ul>
+            </ul>
+          </div>
+      <div class="footer">
+        <p>
+          &copy; <a href="">Copyright</a> 2013, Malthe Jørgensen 
+          MongoDB&reg;, Mongo&reg;, and the leaf logo are registered trademarks of <a href="http://www.10gen.com/">10gen, Inc.</a>
+        </p>
+      </div>
+
+  --><script type="text/javascript">
+var versions = {
+ "v6": { "branch_name": "v6", "directory_name": "v6" },
+ "v5": { "branch_name": "v5", "directory_name": "v5" },
+ "v4": { "branch_name": "master", "directory_name": "current", "current": true }
+};
+var pagename = 'server/setup';
+var stable = 'v';
+
+// Change URL on version change
+function vfnav() {
+
+    // If the pagename is "index" don't write anything
+    var pn = pagename;
+    if (pagename=='index') {
+      pn = '';
+    }
+
+    // Get selected version in the version <select>
+    var new_version = $(this).children("option:selected").attr('value');
+    var new_dir = versions[new_version].directory_name;
+    var current_dir = versions['v4'].directory_name;
+
+    var current_url = window.location.href;
+
+    // Replace first occurence of this version's dir with the selected version's
+    // dir in the URL
+    window.location.href = current_url.replace(current_dir, new_dir);
+}
+
+$(document).ready(function() {
+    // Populate version <select>
+    $("#vn").html(function() {
+        var s = $("<select/>");
+        var o = '<option/>';
+
+        for (name in versions) {
+          // Create an <option> for each version
+          var option_text = name;
+          if (versions[name].current) {
+            option_text += ' (current)';
+          }
+          $(o, {value: name, text: option_text}).appendTo(s);
+        }
+
+        return(s);
+    });
+
+    // Setup URL change on version <select>
+    $("#vn select").bind('change', vfnav);
+    $('#vn select').val('v4');
+});
+</script>
+</body>
+</html>

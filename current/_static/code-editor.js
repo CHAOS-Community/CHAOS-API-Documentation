@@ -69,6 +69,10 @@ $(document).ready(function(event) {
       codeMirror.setOption('mode', 'htmlmixed');
     } else if (codeElem.hasClass('language-xml')) {
       codeMirror.setOption('mode', { 'name': 'xml' });
+    } else if (codeElem.hasClass('language-powershell')) {
+      codeMirror.setOption('mode', { 'name': 'powershell' });
+    } else if (codeElem.hasClass('language-sql')) {
+      codeMirror.setOption('mode', 'text/x-mysql');
     } else if (codeElem.hasClass('language-json')) {
       codeMirror.setOption('mode', { 'name': 'javascript', 'json': true });
     } else if (codeElem.hasClass('language-javascript')) {

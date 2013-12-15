@@ -3,9 +3,9 @@
 
 <html lang="">
 
-<head><title>CHAOS.Portal PHP Client &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
+<head><title>External services: MySQL, Couchbase and Solr &mdash; CHAOS API v4</title><!-- <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico" /> -->
   <!-- <meta name="robots" content="index" /> -->
-  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/PHP Portal Client/index.txt"/> -->
+  <!-- <meta name="DC.Source" content="https://github.com/mongodb/CHAOS-API-Documentation/blob/master/source/server/solr.txt"/> -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="release" content="v4"/>
 
@@ -45,8 +45,9 @@
        <script type="text/javascript" src="../_static/base.js"></script>
           <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help"/>
 <link rel="top" title="CHAOS API" href="../index.html" />
-<link rel="next" title="The Basics" href="intro.html" />
-<link rel="prev" title="Member functions" href="../JavaScript Portal Client/member functions.html" />
+<link rel="up" title="Setting up a server" href="index.html" />
+<link rel="next" title="Authentication" href="../authentication.html" />
+<link rel="prev" title="CHAOS server instance" href="setup.html" />
           <script>
             // (function() {
             //    var cx = '017213726194841070573:WMX6838984';
@@ -75,17 +76,20 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">CHAOS overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">CHAOS concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Setting up a server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Setting up a server</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">CHAOS server instance</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">External services: MySQL, Couchbase and Solr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-solr">Setting up Solr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-mysql">Setting up MySQL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-couchbase">Setting up Couchbase</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../the index.html">The Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JavaScript Portal Client/index.html">CHAOS.Portal JavaScript Client</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">CHAOS.Portal PHP Client</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html">The Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata and files.html">Using metadata and files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errors.html">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="member functions.html">Member functions</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../PHP Portal Client/index.html">CHAOS.Portal PHP Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../API/index.html">API</a></li>
 </ul>
 
@@ -98,41 +102,64 @@
 </form>
 
 <!-- Edit this page on Github -->
-<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/PHP Portal Client/index.rst" target="_blank" title="Edit PHP Portal Client/index.txt on GitHub">
+<a class="edit-github" href="https://github.com/CHAOS-Community/CHAOS-API-Documentation/blob/master/source/server/solr.rst" target="_blank" title="Edit server/solr.txt on GitHub">
   Edit this Page
 </a>
 
 <!--
 <strong>Debug:</strong> <br>
-pagename: "PHP Portal Client/index" <br>
+pagename: "server/solr" <br>
 <br>
 -->
          </div>
        </div>
 
         <!-- Main -->
-           <div class="section" id="chaos-portal-php-client">
-<h1>CHAOS.Portal PHP Client<a class="headerlink" href="#chaos-portal-php-client" title="Permalink to this headline">¶</a></h1>
-<p>The CHAOS.Portal PHP Client is a PHP library that facilitates easy
-interaction with a CHAOS.Portal endpoint.</p>
-<p>The client wraps the CHAOS.Portal API in a PHP object with member
-functions for searching and getting objects.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">The Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#setting-up">Setting up</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#searching">Searching</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="metadata and files.html">Using metadata and files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="metadata and files.html#grabbing-a-single-object">Grabbing a single object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata and files.html#files">Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata and files.html#metadata">Metadata</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="errors.html">Error handling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="member functions.html">Member functions</a></li>
-</ul>
+           <!--<h3>Setting up a server</h3>--><div class="section" id="external-services-mysql-couchbase-and-solr">
+<h1>External services: MySQL, Couchbase and Solr<a class="headerlink" href="#external-services-mysql-couchbase-and-solr" title="Permalink to this headline">¶</a></h1>
+<p>CHAOS depends on MySQL, Couchbase and Solr. These services can either run on the
+same server as CHAOS or on another server that can be accessed from the CHAOS
+server.</p>
+<div class="section" id="setting-up-solr">
+<h2>Setting up Solr<a class="headerlink" href="#setting-up-solr" title="Permalink to this headline">¶</a></h2>
+<p>Below are instructions for setting up Solr.</p>
+<p>When you are done setting up Solr, you should set <tt class="docutils literal"><span class="pre">SOLR_URL</span></tt> in the
+<em>Application Settings</em> of the IIS site. <tt class="docutils literal"><span class="pre">SOLR_URL</span></tt> is the URL where your Solr
+service is available.</p>
+<p>First you need to download and install the JDK (Java SE Development Kit).
+<a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a></p>
+<p>Then download Solr: <a class="reference external" href="http://lucene.apache.org/solr/">http://lucene.apache.org/solr/</a>.</p>
+<p>When you have downloaded Solr you start Solr directly by executing the command
+<tt class="code docutils literal"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">solr-4.6.0/example/start.jar</span></tt>.</p>
+<p>This will start a Solr service on <tt class="docutils literal"><span class="pre">http://localhost:8983/solr</span></tt>
+In this scenario <tt class="docutils literal"><span class="pre">SOLR_URL</span></tt> should have the value  <tt class="docutils literal"><span class="pre">http://localhost:8983/solr</span></tt>.</p>
+<p>Go to <tt class="docutils literal"><span class="pre">http://localhost:8983/solr</span></tt> and select <em>Core Admin</em>. Here should
+already be a <tt class="docutils literal"><span class="pre">Core</span></tt> called <tt class="docutils literal"><span class="pre">collection1</span></tt>. Rename it to <tt class="docutils literal"><span class="pre">Object</span></tt>.</p>
+<p>You should name the core according to the <tt class="code docutils literal"><span class="pre">&lt;ObjectCoreName&gt;</span></tt> in the <tt class="docutils literal"><span class="pre">MCM</span></tt>
+settings in the <tt class="docutils literal"><span class="pre">Module</span></tt> table in the MySQL-database.</p>
+</div>
+<div class="section" id="setting-up-mysql">
+<h2>Setting up MySQL<a class="headerlink" href="#setting-up-mysql" title="Permalink to this headline">¶</a></h2>
+<p>Download MySQL: <a class="reference external" href="http://dev.mysql.com/downloads/mysql">http://dev.mysql.com/downloads/mysql</a>.
+Install MySQL.</p>
+<p>MySQL on Windows will by default have the option <tt class="docutils literal"><span class="pre">lower_case_table_names</span></tt>
+equal to <tt class="docutils literal"><span class="pre">1</span></tt>, which can be problematic. We recommend changing this setting to
+<tt class="docutils literal"><span class="pre">0</span></tt> in either <tt class="docutils literal"><span class="pre">C:\ProgramData\MySQL\MySQL</span> <span class="pre">Server</span> <span class="pre">5.6\my.ini</span></tt> or in <em>MySQL Workbench</em>.
+(<tt class="docutils literal"><span class="pre">MySQL</span> <span class="pre">Workbench</span> <span class="pre">-&gt;</span> <span class="pre">Manage</span> <span class="pre">Server</span> <span class="pre">Instances</span> <span class="pre">-&gt;</span> <span class="pre">[tab]</span> <span class="pre">System</span> <span class="pre">Profile</span> <span class="pre">-&gt;</span> <span class="pre">Configuration</span> <span class="pre">File</span></tt>)
+(<a class="reference external" href="http://stackoverflow.com/a/17953456/118608">http://stackoverflow.com/a/17953456/118608</a>)</p>
+</div>
+<div class="section" id="setting-up-couchbase">
+<h2>Setting up Couchbase<a class="headerlink" href="#setting-up-couchbase" title="Permalink to this headline">¶</a></h2>
+<p>Download Couchbase (<a class="reference external" href="http://couchbase.com">http://couchbase.com</a>).
+Install Couchbase.</p>
+<p>In <tt class="docutils literal"><span class="pre">C:\CHAOS.Portal.Web\Web.config</span></tt> line 10-14:</p>
+<div class="code highlight-python"><pre>&lt;couchbase&gt;
+  &lt;servers bucket="default" bucketPassword=""&gt;
+    &lt;add uri="http://localhost:8091/pools/default"&gt;
+  &lt;/servers&gt;
+&lt;/couchbase&gt;</pre>
+</div>
+<p>set the <tt class="docutils literal"><span class="pre">uri</span></tt> attribute to your Couchbase URL.</p>
 </div>
 </div>
 
@@ -142,17 +169,15 @@ functions for searching and getting objects.</p>
     <div class="nav-buttons">
       <div class="button-row">
         <div class="prev">
-          <a href="../JavaScript Portal Client/member functions.html" title="Previous Section: Member functions">&#8592; &nbsp; Member functions</a>
+          <a href="setup.html" title="Previous Section: CHAOS server instance">&#8592; &nbsp; CHAOS server instance</a>
           <br>Previous
         </div>
-        
         <div class="up">
-          <a href="../index.html" title="Root" >&#8593;&nbsp; Back to table of contents</a>
-          <!-- <a href="../index.html" title="Root" >&#38;#8593;&#38;nbsp; Back to table of contents</a> -->
+          <a href="index.html" title="Parent Section: Setting up a server" >&#8593;&nbsp; Setting up a server</a>
           <br>Up
         </div>
         <div class="next">
-          <a href="intro.html" title="Next Section: The Basics">The Basics &nbsp;&#8594;</a>
+          <a href="../authentication.html" title="Next Section: Authentication">Authentication &nbsp;&#8594;</a>
           <br>Next
         </div>
       </div>
@@ -195,7 +220,7 @@ var versions = {
  "v5": { "branch_name": "v5", "directory_name": "v5" },
  "v4": { "branch_name": "master", "directory_name": "current", "current": true }
 };
-var pagename = 'PHP Portal Client/index';
+var pagename = 'server/solr';
 var stable = 'v';
 
 // Change URL on version change
