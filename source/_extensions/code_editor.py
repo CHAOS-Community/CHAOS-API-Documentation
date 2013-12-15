@@ -6,6 +6,8 @@ def builder_inited(app):
     app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/mode/xml/xml.js")
     app.add_javascript("http://cdn.jsdelivr.net/codemirror/3.0/mode/htmlmixed/htmlmixed.js")
 
+    app.add_javascript("codemirror/3.0/mode/powershell/powershell.js")
+
     app.add_javascript("CHAOS.Portal.Client.PortalClient.js")
     app.add_javascript("code-editor.js")
     app.add_stylesheet("code-editor.css")
